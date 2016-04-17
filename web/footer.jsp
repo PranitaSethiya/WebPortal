@@ -5,8 +5,16 @@
   Time: 4:39 PM
   To change this template use File | Settings | File Templates.
 --%>
-<footer class="footer">
-    <center>
-        <p>Copyright © 2016</p>
-    </center>
-</footer>
+<%--<footer class="footer">--%>
+<%--<center>--%>
+<%--<p>Copyright © 2016</p>--%>
+<%--</center>--%>
+<%--</footer>--%>
+<nav class="navbar navbar-default navbar-fixed-bottom navbar-inverse">
+    <div class="container">
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">About</a></li>
+            <li><a href="#">Sign Out</a></li>
+        </ul>
+    </div>
+</nav>

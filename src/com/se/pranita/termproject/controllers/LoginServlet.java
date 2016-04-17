@@ -26,15 +26,17 @@ public class LoginServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        System.out.println("in doGet");
+        boolean isAuthenticated = true;
 
-        Connection conn = ConnectionHandler.getConnection();
-        try {
-            Statement statement = conn.createStatement();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            System.out.println("error");
-        }
+//        System.out.println("in doGet");
+//
+//        Connection conn = ConnectionHandler.getConnection();
+//        try {
+//            Statement statement = conn.createStatement();
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//            System.out.println("error");
+//        }
 
 //        try
 //        {
@@ -59,5 +61,9 @@ public class LoginServlet extends HttpServlet {
 //        {
 //            System.out.println(theException);
 //        }
+
+        if(isAuthenticated) {
+            response.sendRedirect("/home");
+        }
     }
 }
