@@ -5,10 +5,17 @@
   Time: 4:37 PM
   To change this template use File | Settings | File Templates.
 --%>
-<nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
+<nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role = "navigation">
     <div class="container">
         <div class="navbar-header">
             <span class="navbar-brand">WebPortal</span>
+            <button type = "button" class = "navbar-toggle"
+            data-toggle = "collapse" data-target = "#example-navbar-collapse">
+            <span class = "sr-only">Toggle navigation</span>
+            <span class = "icon-bar"></span>
+            <span class = "icon-bar"></span>
+            <span class = "icon-bar"></span>
+            </button>
         </div>
 
         <div class="collapse navbar-collapse" id="example-navbar-collapse">
@@ -24,7 +31,3 @@
         </div><!-- /.navbar-collapse -->
     </div>
 </nav>
-
-
-
-<!-- /#sidebar-wrapper -->
