@@ -6,8 +6,8 @@ $("#nav-home-btn").click(function (e) {
     $("#wrapper").addClass("toggled");
 });
 $("#nav-res-btn").click(function (e) {
-    var resources = ['Add new resource', 'Reserve resource', 'View reserved resources', 'Cancel reservation'];
-    var links = ['add_resource', 'reserve_resource', 'view_resources', 'cancel_reservation'];
+    var resources = ['Add new resource', 'Reserve resource', 'View/Cancel reserved resources'];
+    var links = ['add_resource', 'reserve_resource', 'view_resources'];
     makeList(e, "Resources", resources, links);
 });
 $("#nav-crs-btn").click(function (e) {

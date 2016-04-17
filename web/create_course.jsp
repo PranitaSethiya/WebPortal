@@ -29,11 +29,11 @@
             <%--</center>--%>
             <div class="pad" id="course_num_parent">
                 <label for="course_num">Course Number</label>
-                <input id="course_num" name="course_num" type="text" class="form-control" placeholder="XX 000" autofocus>
+                <input id="course_num" name="course_num" type="text" class="form-control" placeholder="XX 000" autofocus required>
             </div>
             <div class="pad" id="course_name_parent">
                 <label for="course_name">Course Name</label>
-                <input id="course_name" name="course_name" type="text" class="form-control" placeholder="" autofocus>
+                <input id="course_name" name="course_name" type="text" class="form-control" placeholder="" autofocus required>
             </div>
             <%--<div class="form-group" id="department">--%>
             <%--<label for="dept">Department</label>--%>

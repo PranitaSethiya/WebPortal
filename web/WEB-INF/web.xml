@@ -86,4 +86,14 @@
         <servlet-name>AddResource</servlet-name>
         <url-pattern>/add_resource</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ReserveResource</servlet-name>
+        <jsp-file>/reserve_resource.jsp</jsp-file>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ReserveResource</servlet-name>
+        <url-pattern>/reserve_resource</url-pattern>
+    </servlet-mapping>
 </web-app>
