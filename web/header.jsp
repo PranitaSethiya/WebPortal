@@ -20,7 +20,7 @@
 
         <div class="collapse navbar-collapse" id="example-navbar-collapse">
             <ul class="nav navbar-nav">
-                <li class="active" id="nav-home-btn"><a href="#">Home <span class="sr-only">(current)</span></a></li>
+                <li class="active" id="nav-home-btn"><a href="/home">Home <span class="sr-only">(current)</span></a></li>
                 <li><a href="#" id="nav-res-btn">Resources</a></li>
                 <li><a href="#" id="nav-crs-btn">Courses</a></li>
                 <li><a href="#" id="nav-post-btn">Posts</a></li>

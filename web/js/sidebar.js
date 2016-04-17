@@ -2,7 +2,7 @@
  * Created by sachin on 17/4/16.
  */
 $("#nav-home-btn").click(function (e) {
-    e.preventDefault();
+    // e.preventDefault();
     $("#wrapper").addClass("toggled");
 });
 $("#nav-res-btn").click(function (e) {
