@@ -106,4 +106,34 @@
         <servlet-name>ViewResources</servlet-name>
         <url-pattern>/view_resources</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>PhdStudents</servlet-name>
+        <jsp-file>/phd_students.jsp</jsp-file>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>PhdStudents</servlet-name>
+        <url-pattern>/phd_students</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AlumniStudents</servlet-name>
+        <jsp-file>/alumni_students.jsp</jsp-file>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AlumniStudents</servlet-name>
+        <url-pattern>/alumni_students</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ViewStudent</servlet-name>
+        <jsp-file>/view_student.jsp</jsp-file>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ViewStudent</servlet-name>
+        <url-pattern>/view_student</url-pattern>
+    </servlet-mapping>
 </web-app>
