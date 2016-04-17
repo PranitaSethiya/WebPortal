@@ -12,7 +12,7 @@ $("#nav-res-btn").click(function (e) {
 });
 $("#nav-crs-btn").click(function (e) {
     var courses = ['Create course', 'View courses'];
-    var links = ['add_course', 'view_courses'];
+    var links = ['create_course', 'view_courses'];
     makeList(e, "Courses", courses, links);
 });
 $("#nav-post-btn").click(function (e) {

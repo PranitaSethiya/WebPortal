@@ -66,4 +66,24 @@
         <servlet-name>ViewCourses</servlet-name>
         <url-pattern>/view_courses</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>CreateCourse</servlet-name>
+        <jsp-file>/create_course.jsp</jsp-file>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>CreateCourse</servlet-name>
+        <url-pattern>/create_course</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AddResource</servlet-name>
+        <jsp-file>/add_resource.jsp</jsp-file>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AddResource</servlet-name>
+        <url-pattern>/add_resource</url-pattern>
+    </servlet-mapping>
 </web-app>
