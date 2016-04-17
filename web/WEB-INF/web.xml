@@ -96,4 +96,14 @@
         <servlet-name>ReserveResource</servlet-name>
         <url-pattern>/reserve_resource</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ViewResources</servlet-name>
+        <jsp-file>/view_resources.jsp</jsp-file>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ViewResources</servlet-name>
+        <url-pattern>/view_resources</url-pattern>
+    </servlet-mapping>
 </web-app>
