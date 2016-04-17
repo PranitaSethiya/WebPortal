@@ -13,8 +13,8 @@
 <nav class="navbar navbar-default navbar-fixed-bottom navbar-inverse">
     <div class="container">
         <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">About</a></li>
-            <li><a href="#">Sign Out</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/">Sign Out</a></li>
         </ul>
     </div>
 </nav>

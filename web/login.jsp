@@ -9,6 +9,7 @@
 <html>
 <head>
     <title>Welcome to Pranita's WebPortal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="bootstrap-3.3.6-dist/css/bootstrap.min.css">
     <link href="css/custom.css" rel="stylesheet">
 </head>
