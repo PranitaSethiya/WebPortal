@@ -136,4 +136,24 @@
         <servlet-name>ViewStudent</servlet-name>
         <url-pattern>/view_student</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>EditStudent</servlet-name>
+        <jsp-file>/edit_student.jsp</jsp-file>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>EditStudent</servlet-name>
+        <url-pattern>/edit_student</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>CourseAnnouncements</servlet-name>
+        <jsp-file>/course_announcements.jsp</jsp-file>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>CourseAnnouncements</servlet-name>
+        <url-pattern>/course_announcements</url-pattern>
+    </servlet-mapping>
 </web-app>

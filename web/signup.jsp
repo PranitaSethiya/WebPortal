@@ -25,7 +25,7 @@
             <%--</center>--%>
             <div class="pad" id="netid_parent">
                 <label for="netid">Net ID</label>
-                <input id="netid" name="netID" type="text" class="form-control" placeholder="XY000000" autofocus>
+                <input id="netid" name="netID" type="text" class="form-control" placeholder="" autofocus>
             </div>
             <div class="pad" id="name_parent">
                 <label for="name">Name</label>
@@ -63,7 +63,7 @@
                 </select>
             </div>
             <div class="pad" id="start_sem">
-                <label for="sem">Starting Semester</label>
+                <label for="sem">Starting Term</label>
                 <div class="row" id="sem">
                     <div class="col-lg-6">
                         <select class="form-control">
@@ -75,6 +75,16 @@
                         <input name="year" id="start_year" type="text" class="form-control col-lg-6" placeholder="Year">
                     </div>
                 </div>
+            </div>
+            <div class="form-group" id="program">
+                <label for="prgm">Program</label>
+                <select class="form-control" id="prgm">
+                    <option></option>
+                    <option>BS</option>
+                    <option>BA</option>
+                    <option>MS</option>
+                    <option>Ph.D</option>
+                </select>
             </div>
             <div class="form-group" id="department">
                 <label for="dept">Department</label>

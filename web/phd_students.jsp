@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>PhD Students</title>
+    <title>Ph.D Students</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="bootstrap-3.3.6-dist/css/bootstrap.min.css">
     <link href="css/custom.css" rel="stylesheet">
@@ -14,7 +14,7 @@
     <div id="page-content-wrapper">
         <div id="wrap">
             <div id="main" class="container">
-                <h1>PhD Students in Computer Science</h1>
+                <h1>Ph.D Students in Computer Science</h1>
                 <ul class="list-group">
                     <li class="list-group-item">
                         <table border="0">

@@ -7,9 +7,11 @@ function updateDisplay() {
     if ($('#role').val().toString().trim() == "Student") {
         $('#department').show();
         $('#start_sem').show();
+        $('#program').show();
     } else {
         $('#department').hide();
         $('#start_sem').hide();
+        $('#program').hide();
     }
     if ($('#pass').val() != $('#cnfPass').val()) {
         $('#passParent').addClass("has-error");
@@ -54,6 +56,9 @@ function validateForm() {
     }
     if($('#dept').val().trim() == "" && $('#role').val().toString().trim() == "Student"){
         error_msg += "Please select your department.<br/>";
+    }
+    if($('#prgm').val().trim() == "" && $('#role').val().toString().trim() == "Student"){
+        error_msg += "Please select your program.<br/>";
     }
 
     if(error_msg != "") {

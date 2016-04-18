@@ -11,8 +11,8 @@ $("#nav-res-btn").click(function (e) {
     makeList(e, "Resources", resources, links);
 });
 $("#nav-crs-btn").click(function (e) {
-    var courses = ['Create course', 'View courses'];
-    var links = ['create_course', 'view_courses'];
+    var courses = ['Create course', 'View courses', 'Course Announcements'];
+    var links = ['create_course', 'view_courses', 'course_announcements'];
     makeList(e, "Courses", courses, links);
 });
 $("#nav-post-btn").click(function (e) {
@@ -22,7 +22,7 @@ $("#nav-post-btn").click(function (e) {
 });
 $("#nav-student-btn").click(function (e) {
 
-    var students = ['View PhD Students', 'View Alumni Students'];
+    var students = ['View Ph.D Students', 'View Alumni Students'];
     var links = ['phd_students', 'alumni_students'];
     makeList(e, "Students", students, links);
 });
