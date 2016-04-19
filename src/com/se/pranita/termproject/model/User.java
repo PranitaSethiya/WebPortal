@@ -10,6 +10,11 @@ public abstract class User {
     private String firstName;
     private String lastName;
     private UserType type;
+
+    public User(UserType type){
+        this.type = type;
+    }
+
     public User(UserType type, String netID, String password, String firstName, String lastName) {
         this.type = type;
         this.netID = netID;
@@ -59,6 +64,15 @@ public abstract class User {
     }
 
     public enum UserType {
-        STUDENT, FACULTY, STAFF
+        STUDENT(0), FACULTY(1), STAFF(2);
+
+        int value;
+        UserType(int value){
+            this.value = value;
+        }
+
+        public int getValue(){
+            return this.value;
+        }
     }
 }

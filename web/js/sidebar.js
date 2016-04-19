@@ -20,12 +20,12 @@ $("#nav-post-btn").click(function (e) {
     var links = ['announcements', 'discussion_board', 'exams', 'results'];
     makeList(e, "Posts", post, links);
 });
-$("#nav-student-btn").click(function (e) {
-
-    var students = ['View Ph.D Students', 'View Alumni Students'];
-    var links = ['phd_students', 'alumni_students'];
-    makeList(e, "Students", students, links);
-});
+// $("#nav-student-btn").click(function (e) {
+//
+//     var students = ['View Ph.D Students', 'View Alumni Students'];
+//     var links = ['phd_students', 'alumni'];
+//     makeList(e, "Students", students, links);
+// });
 function makeList(e, title, lst, links) {
 
     e.preventDefault();

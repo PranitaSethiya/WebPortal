@@ -24,7 +24,8 @@
                 <li><a href="#" id="nav-res-btn">Resources</a></li>
                 <li><a href="#" id="nav-crs-btn">Courses</a></li>
                 <li><a href="#" id="nav-post-btn">Posts</a></li>
-                <li><a href="#" id="nav-student-btn">Students</a></li>
+                <li><a href="/phd_students" id="nav-student-btn">Ph.D. Students</a></li>
+                <li><a href="/alumni" id="nav-alumni-btn">Alumni</a></li>
             </ul>
 
             <p class="navbar-text navbar-right">Signed in as <a href="#" class="navbar-link">Pranita Sethiya</a></p>

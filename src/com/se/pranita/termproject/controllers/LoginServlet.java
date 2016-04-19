@@ -1,5 +1,6 @@
 package com.se.pranita.termproject.controllers;
 
+import com.se.pranita.termproject.model.Authenticator;
 import com.se.pranita.termproject.model.ConnectionHandler;
 import com.se.pranita.termproject.model.User;
 
@@ -26,44 +27,24 @@ public class LoginServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        boolean isAuthenticated = true;
+        try
+        {
+            User user = Authenticator.login(request.getParameter("netid"), request.getParameter("password"));
 
-//        System.out.println("in doGet");
-//
-//        Connection conn = ConnectionHandler.getConnection();
-//        try {
-//            Statement statement = conn.createStatement();
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//            System.out.println("error");
-//        }
+            if (user != null)
+            {
 
-//        try
-//        {
-//            User user = new User();
-//            user.setNetID(request.getParameter("uname"));
-//            user.setPassword(request.getParameter("pass"));
-//
-//            user = UserAuthentication.login(user);
-//
-//            if (user.isValid())
-//            {
-//
-//                HttpSession session = request.getSession(true);
-//                session.setAttribute("currentSessionUser", user);
-//                response.sendRedirect("dashBoard.jsp");
-//            }
-//
-//            else
-//                response.sendRedirect("badLogin.jsp");
-//        }
-//        catch (Throwable theException)
-//        {
-//            System.out.println(theException);
-//        }
+                HttpSession session = request.getSession(true);
+                session.setAttribute("currentSessionUser", user);
+                response.sendRedirect("/home");
+            }
 
-        if(isAuthenticated) {
-            response.sendRedirect("/home");
+            else
+                response.sendRedirect("/");
+        }
+        catch (Throwable theException)
+        {
+            System.out.println(theException);
         }
     }
 }

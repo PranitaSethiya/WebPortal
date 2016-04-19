@@ -21,8 +21,12 @@
     <div id="page-content-wrapper">
         <div id="wrap">
             <div id="main" class="container">
-
-                <h1>Welcome to the home page.</h1>
+                <div class="jumbotron">
+                    <h2>Hello, Pranita</h2>
+                    <h1>Welcome to the WebPortal homepage.</h1>
+                    <p>Here you can look through courses, announcements, reserve resources, apply for jobs.</p>
+                    <p>Select an option from the top menu to continue.</p>
+                </div>
             </div>
         </div>
 

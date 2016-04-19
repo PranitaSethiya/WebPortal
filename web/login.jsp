@@ -23,8 +23,8 @@
                 <i class="img-circle glyphicon glyphicon-user icon-large icon-white"
                    style="font-size: 70px; padding: 20px;"></i>
             </center>
-            <input name="" type="text" class="form-control" placeholder="Net ID" autofocus>
-            <input type="password" class="form-control" placeholder="Password">
+            <input name="netid" type="text" class="form-control" placeholder="Net ID" autofocus>
+            <input name="password" type="password" class="form-control" placeholder="Password">
             <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
         </form>
         <a href="/SignUp" class="text-center account-creation">Create account</a>

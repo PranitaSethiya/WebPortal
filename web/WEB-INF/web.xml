@@ -118,13 +118,13 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>AlumniStudents</servlet-name>
-        <jsp-file>/alumni_students.jsp</jsp-file>
+        <servlet-name>Alumni</servlet-name>
+        <jsp-file>/alumni.jsp</jsp-file>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>AlumniStudents</servlet-name>
-        <url-pattern>/alumni_students</url-pattern>
+        <servlet-name>Alumni</servlet-name>
+        <url-pattern>/alumni</url-pattern>
     </servlet-mapping>
 
     <servlet>
