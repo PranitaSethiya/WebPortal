@@ -7,7 +7,7 @@
     <link href="css/custom.css" rel="stylesheet">
     <link href="css/sidebar.css" rel="stylesheet">
 </head>
-<body onload="updateMinDate();">
+<body>
 <%@ include file="header.jsp" %>
 <div id="wrapper" class="toggled">
     <%@ include file="sidebar.jsp" %>

@@ -1,5 +1,11 @@
 package com.se.pranita.termproject.model;
 
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.Calendar;
+
 /**
  * Created by Pranita on 14/4/16.
  */
@@ -11,7 +17,7 @@ public abstract class User {
     private String lastName;
     private UserType type;
 
-    public User(UserType type){
+    public User(UserType type) {
         this.type = type;
     }
 
@@ -21,6 +27,44 @@ public abstract class User {
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
+    }
+
+    public boolean saveUser() {
+        Connection conn = ConnectionHandler.getConnection();
+        String query = "INSERT INTO `WebPortal`.`users` VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        try {
+            PreparedStatement ps = conn.prepareStatement(query);
+
+            ps.setString(1, this.netID);
+            ps.setString(2, this.password);
+            ps.setString(3, this.firstName);
+            ps.setString(4, this.lastName);
+            ps.setInt(5, this.type.getValue());
+            if(type == UserType.STUDENT) {
+                ps.setString(6, ((Student) this).getStartTerm());
+                ps.setString(7, ((Student) this).getProgram());
+                ps.setString(8, ((Student) this).getDepartment());
+            } else {
+                ps.setString(6, null);
+                ps.setString(7, null);
+                ps.setString(8, null);
+            }
+
+            ps.executeUpdate();
+            conn.commit();
+            ps.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return false;
+            }
+        }
+        return true;
     }
 
     public UserType getType() {
@@ -67,12 +111,35 @@ public abstract class User {
         STUDENT(0), FACULTY(1), STAFF(2);
 
         int value;
-        UserType(int value){
+
+        UserType(int value) {
             this.value = value;
         }
 
-        public int getValue(){
+        public static UserType getUserType(String type) {
+            if (type.equalsIgnoreCase("student"))
+                return STUDENT;
+            else if (type.equalsIgnoreCase("faculty"))
+                return FACULTY;
+            else if (type.equalsIgnoreCase("staff"))
+                return STAFF;
+            else
+                return null;
+        }
+
+        public int getValue() {
             return this.value;
         }
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "netID='" + netID + '\'' +
+                ", password='" + password + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", type=" + type +
+                '}';
     }
 }

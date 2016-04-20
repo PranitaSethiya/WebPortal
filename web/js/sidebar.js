@@ -1,18 +1,31 @@
 /**
  * Created by sachin on 17/4/16.
  */
-$("#nav-home-btn").click(function (e) {
-    // e.preventDefault();
-    $("#wrapper").addClass("toggled");
-});
+// $("#nav-home-btn").click(function (e) {
+//     // e.preventDefault();
+//     $("#wrapper").addClass("toggled");
+// });
 $("#nav-res-btn").click(function (e) {
-    var resources = ['Add new resource', 'Reserve resource', 'View/Cancel reserved resources'];
-    var links = ['add_resource', 'reserve_resource', 'view_resources'];
+
+    var resources = ['Reserve resource', 'View/Cancel reserved resources'];
+    var links = ['reserve_resource', 'view_resources'];
+    var userType = sessionStorage.getItem('userType').toLowerCase();
+    if(userType == 'staff'){
+        resources = ['Add new resource'].concat(resources);
+        links = ['add_resource'].concat(links);
+    }
+    
     makeList(e, "Resources", resources, links);
 });
 $("#nav-crs-btn").click(function (e) {
-    var courses = ['Create course', 'View courses', 'Course Announcements'];
-    var links = ['create_course', 'view_courses', 'course_announcements'];
+    var courses = ['View courses', 'Course Announcements'];
+    var links = ['view_courses', 'course_announcements'];
+    var userType = sessionStorage.getItem('userType').toLowerCase();
+    if(userType == 'faculty'){
+        courses = ['Create course'].concat(courses);
+        links = ['create_course'].concat(links);
+    }
+    
     makeList(e, "Courses", courses, links);
 });
 $("#nav-post-btn").click(function (e) {

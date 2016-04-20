@@ -21,30 +21,24 @@ import java.sql.Statement;
  */
 @WebServlet(name = "com.se.pranita.termproject.controllers.LoginServlet")
 public class LoginServlet extends HttpServlet {
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-    }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         try
         {
             User user = Authenticator.login(request.getParameter("netid"), request.getParameter("password"));
 
             if (user != null)
             {
-
-                HttpSession session = request.getSession(true);
+                HttpSession session = request.getSession(false);
                 session.setAttribute("currentSessionUser", user);
                 response.sendRedirect("/home");
             }
-
             else
-                response.sendRedirect("/");
+                response.sendRedirect("/error");
         }
-        catch (Throwable theException)
+        catch (Exception ex)
         {
-            System.out.println(theException);
+            System.out.println(ex.getMessage());
         }
     }
 }

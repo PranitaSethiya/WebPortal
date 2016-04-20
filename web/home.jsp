@@ -1,6 +1,6 @@
 <%--
   Created by IntelliJ IDEA.
-  User: sachin
+  User: pranita
   Date: 14/4/16
   Time: 7:15 PM
   To change this template use File | Settings | File Templates.
@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Home | Pranita Sethiya</title>
+    <title>Home</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="bootstrap-3.3.6-dist/css/bootstrap.min.css">
     <link href="css/custom.css" rel="stylesheet">
@@ -22,7 +22,7 @@
         <div id="wrap">
             <div id="main" class="container">
                 <div class="jumbotron">
-                    <h2>Hello, Pranita</h2>
+                    <h2>Hello, <%= currentUser.getFirstName() + " " + currentUser.getLastName()%></h2>
                     <h1>Welcome to the WebPortal homepage.</h1>
                     <p>Here you can look through courses, announcements, reserve resources, apply for jobs.</p>
                     <p>Select an option from the top menu to continue.</p>

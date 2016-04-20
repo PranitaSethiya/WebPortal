@@ -18,7 +18,7 @@ public class Authenticator {
 
         Statement stmt = null;
         User user = null;
-        String searchQuery = "select * from users where netId='" + netId + "' AND password='" + password + "'";
+        String searchQuery = "SELECT * FROM `WebPortal`.`users` WHERE netId='" + netId + "' AND password='" + password + "'";
         try {
 
             con = ConnectionHandler.getConnection();

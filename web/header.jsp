@@ -1,10 +1,14 @@
-<%--
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="com.se.pranita.termproject.model.User" %><%--
   Created by IntelliJ IDEA.
   User: sachin
   Date: 15/4/16
   Time: 4:37 PM
   To change this template use File | Settings | File Templates.
 --%>
+<%
+    User currentUser = (User) (session.getAttribute("currentSessionUser"));
+%>
 <nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role = "navigation">
     <div class="container">
         <div class="navbar-header">
@@ -24,11 +28,15 @@
                 <li><a href="#" id="nav-res-btn">Resources</a></li>
                 <li><a href="#" id="nav-crs-btn">Courses</a></li>
                 <li><a href="#" id="nav-post-btn">Posts</a></li>
+                <c:if test="${currentUser.getType() == 'Faculty'}">
+
+                    <li><a href="/phd_students" id="nav-student1-btn"><c:out value="${currentUser.getType()}"/></a></li>
+                </c:if>
                 <li><a href="/phd_students" id="nav-student-btn">Ph.D. Students</a></li>
                 <li><a href="/alumni" id="nav-alumni-btn">Alumni</a></li>
             </ul>
 
-            <p class="navbar-text navbar-right">Signed in as <a href="#" class="navbar-link">Pranita Sethiya</a></p>
+            <p class="navbar-text navbar-right">Signed in as <a href="#" class="navbar-link"><%= currentUser.getFirstName() + " " + currentUser.getLastName()%></a></p>
         </div><!-- /.navbar-collapse -->
     </div>
 </nav>

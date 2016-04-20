@@ -50,9 +50,9 @@
                 <label for="cnfPass">Confirm your password</label>
                 <input name="confirmPassword" type="password" class="form-control" id="cnfPass" placeholder="">
             </div>
-            <div class="form-group">
+            <div class="pad">
                 <label for="role">Role</label>
-                <select class="form-control" id="role">
+                <select name="role" class="form-control" id="role">
                     <option></option>
                     <option>Student</option>
                     <option>Faculty</option>
@@ -63,7 +63,7 @@
                 <label for="sem">Starting Term</label>
                 <div class="row" id="sem">
                     <div class="col-lg-6">
-                        <select class="form-control">
+                        <select name="sem" class="form-control">
                             <option>Fall</option>
                             <option>Spring</option>
                         </select>
@@ -73,9 +73,9 @@
                     </div>
                 </div>
             </div>
-            <div class="form-group" id="program">
+            <div class="pad" id="program">
                 <label for="prgm">Program</label>
-                <select class="form-control" id="prgm">
+                <select name="program" class="form-control" id="prgm">
                     <option></option>
                     <option>BS</option>
                     <option>BA</option>
@@ -83,9 +83,9 @@
                     <option>Ph.D</option>
                 </select>
             </div>
-            <div class="form-group" id="department">
+            <div class="pad" id="department">
                 <label for="dept">Department</label>
-                <select class="form-control" id="dept">
+                <select name="department" class="form-control" id="dept">
                     <option></option>
                     <option>Chemical Engineering</option>
                     <option>Computer Science</option>
