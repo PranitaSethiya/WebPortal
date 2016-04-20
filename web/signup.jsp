@@ -20,9 +20,6 @@
         <p class="heading-desc text-center">Already have an account? Log in <a href="/">Here</a>. </p>
         <form name="loginForm" class="form-signin" action="SignUpServlet" onchange="updateDisplay();"
               onsubmit="validateForm();">
-            <%--<center>--%>
-            <%--<i class="img-circle glyphicon glyphicon-user icon-large icon-white" style="font-size: 70px; padding: 20px;"></i>--%>
-            <%--</center>--%>
             <div class="pad" id="netid_parent">
                 <label for="netid">Net ID</label>
                 <input id="netid" name="netID" type="text" class="form-control" placeholder="" autofocus>
