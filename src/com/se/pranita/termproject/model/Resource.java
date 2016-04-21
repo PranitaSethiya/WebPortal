@@ -1,5 +1,7 @@
 package com.se.pranita.termproject.model;
 
+import com.se.pranita.termproject.utils.Constants;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -56,7 +58,7 @@ public class Resource {
     public boolean save() throws SQLException {
         int status;
         Connection conn = ConnectionHandler.getConnection();
-        String query = "INSERT INTO `WebPortal`.`resources` VALUES (?, ?, ?)";
+        String query = "INSERT INTO " + Constants.DATABASENAME + ".`resources` VALUES (?, ?, ?)";
         PreparedStatement ps = conn.prepareStatement(query);
         ps.setString(1, this.getName());
         ps.setString(2, this.getType());

@@ -19,10 +19,8 @@ import javax.servlet.http.HttpSession;
 @WebFilter("/AuthenticationFilter")
 public class AuthenticationFilter implements Filter {
 
-    private ServletContext context;
-
     public void init(FilterConfig fConfig) throws ServletException {
-        this.context = fConfig.getServletContext();
+        ServletContext context = fConfig.getServletContext();
         System.out.println("AuthenticationFilter initialized");
     }
 

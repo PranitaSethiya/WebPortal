@@ -3,6 +3,7 @@ package com.se.pranita.termproject.controllers;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.se.pranita.termproject.model.ConnectionHandler;
+import com.se.pranita.termproject.utils.Constants;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,16 +24,12 @@ import java.util.Enumeration;
 public class TimeSlotServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("doPost");
-        Enumeration<String> names = request.getParameterNames();
-        while(names.hasMoreElements())
-        System.out.println(names.nextElement());
 
         PrintWriter out = response.getWriter();
         try {
             Connection conn = ConnectionHandler.getConnection();
 
-            String query = "INSERT INTO `WebPortal`.`reservations` VALUES (?, ?, ?, ?)";
+            String query = "INSERT INTO " + Constants.DATABASENAME + ".`reservations` VALUES (?, ?, ?, ?)";
             PreparedStatement ps = conn.prepareStatement(query);
 
             ps.setString(1, request.getParameter("name"));
@@ -54,13 +51,13 @@ public class TimeSlotServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println(request.getRequestURI());
+
         try {
             JsonObject jsonObject = new JsonObject();
 
             String netID = request.getParameter("netID");
             Connection conn = ConnectionHandler.getConnection();
-            String query = "SELECT * FROM `WebPortal`.`reservations` WHERE `name`='"
+            String query = "SELECT * FROM " + Constants.DATABASENAME + ".`reservations` WHERE `name`='"
                     + request.getParameter("name") + "' AND `slot_date`='" + request.getParameter("date") + "'";
             if(netID != null){
                 query += " AND `netID`='" + netID + "'";

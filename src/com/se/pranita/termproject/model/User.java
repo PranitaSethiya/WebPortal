@@ -1,5 +1,7 @@
 package com.se.pranita.termproject.model;
 
+import com.se.pranita.termproject.utils.Constants;
+
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -32,7 +34,7 @@ public abstract class User {
     public boolean save() throws SQLException {
         int status;
         Connection conn = ConnectionHandler.getConnection();
-        String query = "INSERT INTO `WebPortal`.`users` VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO " + Constants.DATABASENAME + ".`users` VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         PreparedStatement ps = conn.prepareStatement(query);
 
         ps.setString(1, this.netID);

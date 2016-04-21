@@ -18,6 +18,7 @@
         <div id="wrap">
             <div id="main" class="container">
                 <h1>Resources</h1>
+                <% if (resources.size() > 0) {%>
                 <div class="panel-group" id="accordion">
                     <% for (int i = 0; i < resources.size(); i++) {
                         Resource resource = (Resource) resources.get(i);
@@ -34,7 +35,8 @@
                         </div>
                         <div id="collapse<%= i %>" class="panel-collapse collapse">
                             <div class="panel-body">
-                                <form action="" onsubmit="reserve('<%=resource.getName()%>', '<%=currentUser.getNetID()%>', '<%= i %>');">
+                                <form action=""
+                                      onsubmit="reserve('<%=resource.getName()%>', '<%=currentUser.getNetID()%>', '<%= i %>');">
                                     <div>
                                         <label>Select a date: </label><br/>
                                         <input id="date-<%= i %>" type="date" class="resource_additional"
@@ -52,6 +54,12 @@
 
 
                 </div>
+                <% } else { %>
+                <div class="jumbotron">
+                    <h2>Reserve Resources</h2>
+                    <p>No resources to reserve.</p>
+                </div>
+                <% }%>
             </div>
         </div>
 

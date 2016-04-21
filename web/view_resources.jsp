@@ -1,3 +1,5 @@
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="com.se.pranita.termproject.model.Reservation" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -7,74 +9,68 @@
     <link href="css/custom.css" rel="stylesheet">
     <link href="css/sidebar.css" rel="stylesheet">
 </head>
-<body onload="updateMinDate();">
+<body>
 <%@ include file="header.jsp" %>
+<% ArrayList<Reservation> reservations = (ArrayList) session.getAttribute("reservations"); %>
 <div id="wrapper" class="toggled">
     <%@ include file="sidebar.jsp" %>
     <div id="page-content-wrapper">
         <div id="wrap">
             <div id="main" class="container">
+                <% if(reservations.size() > 0) {%>
                 <ul class="list-group">
+                    <% for (int i = 0; i < reservations.size(); i++) {
+                        Reservation reservation = (Reservation) reservations.get(i);
+                    %>
                     <li class="list-group-item">
-                        <button type="button" class="btn btn-danger pull-right" data-toggle="modal" data-target="#cancelModal">Cancel</button>
+                        <button type="button" class="btn btn-danger pull-right" data-toggle="modal"
+                                data-target="#cancelModal<%= i %>">Cancel
+                        </button>
                         <div>
-                            <b>Resource Name: </b>Ultimate 5000<br/>
-                            <b>Resource Type: </b>Projector<br/>
+                            <b>Resource Name: </b><%=reservation.getResourceName()%><br/>
+                            <%--<b>Resource Type: </b>Projector<br/>--%>
                             <b>Booked time slot: </b><br/>
                             <ul>
-                                <li>04-25-2016, 3pm to 4pm<br/></li>
+                                <li><%=reservation.getSlot_date()%>, <%=reservation.getTimeSlotVal()%><br/></li>
                             </ul>
                         </div>
                     </li>
-                    <li class="list-group-item">
-                            <button type="button" class="btn btn-danger pull-right" data-toggle="modal" data-target="#cancelModal">Cancel</button>
-                            <div>
-                                <b>Resource Name: </b>Machine 200<br/>
-                                <b>Resource Type: </b>Fax Machine<br/>
-                                <b>Booked time slot: </b><br/>
-                                <ul>
-                                    <li>04-25-2016, 3pm to 4pm<br/></li>
-                                </ul>
+
+                    <div id="cancelModal<%= i %>" class="modal fade" role="dialog">
+                        <div class="modal-dialog">
+
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title">Cancel Reservation</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Are you sure you want to cancel reservation for:<br/><b>Resource Name: </b><%=reservation.getResourceName()%><br/>
+                                        <b>Booked time slot: </b><br/>
+                                    <ul>
+                                        <li><%=reservation.getSlot_date()%>, <%=reservation.getTimeSlotVal()%><br/></li>
+                                    </ul>
+                                    </p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="cancelIt('<%=reservation.getResourceName()%>', '<%=reservation.getNetID()%>', '<%=reservation.getSlot_date()%>', '<%=reservation.getSlot_time_range()%>');">Yes</button>
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
+                                </div>
                             </div>
-                    </li>
-                    <li class="list-group-item">
-                        <button type="button" class="btn btn-danger pull-right" data-toggle="modal" data-target="#cancelModal">Cancel</button>
-                        <div>
-                            <b>Resource Name: </b>WCH 220<br/>
-                            <b>Resource Type: </b>Conference Room<br/>
-                            <b>Booked time slot: </b><br/>
-                            <ul>
-                                <li>04-25-2016, 3pm to 4pm<br/></li>
-                            </ul>
+
                         </div>
-                    </li>
+                    </div>
+
+                    <% } %>
+
                 </ul>
-            </div>
-        </div>
-
-        <div id="cancelModal" class="modal fade" role="dialog">
-            <div class="modal-dialog">
-
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Cancel Reservation</h4>
+                <% } else { %>
+                    <div class="jumbotron">
+                        <h2>Reserved Resources</h2>
+                        <p>You haven't reserved any resources.</p>
                     </div>
-                    <div class="modal-body">
-                        <p>Are you sure you want to cancel reservation for:<br/><b>Resource Name: </b>Machine 200<br/>
-                            <b>Resource Type: </b>Fax Machine<br/>
-                            <b>Booked time slot: </b><br/>
-                        <ul>
-                            <li>04-25-2016, 3pm to 4pm<br/></li>
-                        </ul></p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Yes</button>
-                        <button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
-                    </div>
-                </div>
-
+                <% }%>
             </div>
         </div>
 
@@ -84,7 +80,9 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>
 <script src="js/sidebar.js"></script>
-<%--<script src="js/reserve_resource.js"></script>--%>
+<script src="js/vendor/jquery.toaster.js"></script>
+<script src="js/view_resources.js"></script>
+
 </body>
 
 </html>

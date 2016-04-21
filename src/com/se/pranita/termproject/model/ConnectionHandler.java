@@ -14,8 +14,6 @@ import java.util.Properties;
  */
 public class ConnectionHandler {
 
-    private static final String DB_PROPERTIES = "web/config/config.properties";
-
     public static Connection connection;
     private static String address;
     private static String username;

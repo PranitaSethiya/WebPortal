@@ -45,7 +45,7 @@ function reserve(r_name, netId, index) {
             if(data == "success") {
                 $.toaster({ priority : 'success', title : 'Success', message : 'Resource successfully reserved.'});
             } else {
-                $.toaster({ priority : 'danger', title : 'Failure', message : 'Failed to reserve resource.'});
+                $.toaster({ priority : 'danger', title : 'Error', message : 'Failed to reserve resource.'});
             }
             var cList = $('#time-slots-' + index);
             cList.empty();

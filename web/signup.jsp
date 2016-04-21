@@ -69,7 +69,7 @@
                         </select>
                     </div>
                     <div class="col-lg-6">
-                        <input name="year" id="start_year" type="text" class="form-control col-lg-6" placeholder="Year">
+                        <input name="year" id="start_year" type="number" class="form-control col-lg-6" placeholder="Year">
                     </div>
                 </div>
             </div>
@@ -86,7 +86,6 @@
             <div class="pad" id="department">
                 <label for="dept">Department</label>
                 <select name="department" class="form-control" id="dept">
-                    <option></option>
                     <option>Chemical Engineering</option>
                     <option>Computer Science</option>
                     <option>Computer Engineering</option>

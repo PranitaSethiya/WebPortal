@@ -7,5 +7,5 @@ public class Constants {
     public static final String DBHOSTADDRESS = "localhost";
     public static final String USERNAME = "root";
     public static final String PASSWORD = "extreme1092!";
-    public static final String DATABASENAME = "WebPortal";
+    public static final String DATABASENAME = "WebPortalDB";
 }
