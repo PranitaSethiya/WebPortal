@@ -13,6 +13,14 @@ function updateDisplay() {
         $('#start_sem').hide();
         $('#program').hide();
     }
+    
+    if (firstTime) {
+        firstTime = false;
+        $('#errors').hide();
+    }
+}
+
+function passwordError() {
     if ($('#pass').val() != $('#cnfPass').val()) {
         $('#passParent').addClass("has-error");
         $('#cnfPassParent').addClass("has-error");
@@ -27,10 +35,6 @@ function updateDisplay() {
 
         }
         $('#pass_error').hide();
-    }
-    if (firstTime) {
-        firstTime = false;
-        $('#errors').hide();
     }
 }
 

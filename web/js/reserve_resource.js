@@ -4,3 +4,9 @@
 function updateMinDate() {
     $('.resource_additional').attr("min", new Date().toISOString().slice(0,10));
 }
+
+function getTimeSlots() {
+    $.get("/getTimeSlots", function(data, status){
+        alert("Data: " + data + "\nStatus: " + status);
+    });
+}

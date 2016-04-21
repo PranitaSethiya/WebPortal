@@ -26,15 +26,17 @@ public class LoginServlet extends HttpServlet {
         try
         {
             User user = Authenticator.login(request.getParameter("netid"), request.getParameter("password"));
-
+            HttpSession session = request.getSession(false);
             if (user != null)
             {
-                HttpSession session = request.getSession(false);
+
                 session.setAttribute("currentSessionUser", user);
                 response.sendRedirect("/home");
             }
-            else
+            else {
+                session.setAttribute("error", "Invalid Username or Password");
                 response.sendRedirect("/error");
+            }
         }
         catch (Exception ex)
         {

@@ -22,11 +22,8 @@
         <div id="wrap">
             <div id="main" class="container">
                 <h1 class="heading text-center">Create a resource</h1>
-                <form name="loginForm" class="form-signin" action="CreateCourseServlet"
+                <form name="createResourceForm" class="form-signin" action="CreateResourceServlet"
                       onsubmit="validateForm();">
-                    <%--<center>--%>
-                    <%--<i class="img-circle glyphicon glyphicon-user icon-large icon-white" style="font-size: 70px; padding: 20px;"></i>--%>
-                    <%--</center>--%>
                     <div class="pad" id="resource_name_parent">
                         <label for="resource_name">Resource Name</label>
                         <input id="resource_name" name="resource_name" type="text" class="form-control" placeholder="" autofocus required>
@@ -39,18 +36,6 @@
                         <label for="resource_additional">Additional Info</label>
                         <textarea id="resource_additional" name="resource_additional" class="form-control" placeholder=""></textarea>
                     </div>
-                    <%--<div class="form-group" id="department">--%>
-                    <%--<label for="dept">Department</label>--%>
-                    <%--<select class="form-control" id="dept">--%>
-                    <%--<option></option>--%>
-                    <%--<option>Chemical Engineering</option>--%>
-                    <%--<option>Computer Science</option>--%>
-                    <%--<option>Computer Engineering</option>--%>
-                    <%--<option>Electrical Engineering</option>--%>
-                    <%--<option>Environmental Sciences</option>--%>
-                    <%--<option>Mechanical Engineering</option>--%>
-                    <%--</select>--%>
-                    <%--</div>--%>
 
                     <div class="alert alert-danger" role="alert" id="errors">
                         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>

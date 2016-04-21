@@ -28,11 +28,14 @@
                 <li><a href="#" id="nav-res-btn">Resources</a></li>
                 <li><a href="#" id="nav-crs-btn">Courses</a></li>
                 <li><a href="#" id="nav-post-btn">Posts</a></li>
-                <c:if test="${currentUser.getType() == 'Faculty'}">
+                <%--<c:if test="${currentUser.getType() == 'Faculty'}">--%>
+                <%--<c:set var="zones" value="${currentUser.getType()}" scope="session" />--%>
+                <%if(currentUser.getType().getValue() == 1){
+                    out.print("<li><a href=\"/phd_students\" id=\"nav-student-btn\">Ph.D. Students</a></li>");
+                }%>
+                    <%--<li><a href="/phd_students" id="nav-student1-btn"><c:out value="${currentUser.getType()}"/></a></li>--%>
+                <%--</c:if>--%>
 
-                    <li><a href="/phd_students" id="nav-student1-btn"><c:out value="${currentUser.getType()}"/></a></li>
-                </c:if>
-                <li><a href="/phd_students" id="nav-student-btn">Ph.D. Students</a></li>
                 <li><a href="/alumni" id="nav-alumni-btn">Alumni</a></li>
             </ul>
 

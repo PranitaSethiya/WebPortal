@@ -9,7 +9,7 @@
 <center>
     <div class="jumbotron" style="height: 100%">
         <h1>Error</h1>
-        <p>Something went wrong. Please try again!!</p>
+        <p><%=session.getAttribute("error")%></p>
         <p><button type="button" class="btn btn-default" onclick="window.history.back();">Click here to go back.</button></p>
     </div>
 </center>

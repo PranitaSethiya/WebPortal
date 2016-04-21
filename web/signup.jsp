@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="bootstrap-3.3.6-dist/css/bootstrap.min.css">
     <link href="css/custom.css" rel="stylesheet">
 </head>
-<body onload="updateDisplay();">
+<body onload="updateDisplay(); passwordError();">
 <div id="wrap">
     <div id="main" class="container">
         <h1 class="heading text-center">Create your WebPortal Account</h1>
@@ -48,7 +48,7 @@
             </div>
             <div class="pad" id="cnfPassParent">
                 <label for="cnfPass">Confirm your password</label>
-                <input name="confirmPassword" type="password" class="form-control" id="cnfPass" placeholder="">
+                <input name="confirmPassword" type="password" onblur="passwordError();" class="form-control" id="cnfPass" placeholder="">
             </div>
             <div class="pad">
                 <label for="role">Role</label>

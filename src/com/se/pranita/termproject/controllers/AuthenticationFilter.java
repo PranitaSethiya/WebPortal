@@ -36,7 +36,11 @@ public class AuthenticationFilter implements Filter {
 
         HttpSession session = req.getSession(false);
 
-        if(uri.equalsIgnoreCase("/") || uri.endsWith("/LoginServlet")  || uri.endsWith("css") || uri.endsWith("js")  || uri.endsWith("woff") || uri.endsWith("ttf") || uri.endsWith("woff2")) {
+        if(uri.equalsIgnoreCase("/") || uri.endsWith("/error")
+                || uri.endsWith("/LoginServlet") || uri.endsWith("/SignUp")
+                || uri.endsWith("css") || uri.endsWith("js")
+                || uri.endsWith("woff") || uri.endsWith("ttf")
+                || uri.endsWith("woff2")) {
             chain.doFilter(request, response);
         }else if (session == null && !(uri.equalsIgnoreCase("/"))) {
             System.out.println("Unauthorized access request");

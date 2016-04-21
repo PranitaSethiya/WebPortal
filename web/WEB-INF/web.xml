@@ -18,6 +18,7 @@
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
     </servlet-mapping>
+
     <servlet>
         <servlet-name>SignUpServlet</servlet-name>
         <servlet-class>com.se.pranita.termproject.controllers.SignUpServlet</servlet-class>
@@ -28,9 +29,18 @@
         <url-pattern>/SignUpServlet</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>CreateResourceServlet</servlet-name>
+        <servlet-class>com.se.pranita.termproject.controllers.CreateResourceServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>CreateResourceServlet</servlet-name>
+        <url-pattern>/CreateResourceServlet</url-pattern>
+    </servlet-mapping>
+
 
     <filter>
-
         <filter-name>AuthenticationFilter</filter-name>
         <filter-class>com.se.pranita.termproject.controllers.AuthenticationFilter</filter-class>
     </filter>
@@ -106,7 +116,7 @@
 
     <servlet-mapping>
         <servlet-name>ReserveResource</servlet-name>
-        <url-pattern>/reserve_resource</url-pattern>
+        <url-pattern>/ReserveResource</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -168,7 +178,6 @@
         <servlet-name>CourseAnnouncements</servlet-name>
         <url-pattern>/course_announcements</url-pattern>
     </servlet-mapping>
-
 
 
 </web-app>

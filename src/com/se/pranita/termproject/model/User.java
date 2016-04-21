@@ -29,42 +29,34 @@ public abstract class User {
         this.lastName = lastName;
     }
 
-    public boolean saveUser() {
+    public boolean saveUser() throws SQLException {
+        int status;
         Connection conn = ConnectionHandler.getConnection();
         String query = "INSERT INTO `WebPortal`.`users` VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-        try {
-            PreparedStatement ps = conn.prepareStatement(query);
+        PreparedStatement ps = conn.prepareStatement(query);
 
-            ps.setString(1, this.netID);
-            ps.setString(2, this.password);
-            ps.setString(3, this.firstName);
-            ps.setString(4, this.lastName);
-            ps.setInt(5, this.type.getValue());
-            if(type == UserType.STUDENT) {
-                ps.setString(6, ((Student) this).getStartTerm());
-                ps.setString(7, ((Student) this).getProgram());
-                ps.setString(8, ((Student) this).getDepartment());
-            } else {
-                ps.setString(6, null);
-                ps.setString(7, null);
-                ps.setString(8, null);
-            }
-
-            ps.executeUpdate();
-            conn.commit();
-            ps.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        } finally {
-            try {
-                conn.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-                return false;
-            }
+        ps.setString(1, this.netID);
+        ps.setString(2, this.password);
+        ps.setString(3, this.firstName);
+        ps.setString(4, this.lastName);
+        ps.setInt(5, this.type.getValue());
+        if(type == UserType.STUDENT) {
+            ps.setString(6, ((Student) this).getStartTerm());
+            ps.setString(7, ((Student) this).getProgram());
+            ps.setString(8, ((Student) this).getDepartment());
+        } else {
+            ps.setString(6, null);
+            ps.setString(7, null);
+            ps.setString(8, null);
         }
-        return true;
+
+        status = ps.executeUpdate();
+        conn.commit();
+        ps.close();
+        conn.close();
+
+
+        return status > 0;
     }
 
     public UserType getType() {

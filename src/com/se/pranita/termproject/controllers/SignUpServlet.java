@@ -8,7 +8,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Enumeration;
 
 /**
@@ -17,11 +19,16 @@ import java.util.Enumeration;
 public class SignUpServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession(false);
+
         try {
             User.UserType type = User.UserType.getUserType(request.getParameter("role"));
 
-            if(type == null)
-                throw new Exception("Invalid User Type");
+            if(type == null){
+                session.setAttribute("error", "Invalid User Type.");
+                return;
+//                throw new Exception("Invalid User Type");
+            }
 
             User user = new UserFactory().getUser(type.getValue());
             user.setNetID(request.getParameter("netID"));
@@ -38,11 +45,13 @@ public class SignUpServlet extends HttpServlet {
             if(user.saveUser()) {
                 response.sendRedirect("/");
             } else {
+                session.setAttribute("error", "Check your data");
                 response.sendRedirect("/error");
             }
 
-        } catch(Exception ex) {
+        } catch(SQLException ex) {
             System.out.println(ex.getMessage());
+            session.setAttribute("error", ex.getMessage());
             response.sendRedirect("/error");
         }
 

@@ -1,3 +1,5 @@
+<%@ page import="com.se.pranita.termproject.model.Resource" %>
+<%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -9,29 +11,35 @@
 </head>
 <body onload="updateMinDate();">
 <%@ include file="header.jsp" %>
+<% ArrayList<Resource> resources = (ArrayList) session.getAttribute("resources"); %>
 <div id="wrapper" class="toggled">
     <%@ include file="sidebar.jsp" %>
     <div id="page-content-wrapper">
         <div id="wrap">
             <div id="main" class="container">
+                <h1>Resources</h1>
                 <div class="panel-group" id="accordion">
+                    <%  for(int i = 0; i < resources.size(); i++) {
+                        Resource resource = (Resource)resources.get(i);
+                    %>
+                    <%--<option value="<%= option %>"><%= option %></option>--%>
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h4 class="panel-title">
-                                <b>Projector:</b> The ultimate 5000.<br/>
-                                <b>Additional Info:</b> This is super awesome ultimate projector.
+                                <b><%= resource.getType() %>:</b> <%= resource.getName() %><br/>
+                                <b>Additional Info:</b> <%= resource.getInfo() %>
                             </h4>
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse<%= i %>">
                                 Reserve</a>
                         </div>
-                        <div id="collapse1" class="panel-collapse collapse">
+                        <div id="collapse<%= i %>" class="panel-collapse collapse">
                             <div class="panel-body">
                                 <form action="">
-                                    <div class="pad">
+                                    <div >
                                         <label>Select a date: </label><br/>
-                                        <input type="date" class="resource_additional" required><br><br>
+                                        <input type="date" class="resource_additional" onchange="getTimeSlots();" required><br><br>
                                     </div>
-                                    <div class="pad">
+                                    <div >
                                         <label>Available timeslots: </label><br/>
                                         <input type="radio" name="timeslot" value="9-10" required> 9am - 10am<br>
                                         <input type="radio" name="timeslot" value="10-11"> 10am - 11am<br>
@@ -50,6 +58,8 @@
                             </div>
                         </div>
                     </div>
+                    <% } %>
+
 
                 </div>
             </div>
