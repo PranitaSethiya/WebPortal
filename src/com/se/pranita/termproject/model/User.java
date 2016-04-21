@@ -29,7 +29,7 @@ public abstract class User {
         this.lastName = lastName;
     }
 
-    public boolean saveUser() throws SQLException {
+    public boolean save() throws SQLException {
         int status;
         Connection conn = ConnectionHandler.getConnection();
         String query = "INSERT INTO `WebPortal`.`users` VALUES (?, ?, ?, ?, ?, ?, ?, ?)";

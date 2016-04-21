@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.Enumeration;
 
 /**
  * Created by Pranita on 16/4/16.
@@ -42,7 +41,7 @@ public class SignUpServlet extends HttpServlet {
                 ((Student) user).setStartTerm(request.getParameter("sem") + " " + request.getParameter("year"));
             }
 
-            if(user.saveUser()) {
+            if(user.save()) {
                 response.sendRedirect("/");
             } else {
                 session.setAttribute("error", "Check your data");

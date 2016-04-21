@@ -126,7 +126,7 @@
 
     <servlet-mapping>
         <servlet-name>ViewResources</servlet-name>
-        <url-pattern>/view_resources</url-pattern>
+        <url-pattern>/ViewResources</url-pattern>
     </servlet-mapping>
 
     <servlet>

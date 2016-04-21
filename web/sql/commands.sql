@@ -23,5 +23,6 @@ CREATE TABLE `reservations` (
   `slot_date` DATE NOT NULL,
   `slot_time_range` VARCHAR(5),
   FOREIGN KEY (`name`) REFERENCES `resources`(`name`),
-  FOREIGN KEY (`netID`) REFERENCES `users`(`netID`)
+  FOREIGN KEY (`netID`) REFERENCES `users`(`netID`),
+  PRIMARY KEY (`name`,`netID`,`slot_date`,`slot_time_range`)
 );
