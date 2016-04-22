@@ -1,6 +1,8 @@
 package com.se.pranita.termproject.controllers;
 
-import com.se.pranita.termproject.model.*;
+import com.se.pranita.termproject.model.ConnectionHandler;
+import com.se.pranita.termproject.model.Course;
+import com.se.pranita.termproject.model.User;
 import com.se.pranita.termproject.utils.Constants;
 import com.se.pranita.termproject.utils.TermUtil;
 
@@ -12,9 +14,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,7 +27,12 @@ import java.util.Map;
 public class CourseServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        course_num=a&course_name=a&sem=Fall&year=a&course_syllabus=&ins_office=&ins_office_hour=&ta_name=&ta_email=&ta_office=&ta_office_hour=
+
+        if(req.getParameter("action") != null){
+            enroll(req, resp);
+            return;
+        }
+
         HttpSession session = req.getSession(false);
         try {
             Course course = new Course();
@@ -62,6 +69,36 @@ public class CourseServlet extends HttpServlet {
         } catch (Exception ex) {
             session.setAttribute("error", ex.getMessage());
             resp.sendRedirect("/error");
+        }
+    }
+
+    private void enroll(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        System.out.println("Here in enroll");
+        PrintWriter out = resp.getWriter();
+        try {
+            Connection conn = ConnectionHandler.getConnection();
+
+            String query;
+            if(req.getParameter("action").equalsIgnoreCase("enroll"))
+                query = "INSERT INTO " + Constants.DATABASENAME + ".`course_user` VALUES (?, ?, ?, ?)";
+            else
+                query = "DELETE FROM " + Constants.DATABASENAME + ".`course_user` WHERE `netID`=? AND `number`=? AND `term`=? AND `year`=?";
+            PreparedStatement ps = conn.prepareStatement(query);
+
+            ps.setString(1, req.getParameter("netId"));
+            ps.setString(2, req.getParameter("num"));
+            ps.setString(3, req.getParameter("tsem"));
+            ps.setInt(4, Integer.parseInt(req.getParameter("tyear")));
+
+            ps.executeUpdate();
+            conn.commit();
+            ps.close();
+            conn.close();
+
+            out.print("success");
+        }catch (SQLException ex){
+            ex.printStackTrace();
+            out.print("error");
         }
     }
 

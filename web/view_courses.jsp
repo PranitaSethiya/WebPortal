@@ -29,17 +29,17 @@
                         <div class="panel-heading">
                             <% if( isStudent ) { %>
                                 <% if(course.getStatus().getValue() == 0) { %>
-                                    <button class="btn btn-danger pull-right"
-                                            onclick="enroll(false, '<%= user.getNetID() %>', '<%= course.getNumber() %>', '<%= course.getTerm() %>', '<%= course.getYear() %>');">
-                                        Drop
+                                    <button id="enroll<%= i %>" class="btn btn-success pull-right" onmouseover="makeDrop('<%= i %>')" onmouseleave="makeEnrolled('<%= i %>');"
+                                            onclick="enroll('<%= i %>', '<%= user.getNetID() %>', '<%= course.getNumber() %>', '<%= course.getTerm() %>', '<%= course.getYear() %>');">
+                                        Enrolled
                                     </button>
                                 <% } else if(course.getStatus().getValue() == 1) {%>
-                                    <button class="btn btn-primary pull-right"
-                                            onclick="enroll(true, '<%= user.getNetID() %>', '<%= course.getNumber() %>', '<%= course.getTerm() %>', '<%= course.getYear() %>');">
+                                    <button id="enroll<%= i %>" class="btn btn-primary pull-right"  onmouseover="makeDrop('<%= i %>')" onmouseleave="makeEnrolled('<%= i %>');"
+                                            onclick="enroll('<%= i %>', '<%= user.getNetID() %>', '<%= course.getNumber() %>', '<%= course.getTerm() %>', '<%= course.getYear() %>');">
                                         Enroll
                                     </button>
                                 <% } else if(course.getStatus().getValue() == 2) {%>
-                                    <button class="btn btn-success pull-right disabled">
+                                    <button id="enroll<%= i %>" class="btn btn-success pull-right disabled">
                                         Completed
                                     </button>
                                 <% } %>
@@ -92,6 +92,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>
 <script src="js/sidebar.js"></script>
+<script src="js/vendor/jquery.toaster.js"></script>
 <script src="js/view_courses.js"></script>
 </body>
 

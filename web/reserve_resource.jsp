@@ -69,7 +69,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>
 <script src="js/sidebar.js"></script>
-<script src="js/vendor/jquery.toaster.js"></script>
+    <script src="js/vendor/jquery.toaster.js"></script>
 <script src="js/reserve_resource.js"></script>
 </body>
 

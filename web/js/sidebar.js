@@ -10,23 +10,29 @@ $("#nav-res-btn").click(function (e) {
     var resources = ['Reserve resource', 'View/Cancel reserved resources'];
     var links = ['reserve_resource', 'view_resources'];
     var userType = sessionStorage.getItem('userType').toLowerCase();
-    if(userType == 'staff'){
+    if (userType == 'staff') {
         resources = ['Add new resource'].concat(resources);
         links = ['add_resource'].concat(links);
     }
-    
+
     makeList(e, "Resources", resources, links);
 });
 $("#nav-crs-btn").click(function (e) {
-    var courses = ['View courses', 'Course Info'];
-    var links = ['courses', 'course_info'];
     var userType = sessionStorage.getItem('userType').toLowerCase();
-    if(userType == 'faculty'){
-        courses = ['Create course'].concat(courses);
-        links = ['create_course'].concat(links);
+    if (userType == 'staff') {
+        e.preventDefault();
+        window.location = '/courses';
+    } else {
+
+        var courses = ['View courses', 'Course Info'];
+        var links = ['courses', 'course_info'];
+        if (userType == 'faculty') {
+            courses = ['Create course'].concat(courses);
+            links = ['create_course'].concat(links);
+        }
+
+        makeList(e, "Courses", courses, links);
     }
-    
-    makeList(e, "Courses", courses, links);
 });
 $("#nav-post-btn").click(function (e) {
     var post = ['Announcements', 'Discussion board', 'Exam offering', 'Results'];
