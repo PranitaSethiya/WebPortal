@@ -24,7 +24,7 @@ public class CreateResourceServlet extends HttpServlet {
         resource.setType(req.getParameter("resource_type"));
         resource.setInfo(req.getParameter("resource_additional"));
         if(resource.save()) {
-            response.sendRedirect("/ReserveResource");
+            response.sendRedirect("/reserve_resource");
         } else {
             session.setAttribute("error", "Invalid Resource Data. Please check and try again!!");
             response.sendRedirect("/error");

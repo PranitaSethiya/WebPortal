@@ -15,6 +15,7 @@ public class Course {
     private String department;
     private String course_syllabus;
     private String instructor;
+    private String instructor_name;
     private String ins_office_hour;
     private String ins_office;
     private String ta_name;
@@ -23,6 +24,7 @@ public class Course {
     private String ta_email;
     private String term;
     private int year;
+    private CourseStatus status;
 
     public Course() {
     }
@@ -41,6 +43,26 @@ public class Course {
         this.ta_email = ta_email;
         this.term = term;
         this.year = year;
+    }
+
+    @Override
+    public String toString() {
+        return "Course{" +
+                "number='" + number + '\'' +
+                ", name='" + name + '\'' +
+                ", department='" + department + '\'' +
+                ", course_syllabus='" + course_syllabus + '\'' +
+                ", instructor='" + instructor + '\'' +
+                ", instructor_name='" + instructor_name + '\'' +
+                ", ins_office_hour='" + ins_office_hour + '\'' +
+                ", ins_office='" + ins_office + '\'' +
+                ", ta_name='" + ta_name + '\'' +
+                ", ta_office_hour='" + ta_office_hour + '\'' +
+                ", ta_office='" + ta_office + '\'' +
+                ", ta_email='" + ta_email + '\'' +
+                ", term='" + term + '\'' +
+                ", year=" + year +
+                '}';
     }
 
     public String getNumber() {
@@ -147,48 +169,89 @@ public class Course {
         this.year = year;
     }
 
-    @Override
-    public String toString() {
-        return "Course{" +
-                "number='" + number + '\'' +
-                ", name='" + name + '\'' +
-                ", department='" + department + '\'' +
-                ", course_syllabus='" + course_syllabus + '\'' +
-                ", instructor='" + instructor + '\'' +
-                ", ins_office_hour='" + ins_office_hour + '\'' +
-                ", ins_office='" + ins_office + '\'' +
-                ", ta_name='" + ta_name + '\'' +
-                ", ta_office_hour='" + ta_office_hour + '\'' +
-                ", ta_office='" + ta_office + '\'' +
-                ", ta_email='" + ta_email + '\'' +
-                ", term='" + term + '\'' +
-                ", year=" + year +
-                '}';
-    }
-
     public boolean save() throws SQLException {
         int status;
         Connection conn = ConnectionHandler.getConnection();
-        String query = "INSERT INTO " + Constants.DATABASENAME + ".`courses` VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO " + Constants.DATABASENAME + ".`courses` VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         PreparedStatement ps = conn.prepareStatement(query);
         ps.setString(1, this.getNumber());
         ps.setString(2, this.getName());
         ps.setString(3, this.getDepartment());
         ps.setString(4, this.getCourse_syllabus());
-        ps.setString(5, this.getInstructor());
-        ps.setString(6, this.getIns_office_hour());
-        ps.setString(7, this.getIns_office());
-        ps.setString(8, this.getTa_name());
-        ps.setString(9, this.getTa_office_hour());
-        ps.setString(10, this.getTa_office());
-        ps.setString(11, this.getTa_email());
-        ps.setString(12, this.getTerm());
-        ps.setInt(13, this.getYear());
+//        ps.setString(5, this.getInstructor());
+        ps.setString(5, this.getIns_office_hour());
+        ps.setString(6, this.getIns_office());
+        ps.setString(7, this.getTa_name());
+        ps.setString(8, this.getTa_office_hour());
+        ps.setString(9, this.getTa_office());
+        ps.setString(10, this.getTa_email());
+        ps.setString(11, this.getTerm());
+        ps.setInt(12, this.getYear());
 
         status = ps.executeUpdate();
         conn.commit();
         ps.close();
         conn.close();
         return status > 0;
+    }
+
+    public boolean saveRelation(String user_netId) throws SQLException {
+        int status;
+        Connection conn = ConnectionHandler.getConnection();
+        String query = "INSERT INTO " + Constants.DATABASENAME + ".`course_user` VALUES (?, ?, ?, ?)";
+        PreparedStatement ps = conn.prepareStatement(query);
+        ps.setString(1, user_netId);
+        ps.setString(2, this.getNumber());
+        ps.setString(3, this.getTerm());
+        ps.setInt(4, this.getYear());
+
+        status = ps.executeUpdate();
+        conn.commit();
+        ps.close();
+        conn.close();
+        return status > 0;
+    }
+
+    public String getInstructor_name() {
+        return instructor_name;
+    }
+
+    public void setInstructor_name(String instructor_name) {
+        this.instructor_name = instructor_name;
+    }
+
+    public CourseStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(CourseStatus status){
+        this.status = status;
+    }
+
+    public enum CourseStatus {
+        ENROLLED(0), UNENROLLED(1), COMPLETED(2), GONE(3);
+
+        int value;
+
+        CourseStatus(int value) {
+            this.value = value;
+        }
+
+        public static CourseStatus getCourseStatus(String status) {
+            if (status.equalsIgnoreCase("enrolled"))
+                return ENROLLED;
+            else if (status.equalsIgnoreCase("unenrolled"))
+                return UNENROLLED;
+            else if (status.equalsIgnoreCase("completed"))
+                return COMPLETED;
+            else if(status.equalsIgnoreCase("gone"))
+                return GONE;
+            else
+                return null;
+        }
+
+        public int getValue() {
+            return this.value;
+        }
     }
 }

@@ -34,7 +34,7 @@ public abstract class User {
     public boolean save() throws SQLException {
         int status;
         Connection conn = ConnectionHandler.getConnection();
-        String query = "INSERT INTO " + Constants.DATABASENAME + ".`users` VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO " + Constants.DATABASENAME + ".`users` VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         PreparedStatement ps = conn.prepareStatement(query);
 
         ps.setString(1, this.netID);
@@ -44,12 +44,14 @@ public abstract class User {
         ps.setInt(5, this.type.getValue());
         if(type == UserType.STUDENT) {
             ps.setString(6, ((Student) this).getStartTerm());
-            ps.setString(7, ((Student) this).getProgram());
-            ps.setString(8, ((Student) this).getDepartment());
+            ps.setInt(7, ((Student) this).getStartYear());
+            ps.setString(8, ((Student) this).getProgram());
+            ps.setString(9, ((Student) this).getDepartment());
         } else {
             ps.setString(6, null);
-            ps.setString(7, null);
+            ps.setInt(7, -1);
             ps.setString(8, null);
+            ps.setString(9, null);
         }
 
         status = ps.executeUpdate();

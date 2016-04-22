@@ -11,7 +11,7 @@
 </head>
 <body onload="updateMinDate();">
 <%@ include file="header.jsp" %>
-<% ArrayList<Resource> resources = (ArrayList) session.getAttribute("resources"); %>
+<% ArrayList<Resource> resources = (ArrayList) request.getAttribute("resources");%>
 <div id="wrapper" class="toggled">
     <%@ include file="sidebar.jsp" %>
     <div id="page-content-wrapper">

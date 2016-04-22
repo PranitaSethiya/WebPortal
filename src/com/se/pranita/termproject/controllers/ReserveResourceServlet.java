@@ -4,6 +4,7 @@ import com.se.pranita.termproject.model.ConnectionHandler;
 import com.se.pranita.termproject.model.Resource;
 import com.se.pranita.termproject.utils.Constants;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -38,8 +39,11 @@ public class ReserveResourceServlet extends HttpServlet {
                 resource.setInfo(rs.getString("info"));
                 resources.add(resource);
             }
-            session.setAttribute("resources", resources);
-            resp.sendRedirect("/ReserveResource");
+            req.setAttribute("resources", resources);
+//            resp.sendRedirect("/ReserveResource");
+            RequestDispatcher rd = getServletContext()
+                    .getRequestDispatcher("/ReserveResource");
+            rd.forward(req, resp);
         } catch (SQLException e) {
             e.printStackTrace();
             session.setAttribute("error", e.getMessage());

@@ -1,3 +1,5 @@
+<%@ page import="com.se.pranita.termproject.model.Course" %>
+<%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -9,40 +11,78 @@
 </head>
 <body>
 <%@ include file="header.jsp" %>
+<% ArrayList<Course> courses = (ArrayList) request.getAttribute("courses");
+    User user = ((User) session.getAttribute("currentSessionUser"));
+    boolean isStudent = user.getType().getValue() == 0;
+%>
 <div id="wrapper" class="toggled">
     <%@ include file="sidebar.jsp" %>
     <div id="page-content-wrapper">
         <div id="wrap">
             <div id="main" class="container">
+                <% if(courses.size() > 0) {%>
                 <div class="panel-group" id="accordion">
-
+                    <% for (int i = 0; i < courses.size(); i++) {
+                        Course course = (Course) courses.get(i);
+                    %>
                     <div class="panel panel-default">
                         <div class="panel-heading">
+                            <% if( isStudent ) { %>
+                                <% if(course.getStatus().getValue() == 0) { %>
+                                    <button class="btn btn-danger pull-right"
+                                            onclick="enroll(false, '<%= user.getNetID() %>', '<%= course.getNumber() %>', '<%= course.getTerm() %>', '<%= course.getYear() %>');">
+                                        Drop
+                                    </button>
+                                <% } else if(course.getStatus().getValue() == 1) {%>
+                                    <button class="btn btn-primary pull-right"
+                                            onclick="enroll(true, '<%= user.getNetID() %>', '<%= course.getNumber() %>', '<%= course.getTerm() %>', '<%= course.getYear() %>');">
+                                        Enroll
+                                    </button>
+                                <% } else if(course.getStatus().getValue() == 2) {%>
+                                    <button class="btn btn-success pull-right disabled">
+                                        Completed
+                                    </button>
+                                <% } %>
+                            <% } %>
                             <h4 class="panel-title">
-                                CS 201: Algorithms and Data Structures.
+                                <b><%= course.getNumber() %>: <%= course.getName() %></b><br/>
                             </h4>
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
+                            <h5>Term: <%= course.getTerm() %> <%= course.getYear()%><br/>
+                                Department: <%= course.getDepartment() %></h5>
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse<%= i %>">
                                 more details</a>
                         </div>
-                        <div id="collapse1" class="panel-collapse collapse">
+                        <div id="collapse<%= i %>" class="panel-collapse collapse">
                             <div class="panel-body">
-                                <b>Instructor:</b> Lorem Ipsum<br/>
-                                <b>Office:</b> WCH 139<br/>
-                                <b>Office Hours:</b> 10am - 11am, Tuesday and Thursday<br/>
-                                <a href="http://mail.albany.edu" target="_blank">Send Email</a><br/>
+                                <b>Instructor:</b> <%= course.getInstructor_name() %><br/>
+                                <% if(!course.getIns_office().isEmpty()) {%>
+                                    <b>Office:</b> <%= course.getIns_office() %><br/>
+                                <% } %>
+                                <% if(!course.getIns_office_hour().isEmpty()) {%>
+                                <b>Office Hours:</b> <%= course.getIns_office_hour() %><br/>
+                                <% } %>
+                                <a href="mailto:<%= course.getInstructor()%>@webportal.edu" target="_blank">Send Email</a><br/>
                                 <br/>
-                                <b>TA:</b> Sit Amet<br/>
-                                <b>Office:</b> WCH 234<br/>
-                                <b>Office Hours:</b> 12pm - 1pm, Monday<br/>
-                                <a href="http://mail.albany.edu" target="_blank">Send Email</a><br/>
+                                <% if(!course.getTa_name().isEmpty()) {%>
+                                <b>TA:</b> <%= course.getTa_name()%><br/>
+                                <b>Office:</b> <%= course.getTa_office()%><br/>
+                                <b>Office Hours:</b> <%= course.getTa_office_hour()%><br/>
+                                <a href="mailto:<%= course.getTa_email()%>" target="_blank">Send Email</a><br/>
                                 <br/>
+                                <% } %>
                                 <b>Course Syllabus:</b><br/>
-                                CS 218 Design and Analysis of Algorithms, 4 units, Lecture, 3 hours; outside research, 3 hours. Prerequisite(s): CS 141. A study of efficient data structures and algorithms for solving problems from a variety of areas such as sorting, searching, selection, linear algebra, graph theory, and computational geometry. Also covers worst-case and average-case analysis using recurrence relations, generating functions, upper and lower bounds, and other methods. May be taken Satisfactory (S) or No Credit (NC) with consent of instructor and graduate advisor.
+                                <%= course.getCourse_syllabus().isEmpty() ? "NA" : course.getCourse_syllabus()%>
                             </div>
                         </div>
                     </div>
-
+                    <% } %>
                 </div>
+                <% } else { %>
+                <div class="jumbotron">
+                    <h2>Courses</h2>
+                    <p>No courses to display.</p>
+                </div>
+                <% }%>
             </div>
         </div>
 
@@ -52,6 +92,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>
 <script src="js/sidebar.js"></script>
+<script src="js/view_courses.js"></script>
 </body>
 
 </html>

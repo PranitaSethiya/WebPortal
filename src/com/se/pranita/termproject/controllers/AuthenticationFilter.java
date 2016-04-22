@@ -19,8 +19,10 @@ import javax.servlet.http.HttpSession;
 @WebFilter("/AuthenticationFilter")
 public class AuthenticationFilter implements Filter {
 
+    private ServletContext context;
+
     public void init(FilterConfig fConfig) throws ServletException {
-        ServletContext context = fConfig.getServletContext();
+        this.context = fConfig.getServletContext();
         System.out.println("AuthenticationFilter initialized");
     }
 
@@ -35,7 +37,7 @@ public class AuthenticationFilter implements Filter {
         HttpSession session = req.getSession(false);
 
         if(uri.equalsIgnoreCase("/") || uri.endsWith("/error")
-                || uri.endsWith("/LoginServlet") || uri.endsWith("/SignUp")
+                || uri.endsWith("/LoginServlet") || uri.endsWith("/SignUpServlet") || uri.endsWith("/SignUp")
                 || uri.endsWith("css") || uri.endsWith("js")
                 || uri.endsWith("woff") || uri.endsWith("ttf")
                 || uri.endsWith("woff2")) {

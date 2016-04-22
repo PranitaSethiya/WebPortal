@@ -170,13 +170,13 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>CourseAnnouncements</servlet-name>
-        <jsp-file>/course_announcements.jsp</jsp-file>
+        <servlet-name>CourseInfo</servlet-name>
+        <jsp-file>/course_info.jsp</jsp-file>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>CourseAnnouncements</servlet-name>
-        <url-pattern>/course_announcements</url-pattern>
+        <servlet-name>CourseInfo</servlet-name>
+        <url-pattern>/course_info</url-pattern>
     </servlet-mapping>
 
 

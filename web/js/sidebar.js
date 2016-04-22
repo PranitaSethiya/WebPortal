@@ -18,8 +18,8 @@ $("#nav-res-btn").click(function (e) {
     makeList(e, "Resources", resources, links);
 });
 $("#nav-crs-btn").click(function (e) {
-    var courses = ['View courses', 'Course Announcements'];
-    var links = ['view_courses', 'course_announcements'];
+    var courses = ['View courses', 'Course Info'];
+    var links = ['courses', 'course_info'];
     var userType = sessionStorage.getItem('userType').toLowerCase();
     if(userType == 'faculty'){
         courses = ['Create course'].concat(courses);

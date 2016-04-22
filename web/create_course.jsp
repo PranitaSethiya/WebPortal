@@ -22,8 +22,8 @@
 <div id="wrap">
     <div id="main" class="container">
         <h1 class="heading text-center">Create a course</h1>
-        <form name="loginForm" class="form-signin" action="CreateCourseServlet"
-              onsubmit="validateForm();">
+        <form name="loginForm" class="form-signin" action="courses"
+              onsubmit="validateForm();" method="post">
             <%--<center>--%>
             <%--<i class="img-circle glyphicon glyphicon-user icon-large icon-white" style="font-size: 70px; padding: 20px;"></i>--%>
             <%--</center>--%>

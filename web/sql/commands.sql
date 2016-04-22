@@ -32,15 +32,21 @@ CREATE TABLE `courses` (
   `name` VARCHAR(100) NOT NULL,
   `department` VARCHAR(100) NOT NULL,
   `course_syllabus` TEXT NOT NULL DEFAULT '',
-  `instructor` VARCHAR(10) NOT NULL,
   `ins_office_hour` VARCHAR(100) DEFAULT NULL,
   `ins_office` VARCHAR(100) DEFAULT NULL,
   `ta_name` VARCHAR(10) DEFAULT NULL,
   `ta_office_hour` VARCHAR(100) DEFAULT NULL,
   `ta_office` VARCHAR(100) DEFAULT NULL,
   `ta_email` VARCHAR(100) DEFAULT NULL,
-  `term` VARCHAR(10) DEFAULT NULL,
-  `year` INT(4) DEFAULT NULL,
-  FOREIGN KEY (`instructor`) REFERENCES `users`(`netID`),
+  `term` VARCHAR(10) NOT NULL,
+  `year` INT(4) NOT NULL,
   PRIMARY KEY (`number`, `term`, `year`)
+);
+CREATE TABLE `course_user` (
+  `netID` varchar(10) NOT NULL,
+  `number` VARCHAR(10) NOT NULL,
+  `term` VARCHAR(10) NOT NULL,
+  `year` INT(4) NOT NULL,
+  FOREIGN KEY (`netID`) REFERENCES `users`(`netID`),
+  FOREIGN KEY (`number`, `term`, `year`) REFERENCES `courses`(`number`, `term`, `year`)
 );

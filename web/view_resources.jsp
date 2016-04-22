@@ -11,7 +11,7 @@
 </head>
 <body>
 <%@ include file="header.jsp" %>
-<% ArrayList<Reservation> reservations = (ArrayList) session.getAttribute("reservations"); %>
+<% ArrayList<Reservation> reservations = (ArrayList) request.getAttribute("reservations"); %>
 <div id="wrapper" class="toggled">
     <%@ include file="sidebar.jsp" %>
     <div id="page-content-wrapper">

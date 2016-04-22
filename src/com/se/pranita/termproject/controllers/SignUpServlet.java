@@ -38,7 +38,8 @@ public class SignUpServlet extends HttpServlet {
             if (user.getType() == User.UserType.STUDENT) {
                 ((Student) user).setDepartment(request.getParameter("department"));
                 ((Student) user).setProgram(request.getParameter("program"));
-                ((Student) user).setStartTerm(request.getParameter("sem") + " " + request.getParameter("year"));
+                ((Student) user).setStartTerm(request.getParameter("sem"));
+                ((Student) user).setStartYear(Integer.parseInt(request.getParameter("year")));
             }
 
             if(user.save()) {

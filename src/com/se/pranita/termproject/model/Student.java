@@ -6,6 +6,7 @@ package com.se.pranita.termproject.model;
 public class Student extends User {
 
     private String startTerm;
+    private int startYear;
     private String program;
     private String department;
 
@@ -21,14 +22,16 @@ public class Student extends User {
     public String toString() {
         return super.toString() + "Student{" +
                 "startTerm='" + startTerm + '\'' +
+                "startYear='" + startYear + '\'' +
                 ", program='" + program + '\'' +
                 ", department='" + department + '\'' +
                 '}';
     }
 
-    public Student(String netID, String password, String firstName, String lastName, String startTerm, String program, String department) {
+    public Student(String netID, String password, String firstName, String lastName, String startTerm, int startYear, String program, String department) {
         super(UserType.STUDENT, netID, password, firstName, lastName);
         this.startTerm = startTerm;
+        this.startYear = startYear;
         this.program = program;
         this.department = department;
     }
@@ -58,4 +61,11 @@ public class Student extends User {
     }
 
 
+    public int getStartYear() {
+        return startYear;
+    }
+
+    public void setStartYear(int startYear) {
+        this.startYear = startYear;
+    }
 }

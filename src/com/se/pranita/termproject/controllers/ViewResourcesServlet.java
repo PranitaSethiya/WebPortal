@@ -3,6 +3,7 @@ package com.se.pranita.termproject.controllers;
 import com.se.pranita.termproject.model.*;
 import com.se.pranita.termproject.utils.Constants;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -44,8 +45,11 @@ public class ViewResourcesServlet extends HttpServlet {
                 reservations.add(reservation);
             }
             System.out.println(reservations);
-            session.setAttribute("reservations", reservations);
-            resp.sendRedirect("/ViewResources");
+            req.setAttribute("reservations", reservations);
+//            resp.sendRedirect("/ViewResources");
+            RequestDispatcher rd = getServletContext()
+                    .getRequestDispatcher("/ViewResources");
+            rd.forward(req, resp);
         } catch (SQLException e) {
             e.printStackTrace();
             session.setAttribute("error", e.getMessage());
