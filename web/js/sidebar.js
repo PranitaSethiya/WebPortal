@@ -19,17 +19,13 @@ $("#nav-res-btn").click(function (e) {
 });
 $("#nav-crs-btn").click(function (e) {
     var userType = sessionStorage.getItem('userType').toLowerCase();
-    if (userType == 'staff') {
+    if (userType != 'faculty') {
         e.preventDefault();
         window.location = '/courses';
     } else {
 
-        var courses = ['View courses', 'Course Info'];
-        var links = ['courses', 'course_info'];
-        if (userType == 'faculty') {
-            courses = ['Create course'].concat(courses);
-            links = ['create_course'].concat(links);
-        }
+        var courses = ['Create course', 'View courses', 'Course Info'];
+        var links = ['create_course', 'courses', 'course_info'];
 
         makeList(e, "Courses", courses, links);
     }

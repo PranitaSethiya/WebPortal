@@ -34,7 +34,7 @@ CREATE TABLE `courses` (
   `course_syllabus` TEXT NOT NULL DEFAULT '',
   `ins_office_hour` VARCHAR(100) DEFAULT NULL,
   `ins_office` VARCHAR(100) DEFAULT NULL,
-  `ta_name` VARCHAR(10) DEFAULT NULL,
+  `ta_name` VARCHAR(100) DEFAULT NULL,
   `ta_office_hour` VARCHAR(100) DEFAULT NULL,
   `ta_office` VARCHAR(100) DEFAULT NULL,
   `ta_email` VARCHAR(100) DEFAULT NULL,

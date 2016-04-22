@@ -1,7 +1,9 @@
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="com.se.pranita.termproject.model.Course" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Course Announcements</title>
+    <title>Course Information</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="bootstrap-3.3.6-dist/css/bootstrap.min.css">
     <link href="css/custom.css" rel="stylesheet">
@@ -10,96 +12,84 @@
 </head>
 <body onload="updateMinDate();">
 <%@ include file="header.jsp" %>
+<%
+    ArrayList<Course> courses = (ArrayList) request.getAttribute("courses");
+    User user = ((User) session.getAttribute("currentSessionUser"));
+%>
 <div id="wrapper" class="toggled">
     <%@ include file="sidebar.jsp" %>
     <div id="page-content-wrapper">
         <div id="wrap">
             <div id="main" class="container">
                 <div class="jumbotron">
-                    <center><h2>Course Announcements</h2></center>
+                    <center><h2>Your Courses</h2></center>
+                    <% if(courses.size() > 0) {%>
+                    <%--<center><h4>Courses you are teaching.</h4></center>--%>
 
+                    <table id="keywords" cellspacing="0" cellpadding="0">
+                        <thead>
+                        <tr>
+                            <th><span>Term</span></th>
+                            <th><span>Course</span></th>
+                            <th><span>TA</span></th>
+                            <th><span>Course Syllabus</span></th>
+                            <th><span>Instructor Info</span></th>
+                            <th><span>Edit</span></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <% for (int i = 0; i < courses.size(); i++) {
+                            Course course = (Course) courses.get(i);
+                        %>
+                        <tr>
+                            <td class="lalign"><%= course.getTerm() + " " + course.getYear() %>
+                            </td>
+                            <td><%= course.getNumber() %>
+                            </td>
+                            <td>
+                                <% if (course.getTa_name().isEmpty()) {%>
+                                NA
+                                <%} else {%>
+                                <a href="javascript:showModal('TA info for <%=course.getNumber()%>', '<b>TA name: </b><%= course.getTa_name() %><br/><b>TA email: </b><%= course.getTa_email() %><br/><b>TA Office: </b><%= course.getTa_office() %><br/><b>TA Office hours: </b><%= course.getTa_office_hour() %>', 'Close');"
+                                   title="Click for more info."
+                                   alt="Click for more info."><%= course.getTa_name() %>
+                                </a>
+                                <% } %></td>
 
-                <table id="keywords" cellspacing="0" cellpadding="0">
-                    <thead>
-                    <tr>
-                        <th><span>Course</span></th>
-                        <th><span>TA</span></th>
-                        <th><span>Course Syllabus</span></th>
-                        <th><span>Office Hours</span></th>
-                        <th><span>Edit</span></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td class="lalign">CS 203</td>
-                        <td class="lalign">Hanuman Singh</td>
-                        <td><button type="button" class="btn" data-toggle="modal" data-target="#syllabusModal">Click to show</button></td>
-                        <td class="lalign">Monday, Tuesday 10am - 11am</td>
-                        <td><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#editModal"><i class="glyphicon-edit glyphicon"></i></button></td>
-                    </tr>
-                    <tr>
-                        <td class="lalign">CS 215</td>
-                        <td class="lalign">Phulan Singh</td>
-                        <td><button type="button" class="btn" data-toggle="modal" data-target="#syllabusModal">Click to show</button></td>
-                        <td class="lalign">Thursday, Tuesday 10am - 11am</td>
-                        <td><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#editModal"><i class="glyphicon-edit glyphicon"></i></button></td>
-                    </tr>
-                    <tr>
-                        <td class="lalign">CS 211</td>
-                        <td class="lalign">Si Singh</td>
-                        <td><button type="button" class="btn" data-toggle="modal" data-target="#syllabusModal">Click to show</button></td>
-                        <td class="lalign">Monday, Wednesday 10am - 11am</td>
-                        <td><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#editModal"><i class="glyphicon-edit glyphicon"></i></button></td>
-                    </tr>
-                    </tbody>
-                </table>
+                            <td>
+                                <% if (course.getCourse_syllabus().isEmpty()) {%>
+                                NA
+                                <%} else {%>
+                                <button type="button" class="btn"
+                                        onclick="showModal('Syllabus for <%=course.getNumber()%>', '<%=course.getCourse_syllabus()%>', 'Close')">
+                                    Click
+                                    to show
+                                </button>
+                                <% } %></td>
+                            <td>
+                                <button type="button" class="btn"
+                                        onclick="showModal('Instructor info for <%=course.getNumber()%>', '<b>Name: </b><%= course.getInstructor_name() %><br/><b>Email: </b><%= course.getInstructor() %>@webportal.edu<br/><b>Office: </b><%= course.getIns_office() %><br/><b>Office hours: </b><%= course.getIns_office_hour() %>', 'Close');">
+                                    Click
+                                    to show
+                                </button>
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-warning" data-toggle="modal"
+                                        data-target="#editModal"><i class="glyphicon-edit glyphicon"></i></button>
+                            </td>
+                        </tr>
+                        <% } %>
+                        </tbody>
+                    </table>
+                    <% } else { %>
+                        <center><p>No courses to display.</p></center>
+                    <% }%>
                 </div>
             </div>
         </div>
 
-        <div id="syllabusModal" class="modal fade" role="dialog">
-            <div class="modal-dialog">
+        <div id="modalHere">
 
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Syllabus for CS203</h4>
-                    </div>
-                    <div class="modal-body">
-                        <p>
-                            CS 218 Design and Analysis of Algorithms, 4 units, Lecture, 3 hours; outside research, 3 hours. Prerequisite(s): CS 141. A study of efficient data structures and algorithms for solving problems from a variety of areas such as sorting, searching, selection, linear algebra, graph theory, and computational geometry. Also covers worst-case and average-case analysis using recurrence relations, generating functions, upper and lower bounds, and other methods. May be taken Satisfactory (S) or No Credit (NC) with consent of instructor and graduate advisor.
-                        </p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-        <div id="editModal" class="modal fade" role="dialog">
-            <div class="modal-dialog">
-
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Cancel Reservation</h4>
-                    </div>
-                    <div class="modal-body">
-                        <p>
-
-                        </p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-success" data-dismiss="modal">Save</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-                    </div>
-                </div>
-
-            </div>
         </div>
 
         <%@ include file="footer.jsp" %>
@@ -110,12 +100,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.25.8/js/jquery.tablesorter.min.js"></script>
 
 <script src="js/sidebar.js"></script>
-<script>
-    $(function(){
-        $('#keywords').tablesorter();
-    });
-</script>
-<%--<script src="js/reserve_resource.js"></script>--%>
+<script src="js/course_info.js"></script>
 </body>
 
 </html>

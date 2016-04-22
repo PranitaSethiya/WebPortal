@@ -20,21 +20,22 @@
     <%@ include file="sidebar.jsp" %>
     <div id="page-content-wrapper">
 <div id="wrap">
-    <div id="main" class="container">
+    <div id="main" class="container" >
         <h1 class="heading text-center">Create a course</h1>
         <form name="loginForm" class="form-signin" action="courses"
-              onsubmit="validateForm();" method="post">
-            <%--<center>--%>
-            <%--<i class="img-circle glyphicon glyphicon-user icon-large icon-white" style="font-size: 70px; padding: 20px;"></i>--%>
-            <%--</center>--%>
-            <div class="pad" id="course_num_parent">
-                <label for="course_num">Course Number</label>
-                <input id="course_num" name="course_num" type="text" class="form-control" placeholder="XX 000" autofocus required>
-            </div>
-            <div class="pad" id="course_name_parent">
-                <label for="course_name">Course Name</label>
-                <input id="course_name" name="course_name" type="text" class="form-control" placeholder="" required>
-            </div>
+              onsubmit="validateForm();" method="post" style="max-width: 800px !important;" >
+                <div class="pad" id="name_parent">
+                    <label for="name">Course Details</label>
+                    <div class="row" id="name">
+                        <div class="col-lg-6">
+                            <input id="course_num" name="course_num" type="text" class="form-control" placeholder="Number" autofocus required>
+                        </div>
+                        <div class="col-lg-6">
+                            <input id="course_name" name="course_name" type="text" class="form-control" placeholder="Name" required>
+                        </div>
+                    </div>
+                </div>
+
 
             <div class="pad" id="offered_sem">
                 <label for="sem">Offered Term</label>
@@ -68,34 +69,36 @@
                 <textarea id="course_syllabus" name="course_syllabus" class="form-control" placeholder=""></textarea>
             </div>
 
-            <div class="pad" id="ins_office_parent">
-                <label for="ins_office">Instructor Office</label>
-                <input id="ins_office" name="ins_office" type="text" class="form-control" placeholder="WCH 111">
+            <div class="pad">
+                <label for="office_details">Instructor Office Details</label>
+                <div class="row" id="office_details">
+                    <div class="col-lg-6">
+                        <input id="ins_office" name="ins_office" type="text" class="form-control" placeholder="Location(Example: WCH 111)">
+                    </div>
+                    <div class="col-lg-6">
+                        <input id="ins_office_hour" name="ins_office_hour" type="text" class="form-control" placeholder="Hours">
+                    </div>
+                </div>
             </div>
 
-            <div class="pad" id="ins_office_hour_parent">
-                <label for="ins_office_hour">Instructor Office Hour</label>
-                <input id="ins_office_hour" name="ins_office_hour" type="text" class="form-control" placeholder="Monday, Wednesday - 10 am to 12 pm">
-            </div>
-
-            <div class="pad" id="ta_name_parent">
-                <label for="ta_name">TA Name</label>
-                <input id="ta_name" name="ta_name" type="text" class="form-control" placeholder="">
-            </div>
-
-            <div class="pad" id="ta_email_parent">
-                <label for="ta_email">TA Email</label>
-                <input id="ta_email" name="ta_email" type="text" class="form-control" placeholder="xyz@email.com">
-            </div>
-
-            <div class="pad" id="ta_office_parent">
-                <label for="ta_office">TA Office</label>
-                <input id="ta_office" name="ta_office" type="text" class="form-control" placeholder="WCH 111">
-            </div>
-
-            <div class="pad" id="ta_office_hour_parent">
-                <label for="ta_office_hour">TA Office Hour</label>
-                <input id="ta_office_hour" name="ta_office_hour" type="text" class="form-control" placeholder="Monday, Wednesday - 10 am to 12 pm">
+            <div class="pad">
+                <label for="ta_name_details">TA Details</label>
+                <div class="row" id="ta_name_details">
+                    <div class="col-lg-6">
+                        <input id="ta_name" name="ta_name" type="text" class="form-control" placeholder="Name">
+                    </div>
+                    <div class="col-lg-6">
+                        <input id="ta_email" name="ta_email" type="email" class="form-control" placeholder="Email">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <input id="ta_office" name="ta_office" type="text" class="form-control" placeholder="Location(Example: WCH 111)">
+                    </div>
+                    <div class="col-lg-6">
+                        <input id="ta_office_hour" name="ta_office_hour" type="text" class="form-control" placeholder="Office Hours">
+                    </div>
+                </div>
             </div>
 
             <div class="alert alert-danger" role="alert" id="errors">

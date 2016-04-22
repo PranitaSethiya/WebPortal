@@ -169,15 +169,5 @@
         <url-pattern>/edit_student</url-pattern>
     </servlet-mapping>
 
-    <servlet>
-        <servlet-name>CourseInfo</servlet-name>
-        <jsp-file>/course_info.jsp</jsp-file>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>CourseInfo</servlet-name>
-        <url-pattern>/course_info</url-pattern>
-    </servlet-mapping>
-
 
 </web-app>
