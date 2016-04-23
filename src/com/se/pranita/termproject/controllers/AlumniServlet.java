@@ -82,13 +82,24 @@ public class AlumniServlet extends HttpServlet {
                 ps.close();
                 conn.close();
             }else if(request.getParameter("action").equalsIgnoreCase("update")) {
-                query = "UPDATE " + Constants.DATABASENAME + ".`alumni` SET homepage=?, description=?, image=? WHERE name=?";
+                query = "UPDATE " + Constants.DATABASENAME + ".`alumni` SET name=?, homepage=?, description=?, image=? WHERE name=?";
                 ps = conn.prepareStatement(query);
 
-                ps.setString(1, request.getParameter("homepage"));
-                ps.setString(2, request.getParameter("description"));
-                ps.setString(3, request.getParameter("image"));
-                ps.setString(4, request.getParameter("name"));
+                ps.setString(1, request.getParameter("name"));
+                ps.setString(2, request.getParameter("homepage"));
+                ps.setString(3, request.getParameter("description"));
+                ps.setString(4, request.getParameter("image"));
+                ps.setString(5, request.getParameter("old_name"));
+
+                ps.executeUpdate();
+                conn.commit();
+                ps.close();
+                conn.close();
+            } else if(request.getParameter("action").equalsIgnoreCase("delete")) {
+                query = "DELETE FROM " + Constants.DATABASENAME + ".`alumni` WHERE name=?";
+                ps = conn.prepareStatement(query);
+
+                ps.setString(1, request.getParameter("name"));
 
                 ps.executeUpdate();
                 conn.commit();

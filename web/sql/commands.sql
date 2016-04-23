@@ -53,7 +53,7 @@ CREATE TABLE `course_user` (
 CREATE TABLE `alumni` (
   `name` VARCHAR(100) NOT NULL,
   `homepage` VARCHAR(100) DEFAULT NULL,
-  `description` VARCHAR(100) DEFAULT NULL,
+  `description` VARCHAR(500) DEFAULT NULL,
   `image` VARCHAR(100) DEFAULT NULL,
   PRIMARY KEY (`name`)
 );
