@@ -1,5 +1,7 @@
 package com.se.pranita.termproject.model;
 
+import com.google.gson.GsonBuilder;
+
 /**
  * Created by Pranita on 14/4/16.
  */
@@ -67,5 +69,10 @@ public class Student extends User {
 
     public void setStartYear(int startYear) {
         this.startYear = startYear;
+    }
+
+    @Override
+    public String toJSON(){
+        return new GsonBuilder().create().toJson(Student.this);
     }
 }

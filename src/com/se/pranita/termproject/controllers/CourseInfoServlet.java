@@ -61,9 +61,11 @@ public class CourseInfoServlet extends HttpServlet {
                     course.setTerm(rs.getString("term"));
                     course.setYear(rs.getInt("year"));
                     course.setInstructor(user.getNetID());
-                    course.setInstructor_name(user.getFirstName() + " " + user.getFirstName());
+                    course.setInstructor_name(user.getFirstName() + " " + user.getLastName());
 
                     courses.add(course);
+
+                    System.out.println("JSON: "+ course.toJSON());
                 }
 
             }

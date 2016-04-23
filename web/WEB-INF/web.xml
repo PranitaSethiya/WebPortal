@@ -129,15 +129,15 @@
         <url-pattern>/ViewResources</url-pattern>
     </servlet-mapping>
 
-    <servlet>
-        <servlet-name>PhdStudents</servlet-name>
-        <jsp-file>/phd_students.jsp</jsp-file>
-    </servlet>
+    <!--<servlet>-->
+        <!--<servlet-name>PhdStudents</servlet-name>-->
+        <!--<jsp-file>/phd_students.jsp</jsp-file>-->
+    <!--</servlet>-->
 
-    <servlet-mapping>
-        <servlet-name>PhdStudents</servlet-name>
-        <url-pattern>/phd_students</url-pattern>
-    </servlet-mapping>
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>PhdStudents</servlet-name>-->
+        <!--<url-pattern>/phd_students</url-pattern>-->
+    <!--</servlet-mapping>-->
 
     <servlet>
         <servlet-name>Alumni</servlet-name>

@@ -1,5 +1,6 @@
 package com.se.pranita.termproject.model;
 
+import com.google.gson.GsonBuilder;
 import com.se.pranita.termproject.utils.Constants;
 
 import java.io.IOException;
@@ -101,6 +102,10 @@ public abstract class User {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String toJSON() {
+        return new GsonBuilder().create().toJson(this);
     }
 
     public enum UserType {

@@ -14,7 +14,19 @@
     <div id="page-content-wrapper">
         <div id="wrap">
             <div id="main" class="container">
-                <h1>Ph.D Students in Computer Science</h1>
+                <h1>Ph.D Students</h1>
+                <div class="pad" id="department">
+                    <label for="dept">Filter by Department</label>
+                    <select name="department" class="form-control" id="dept">
+                        <option selected>All departments</option>
+                        <option>Chemical Engineering</option>
+                        <option>Computer Science</option>
+                        <option>Computer Engineering</option>
+                        <option>Electrical Engineering</option>
+                        <option>Environmental Sciences</option>
+                        <option>Mechanical Engineering</option>
+                    </select>
+                </div>
                 <ul class="list-group">
                     <li class="list-group-item">
                         <table border="0">

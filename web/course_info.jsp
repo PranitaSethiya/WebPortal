@@ -10,7 +10,7 @@
     <link href="css/sidebar.css" rel="stylesheet">
     <link href="css/announcement.css" rel="stylesheet">
 </head>
-<body onload="updateMinDate();">
+<body>
 <%@ include file="header.jsp" %>
 <%
     ArrayList<Course> courses = (ArrayList) request.getAttribute("courses");
@@ -74,8 +74,7 @@
                                 </button>
                             </td>
                             <td>
-                                <button type="button" class="btn btn-warning" data-toggle="modal"
-                                        data-target="#editModal"><i class="glyphicon-edit glyphicon"></i></button>
+                                <button type="button" class="btn btn-warning" onclick='showEditModal(<%= course.toJSON() %>);'><i class="glyphicon-edit glyphicon"></i></button>
                             </td>
                         </tr>
                         <% } %>
@@ -100,6 +99,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.25.8/js/jquery.tablesorter.min.js"></script>
 
 <script src="js/sidebar.js"></script>
+<script src="js/vendor/jquery.toaster.js"></script>
 <script src="js/course_info.js"></script>
 </body>
 

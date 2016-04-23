@@ -1,5 +1,9 @@
 package com.se.pranita.termproject.controllers;
 
+
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.se.pranita.termproject.model.ConnectionHandler;
 import com.se.pranita.termproject.model.Course;
 import com.se.pranita.termproject.model.User;
@@ -17,6 +21,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,8 +33,13 @@ public class CourseServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        System.out.println("/courses doPost");
+
         if(req.getParameter("action") != null){
-            enroll(req, resp);
+            if(req.getParameter("action").equalsIgnoreCase("drop") || req.getParameter("action").equalsIgnoreCase("enroll"))
+                enroll(req, resp);
+            else if(req.getParameter("action").equalsIgnoreCase("update"))
+                update(req, resp);
             return;
         }
 
@@ -72,8 +82,55 @@ public class CourseServlet extends HttpServlet {
         }
     }
 
+    private void update(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+//        System.out.println("Here in update");
+//        Enumeration<String> vars = req.getParameterNames();
+//        while(vars.hasMoreElements())
+//            System.out.println(vars.nextElement());
+        PrintWriter out = resp.getWriter();
+        try {
+            Connection conn = ConnectionHandler.getConnection();
+            System.out.println("number: " + req.getParameter("number"));
+            System.out.println("term: " + req.getParameter("term"));
+            System.out.println("year: " + req.getParameter("year"));
+
+            String number = (req.getParameter("number"));
+            String term = req.getParameter("term");
+            int year = Integer.parseInt(req.getParameter("year"));
+
+            String query = "UPDATE " + Constants.DATABASENAME +
+                        ".`courses` SET department=?, course_syllabus=?, ins_office_hour=?, ins_office=?, ta_name=?, ta_office_hour=?, ta_office=?, ta_email=? " +
+                        "WHERE number=? AND term=? AND year=?";
+            PreparedStatement ps = conn.prepareStatement(query);
+
+            ps.setString(1, req.getParameter("department"));
+            ps.setString(2, req.getParameter("course_syllabus"));
+            ps.setString(3, req.getParameter("ins_office_hour"));
+            ps.setString(4, req.getParameter("ins_office"));
+            ps.setString(5, req.getParameter("ta_name"));
+            ps.setString(6, req.getParameter("ta_office_hour"));
+            ps.setString(7, req.getParameter("ta_office"));
+            ps.setString(8, req.getParameter("ta_email"));
+
+            ps.setString(9, number);
+            ps.setString(10, term);
+            ps.setInt(11, year);
+
+//            System.out.println("Update Course: " + ps.toString());
+            ps.executeUpdate();
+            conn.commit();
+            ps.close();
+            conn.close();
+
+            out.print("success");
+        }catch (SQLException ex){
+            ex.printStackTrace();
+            out.print("error");
+        }
+    }
+
     private void enroll(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        System.out.println("Here in enroll");
+//        System.out.println("Here in enroll");
         PrintWriter out = resp.getWriter();
         try {
             Connection conn = ConnectionHandler.getConnection();

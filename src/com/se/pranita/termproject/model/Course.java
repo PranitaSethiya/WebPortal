@@ -1,5 +1,7 @@
 package com.se.pranita.termproject.model;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.se.pranita.termproject.utils.Constants;
 
 import java.sql.Connection;
@@ -253,5 +255,10 @@ public class Course {
         public int getValue() {
             return this.value;
         }
+    }
+
+    public String toJSON() {
+        Gson gson = new GsonBuilder().create();
+        return gson.toJson(this);
     }
 }
