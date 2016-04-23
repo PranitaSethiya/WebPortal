@@ -12,11 +12,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.io.PrintWriter;
+import java.sql.*;
 import java.util.ArrayList;
+import java.util.Enumeration;
 
 /**
  * Created by Pranita on 22/4/16.
@@ -61,7 +60,47 @@ public class AlumniServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doPost(req, resp);
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        PrintWriter out = response.getWriter();
+        try {
+            Connection conn = ConnectionHandler.getConnection();
+            PreparedStatement ps;
+
+            String query;
+            if(request.getParameter("action").equalsIgnoreCase("save")) {
+                query = "INSERT INTO " + Constants.DATABASENAME + ".`alumni` VALUES(?, ?, ?, ?)";
+                ps = conn.prepareStatement(query);
+
+                ps.setString(1, request.getParameter("name"));
+                ps.setString(2, request.getParameter("homepage"));
+                ps.setString(3, request.getParameter("description"));
+                ps.setString(4, request.getParameter("image"));
+
+                ps.executeUpdate();
+                conn.commit();
+                ps.close();
+                conn.close();
+            }else if(request.getParameter("action").equalsIgnoreCase("update")) {
+                query = "UPDATE " + Constants.DATABASENAME + ".`alumni` SET homepage=?, description=?, image=? WHERE name=?";
+                ps = conn.prepareStatement(query);
+
+                ps.setString(1, request.getParameter("homepage"));
+                ps.setString(2, request.getParameter("description"));
+                ps.setString(3, request.getParameter("image"));
+                ps.setString(4, request.getParameter("name"));
+
+                ps.executeUpdate();
+                conn.commit();
+                ps.close();
+                conn.close();
+            }
+
+
+            out.print("success");
+        }catch (SQLException ex){
+            ex.printStackTrace();
+            out.print("error");
+        }
     }
 }

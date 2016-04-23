@@ -89,18 +89,18 @@
                     </div>
                     <div class="modal-body">
                         <p>
-                            <label for="name">Name</label>
-                            <input id="name" name="name" type="text" class="form-control" placeholder="" autofocus>
-                            <label for="homepage">Homepage</label>
-                            <input id="homepage" name="homepage" type="text" class="form-control" placeholder="http://alumni.xyz">
-                            <label for="description">Description</label>
-                            <textarea id="description" name="description" type="text" class="form-control"></textarea>
-                            <label for="image">Image</label>
-                            <input id="image" name="image" type="text" class="form-control" placeholder="http://alumni.xyz/logo.png">
+                            <label for="add_modal_name">Name</label>
+                            <input id="add_modal_name" name="name" type="text" class="form-control" placeholder="" autofocus>
+                            <label for="add_modal_homepage">Homepage</label>
+                            <input id="add_modal_homepage" name="homepage" type="text" class="form-control" placeholder="http://alumni.xyz">
+                            <label for="add_modal_description">Description</label>
+                            <textarea id="add_modal_description" name="description" type="text" class="form-control"></textarea>
+                            <label for="add_modal_image">Image</label>
+                            <input id="add_modal_image" name="image" type="text" class="form-control" placeholder="http://alumni.xyz/logo.png">
                         </p>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-success" data-dismiss="modal">Save</button>
+                        <button type="button" class="btn btn-success" onclick="saveAlumni();">Save</button>
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                     </div>
                 </div>
@@ -113,6 +113,8 @@
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>
+<script src="js/vendor/jquery.toaster.js"></script>
+
 <script src="js/sidebar.js"></script>
 <script src="js/alumni.js"></script>
 </body>
