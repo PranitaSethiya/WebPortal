@@ -8,13 +8,12 @@
     <link rel="stylesheet" href="bootstrap-3.3.6-dist/css/bootstrap.min.css">
     <link href="css/custom.css" rel="stylesheet">
     <link href="css/sidebar.css" rel="stylesheet">
-    <link href="css/announcement.css" rel="stylesheet">
+    <link href="css/table_sorter.css" rel="stylesheet">
 </head>
 <body>
 <%@ include file="header.jsp" %>
 <%
     ArrayList<Course> courses = (ArrayList) request.getAttribute("courses");
-    User user = ((User) session.getAttribute("currentSessionUser"));
 %>
 <div id="wrapper" class="toggled">
     <%@ include file="sidebar.jsp" %>

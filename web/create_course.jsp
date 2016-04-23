@@ -47,6 +47,7 @@
                         </select>
                     </div>
                     <div class="col-lg-6">
+                        <!--TODO add minimum year-->
                         <input name="year" id="start_year" type="number" class="form-control col-lg-6" placeholder="Year" required>
                     </div>
                 </div>

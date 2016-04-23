@@ -29,17 +29,6 @@
         <url-pattern>/SignUpServlet</url-pattern>
     </servlet-mapping>
 
-    <servlet>
-        <servlet-name>CreateResourceServlet</servlet-name>
-        <servlet-class>com.se.pranita.termproject.controllers.CreateResourceServlet</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>CreateResourceServlet</servlet-name>
-        <url-pattern>/CreateResourceServlet</url-pattern>
-    </servlet-mapping>
-
-
     <filter>
         <filter-name>AuthenticationFilter</filter-name>
         <filter-class>com.se.pranita.termproject.controllers.AuthenticationFilter</filter-class>
@@ -139,35 +128,35 @@
         <!--<url-pattern>/phd_students</url-pattern>-->
     <!--</servlet-mapping>-->
 
-    <servlet>
-        <servlet-name>Alumni</servlet-name>
-        <jsp-file>/alumni.jsp</jsp-file>
-    </servlet>
+    <!--<servlet>-->
+        <!--<servlet-name>Alumni</servlet-name>-->
+        <!--<jsp-file>/alumni.jsp</jsp-file>-->
+    <!--</servlet>-->
 
-    <servlet-mapping>
-        <servlet-name>Alumni</servlet-name>
-        <url-pattern>/alumni</url-pattern>
-    </servlet-mapping>
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>Alumni</servlet-name>-->
+        <!--<url-pattern>/alumni</url-pattern>-->
+    <!--</servlet-mapping>-->
 
-    <servlet>
-        <servlet-name>ViewStudent</servlet-name>
-        <jsp-file>/view_student.jsp</jsp-file>
-    </servlet>
+    <!--<servlet>-->
+        <!--<servlet-name>ViewStudent</servlet-name>-->
+        <!--<jsp-file>/view_student.jsp</jsp-file>-->
+    <!--</servlet>-->
 
-    <servlet-mapping>
-        <servlet-name>ViewStudent</servlet-name>
-        <url-pattern>/view_student</url-pattern>
-    </servlet-mapping>
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>ViewStudent</servlet-name>-->
+        <!--<url-pattern>/view_student</url-pattern>-->
+    <!--</servlet-mapping>-->
 
-    <servlet>
-        <servlet-name>EditStudent</servlet-name>
-        <jsp-file>/edit_student.jsp</jsp-file>
-    </servlet>
+    <!--<servlet>-->
+        <!--<servlet-name>EditStudent</servlet-name>-->
+        <!--<jsp-file>/edit_student.jsp</jsp-file>-->
+    <!--</servlet>-->
 
-    <servlet-mapping>
-        <servlet-name>EditStudent</servlet-name>
-        <url-pattern>/edit_student</url-pattern>
-    </servlet-mapping>
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>EditStudent</servlet-name>-->
+        <!--<url-pattern>/edit_student</url-pattern>-->
+    <!--</servlet-mapping>-->
 
 
 </web-app>

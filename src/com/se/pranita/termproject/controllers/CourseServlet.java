@@ -219,7 +219,6 @@ public class CourseServlet extends HttpServlet {
             RequestDispatcher rd = getServletContext()
                     .getRequestDispatcher("/view_courses");
             rd.forward(req, resp);
-//            resp.sendRedirect("/view_courses");
         } catch (SQLException e) {
             e.printStackTrace();
             session.setAttribute("error", e.getMessage());

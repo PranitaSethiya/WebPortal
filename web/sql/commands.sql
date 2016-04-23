@@ -50,3 +50,10 @@ CREATE TABLE `course_user` (
   FOREIGN KEY (`netID`) REFERENCES `users`(`netID`),
   FOREIGN KEY (`number`, `term`, `year`) REFERENCES `courses`(`number`, `term`, `year`)
 );
+CREATE TABLE `alumni` (
+  `name` VARCHAR(100) NOT NULL,
+  `homepage` VARCHAR(100) DEFAULT NULL,
+  `description` VARCHAR(100) DEFAULT NULL,
+  `image` VARCHAR(100) DEFAULT NULL,
+  PRIMARY KEY (`name`)
+);

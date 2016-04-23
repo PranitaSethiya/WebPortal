@@ -1,3 +1,5 @@
+<%@ page import="com.se.pranita.termproject.model.Student" %>
+<%@ page import="com.se.pranita.termproject.model.Course" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -6,8 +8,12 @@
     <link rel="stylesheet" href="bootstrap-3.3.6-dist/css/bootstrap.min.css">
     <link href="css/custom.css" rel="stylesheet">
     <link href="css/sidebar.css" rel="stylesheet">
+    <link href="css/table_sorter.css" rel="stylesheet">
 </head>
-<body onload="updateMinDate();">
+<body>
+<%
+    Student student = (Student) request.getAttribute("user");
+%>
 <%@ include file="header.jsp" %>
 <div id="wrapper" class="toggled">
     <%@ include file="sidebar.jsp" %>
@@ -15,20 +21,66 @@
         <div id="wrap">
             <div id="main" class="container">
                 <div class="jumbotron">
-                    <div class="pull-right">
-                        <button type="button" class="btn btn-warning" onclick="location.href='/edit_student';">
-                            <span class="glyphicon glyphicon-edit"></span> Edit
-                        </button>
-                    </div>
-                    <h1>Pranita Sethiya</h1>
+                    <%--<div class="row">--%>
+                        <%--<div class="col-lg-2">--%>
+                            <%--<i class="img-circle glyphicon glyphicon-user icon-large icon-white "--%>
+                               <%--style="font-size: 100px; padding: 20px;"></i>--%>
+                        <%--</div>--%>
+                        <%--<div class="col-lg-10">--%>
+                            <h1><%=student.getFirstName() + " " + student.getLastName()%>
+                            </h1>
+                        <h4><%= student.getNetID() %>@webportal.edu<br/></h4>
+                        <hr>
+                        <%--</div>--%>
+                    <%--</div>--%>
                     <p>
-                        <b>Email: </b>psethiya@albany.edu<br/>
-                        <b>Program: </b>MS<br/>
-                        <b>Department: </b>Computer Science<br/>
-                        <b>Starting Term: </b>Fall 2015<br/>
-                        <b>Type: </b>Alumni/Enrolled<br/>
-                        <b>Status: </b>2 Semesters Completed<br/>
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <h3><b>Program: </b><%= student.getProgram() %><br/></h3>
+                            <h3><b>Department: </b><br/><%= student.getDepartment() %><br/></h3>
+                            <h3><b>Starting Term: </b><%= student.getStartTerm() + " " + student.getStartYear() %><br/></h3>
+                            <h3><b>Status: </b><br/><%= student.getStatus()%><br/></h3>
+                        </div>
+                        <div class="col-lg-8">
+                            <center><h3><b>Course Details:</b></h3></center>
+
+                            <table id="keywords" class="" cellspacing="0" cellpadding="0">
+                                <thead>
+                                <tr>
+                                    <th><span>Course Number</span></th>
+                                    <th><span>Course Name</span></th>
+                                    <th><span>Term</span></th>
+                                    <th><span>Status</span></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <% for (int i = 0; i < student.getCourses().size(); i++) {
+                                    Course course = (Course) student.getCourses().get(i);
+                                %>
+                                <tr>
+                                    <td class="lalign"><%= course.getNumber() %></td>
+                                    <td><%= course.getName() %></td>
+                                    <td><%= course.getTerm() + " " + course.getYear() %></td>
+                                    <td><%= course.getStatus() %></td>
+                                </tr>
+                                <% } %>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <%--<div class="row">--%>
+                        <%--<div class="col-lg-6">--%>
+
+                        <%--</div>--%>
+                        <%--<div class="col-lg-6">--%>
+
+                        <%--</div>--%>
+                    <%--</div>--%>
+
+
                     </p>
+
+
                 </div>
             </div>
         </div>
@@ -37,8 +89,15 @@
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.25.8/js/jquery.tablesorter.min.js"></script>
+
 <script src="js/sidebar.js"></script>
-<%--<script src="js/reserve_resource.js"></script>--%>
+<script>
+    $(function () {
+        $('#keywords').tablesorter();
+    });
+</script>
+<%--<script src="js/view_student.js"></script>--%>
 </body>
 
 </html>

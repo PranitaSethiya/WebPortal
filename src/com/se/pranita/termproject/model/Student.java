@@ -1,6 +1,7 @@
 package com.se.pranita.termproject.model;
 
 import com.google.gson.GsonBuilder;
+import com.se.pranita.termproject.utils.TermUtil;
 
 /**
  * Created by Pranita on 14/4/16.
@@ -22,12 +23,7 @@ public class Student extends User {
 
     @Override
     public String toString() {
-        return super.toString() + "Student{" +
-                "startTerm='" + startTerm + '\'' +
-                "startYear='" + startYear + '\'' +
-                ", program='" + program + '\'' +
-                ", department='" + department + '\'' +
-                '}';
+        return toJSON();
     }
 
     public Student(String netID, String password, String firstName, String lastName, String startTerm, int startYear, String program, String department) {
@@ -74,5 +70,21 @@ public class Student extends User {
     @Override
     public String toJSON(){
         return new GsonBuilder().create().toJson(Student.this);
+    }
+
+    public String getStatus() {
+        String message = "Completed %d Semester(s)";
+        TermUtil.Term currentTerm = TermUtil.getCurrentTerm();
+        int year_diff = (TermUtil.getCurrentYear() - this.startYear) * 2;
+
+        if(currentTerm == TermUtil.Term.SUMMER || currentTerm == TermUtil.Term.FALL) {
+            year_diff += 1;
+        }
+
+        if(this.startTerm.equalsIgnoreCase("fall"))
+            year_diff -= 1;
+
+        return String.format(message, year_diff);
+
     }
 }

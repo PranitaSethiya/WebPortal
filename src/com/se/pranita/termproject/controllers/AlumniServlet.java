@@ -1,6 +1,7 @@
 package com.se.pranita.termproject.controllers;
 
-import com.se.pranita.termproject.model.*;
+import com.se.pranita.termproject.model.Alumni;
+import com.se.pranita.termproject.model.ConnectionHandler;
 import com.se.pranita.termproject.utils.Constants;
 
 import javax.servlet.RequestDispatcher;
@@ -16,14 +17,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by Pranita on 22/4/16.
  */
-@WebServlet("/phd_students")
-public class UserDetailServlet extends HttpServlet{
+@WebServlet("/alumni")
+public class AlumniServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession(false);
@@ -32,31 +31,26 @@ public class UserDetailServlet extends HttpServlet{
 
         try {
             Connection conn = ConnectionHandler.getConnection();
-            String query = "SELECT * FROM " + Constants.DATABASENAME + ".`users` WHERE `program`='Ph.D'";
+            String query = "SELECT * FROM " + Constants.DATABASENAME + ".`alumni`";
 
             Statement smt = conn.createStatement();
             ResultSet rs = smt.executeQuery(query);
 
-            ArrayList<User> users = new ArrayList<>();
-            while (rs.next()) {
-                User user = new Student();
-                user.setNetID(rs.getString("netID"));
-                user.setFirstName(rs.getString("firstName"));
-                user.setLastName(rs.getString("lastName"));
-                user.setType(User.UserType.STUDENT);
 
-                ((Student) user).setStartTerm(rs.getString("startTerm"));
-                ((Student) user).setStartYear(rs.getInt("startYear"));
-                ((Student) user).setProgram(rs.getString("program"));
-                ((Student) user).setDepartment(rs.getString("department"));
-                System.out.println(user.toJSON());
-                users.add(user);
+            ArrayList<Alumni> alumnis = new ArrayList<>();
+            while (rs.next()) {
+                Alumni alumni = new Alumni();
+                alumni.setName(rs.getString("name"));
+                alumni.setDescription(rs.getString("description"));
+                alumni.setHomepage(rs.getString("homepage"));
+                alumni.setImage(rs.getString("image"));
+                alumnis.add(alumni);
             }
 
-            System.out.println(users);
-            req.setAttribute("users", users);
+            System.out.println(alumnis);
+            req.setAttribute("alumnis", alumnis);
             RequestDispatcher rd = getServletContext()
-                    .getRequestDispatcher("/phd_students.jsp");
+                    .getRequestDispatcher("/alumni.jsp");
             rd.forward(req, resp);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -64,5 +58,10 @@ public class UserDetailServlet extends HttpServlet{
             resp.sendRedirect("/error");
 
         }
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        super.doPost(req, resp);
     }
 }

@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 /**
@@ -19,6 +20,7 @@ public abstract class User {
     private String firstName;
     private String lastName;
     private UserType type;
+    private ArrayList<Course> courses;
 
     public User(UserType type) {
         this.type = type;
@@ -108,6 +110,14 @@ public abstract class User {
         return new GsonBuilder().create().toJson(this);
     }
 
+    public void setCourses(ArrayList<Course> courses) {
+        this.courses = courses;
+    }
+
+    public ArrayList<Course> getCourses() {
+        return courses;
+    }
+
     public enum UserType {
         STUDENT(0), FACULTY(1), STAFF(2);
 
@@ -135,12 +145,6 @@ public abstract class User {
 
     @Override
     public String toString() {
-        return "User{" +
-                "netID='" + netID + '\'' +
-                ", password='" + password + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", type=" + type +
-                '}';
+        return toJSON();
     }
 }

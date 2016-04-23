@@ -20,7 +20,7 @@ public class Authenticator {
 
         Statement stmt = null;
         User user = null;
-        String searchQuery = "SELECT * FROM " + Constants.DATABASENAME + ".`users` WHERE netId='" + netId + "' AND password='" + password + "'";
+        String searchQuery = "SELECT * FROM " + Constants.DATABASENAME + ".`users` WHERE netID='" + netId + "' AND password='" + password + "'";
         try {
 
             con = ConnectionHandler.getConnection();

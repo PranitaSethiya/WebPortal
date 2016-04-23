@@ -22,7 +22,7 @@
         <div id="wrap">
             <div id="main" class="container">
                 <h1 class="heading text-center">Create a resource</h1>
-                <form name="createResourceForm" class="form-signin" action="CreateResourceServlet"
+                <form name="createResourceForm" class="form-signin" action="/view_resources" method="post"
                       onsubmit="validateForm();">
                     <div class="pad" id="resource_name_parent">
                         <label for="resource_name">Resource Name</label>

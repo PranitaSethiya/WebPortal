@@ -19,7 +19,7 @@ import java.util.Calendar;
  * Created by Pranita on 20/4/16.
  */
 @WebServlet("/view_resources")
-public class ViewResourcesServlet extends HttpServlet {
+public class ResourcesServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -55,6 +55,28 @@ public class ViewResourcesServlet extends HttpServlet {
             session.setAttribute("error", e.getMessage());
             resp.sendRedirect("/error");
 
+        }
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = req.getSession(false);
+        try {
+            Resource resource = new Resource();
+            resource.setName(req.getParameter("resource_name"));
+            resource.setType(req.getParameter("resource_type"));
+            resource.setInfo(req.getParameter("resource_additional"));
+            if(resource.save()) {
+                response.sendRedirect("/reserve_resource");
+            } else {
+                session.setAttribute("error", "Invalid Resource Data. Please check and try again!!");
+                response.sendRedirect("/error");
+            }
+
+        } catch(Exception ex) {
+            System.out.println(ex.getMessage());
+            session.setAttribute("error", ex.getMessage());
+            response.sendRedirect("/error");
         }
     }
 }
