@@ -27,12 +27,23 @@ public class ViewStudentServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession(false);
         Statement stmt;
-        String searchQuery = "SELECT * FROM " + Constants.DATABASENAME + ".`users` WHERE netID='" + req.getParameter("netID") + "'";
+        String query = "SELECT * FROM " + Constants.DATABASENAME + ".`courses` JOIN " + Constants.DATABASENAME + ".`course_user` ON " +
+                Constants.DATABASENAME + ".`courses`.`number` = " +
+                Constants.DATABASENAME + ".`course_user`.`number` AND " +
+                Constants.DATABASENAME + ".`courses`.`term` = " +
+                Constants.DATABASENAME + ".`course_user`.`term` AND " +
+                Constants.DATABASENAME + ".`courses`.`year` = " +
+                Constants.DATABASENAME + ".`course_user`.`year` " +
+                " JOIN " + Constants.DATABASENAME + ".`users` ON " +
+                Constants.DATABASENAME + ".`users`.`netID` = " +
+                Constants.DATABASENAME + ".`course_user`.`netID`" +
+                " WHERE " +
+                Constants.DATABASENAME + ".`users`.`netID`='" + req.getParameter("netID") + "'";
         try {
 
             Connection con = ConnectionHandler.getConnection();
             stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery(searchQuery);
+            ResultSet rs = stmt.executeQuery(query);
 
             if (rs.next()) {
                 User user = new Student();
@@ -44,32 +55,34 @@ public class ViewStudentServlet extends HttpServlet {
                 ((Student)user).setStartTerm(rs.getString("startTerm"));
                 ((Student)user).setProgram(rs.getString("program"));
 
-                req.setAttribute("user", user);
-
-                String courseQuery = "SELECT * FROM " + Constants.DATABASENAME + ".`course_user` WHERE netID='" + req.getParameter("netID") + "'";
-                stmt = con.createStatement();
-                ResultSet rs2 = stmt.executeQuery(courseQuery);
                 ArrayList<Course> courses = new ArrayList<>();
-                while(rs2.next()){
-                    String courseNameQuery = "SELECT name FROM " + Constants.DATABASENAME + ".`courses` WHERE number='" + rs2.getString("number") + "'" +
-                            " AND term='" + rs2.getString("term") + "'" +
-                    " AND year=" + rs2.getInt("year") + "";
-                    stmt = con.createStatement();
-                    ResultSet rs3 = stmt.executeQuery(courseNameQuery);
-                    while(rs3.next()){
+
+                Course course_1 = new Course();
+                course_1.setNumber(rs.getString("number"));
+                course_1.setTerm(rs.getString("term"));
+                course_1.setYear(rs.getInt("year"));
+                course_1.setName(rs.getString("name"));
+
+                course_1.setStatus(TermUtil.compareCurrentTerm(TermUtil.Term.getTerm(course_1.getTerm()),
+                        course_1.getYear()) <= 0 ? Course.CourseStatus.ENROLLED : Course.CourseStatus.COMPLETED);
+                courses.add(course_1);
+
+                while(rs.next()){
                         Course course = new Course();
-                        course.setNumber(rs2.getString("number"));
-                        course.setTerm(rs2.getString("term"));
-                        course.setYear(rs2.getInt("year"));
-                        course.setName(rs3.getString("name"));
+                        course.setNumber(rs.getString("number"));
+                        course.setTerm(rs.getString("term"));
+                        course.setYear(rs.getInt("year"));
+                        course.setName(rs.getString("name"));
 
                         course.setStatus(TermUtil.compareCurrentTerm(TermUtil.Term.getTerm(course.getTerm()),
                                 course.getYear()) <= 0 ? Course.CourseStatus.ENROLLED : Course.CourseStatus.COMPLETED);
                         courses.add(course);
-                    }
+
                 }
 
                 user.setCourses(courses);
+
+                req.setAttribute("user", user);
 
                 RequestDispatcher rd = getServletContext()
                         .getRequestDispatcher("/view_student.jsp");

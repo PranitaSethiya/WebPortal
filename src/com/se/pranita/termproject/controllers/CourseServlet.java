@@ -168,16 +168,19 @@ public class CourseServlet extends HttpServlet {
 
         try {
             Connection conn = ConnectionHandler.getConnection();
-            String query = "SELECT * FROM " + Constants.DATABASENAME + ".`courses`";
 
-
-            String query2 = "SELECT netID, firstName, lastName FROM " + Constants.DATABASENAME + ".`users` WHERE `type`='1'";
-            Statement smt2 = conn.createStatement();
-            ResultSet rs2 = smt2.executeQuery(query2);
-            Map<String, String> nameMap = new HashMap<>();
-            while (rs2.next()) {
-                nameMap.put(rs2.getString("netID"), rs2.getString("firstName") + " " + rs2.getString("lastName"));
-            }
+            String query = "SELECT * FROM " + Constants.DATABASENAME + ".`courses` JOIN " + Constants.DATABASENAME + ".`course_user` ON " +
+                    Constants.DATABASENAME + ".`courses`.`number` = " +
+                    Constants.DATABASENAME + ".`course_user`.`number` AND " +
+                    Constants.DATABASENAME + ".`courses`.`term` = " +
+                    Constants.DATABASENAME + ".`course_user`.`term` AND " +
+                    Constants.DATABASENAME + ".`courses`.`year` = " +
+                    Constants.DATABASENAME + ".`course_user`.`year` " +
+                    " JOIN " + Constants.DATABASENAME + ".`users` ON " +
+                    Constants.DATABASENAME + ".`users`.`netID` = " +
+                    Constants.DATABASENAME + ".`course_user`.`netID`" +
+                    " WHERE " +
+                    Constants.DATABASENAME + ".`users`.`type`='1'";
 
             Statement smt = conn.createStatement();
             ResultSet rs = smt.executeQuery(query);
@@ -199,15 +202,8 @@ public class CourseServlet extends HttpServlet {
                 course.setTa_email(rs.getString("ta_email"));
                 course.setTerm(rs.getString("term"));
                 course.setYear(rs.getInt("year"));
-
-                String query3 = "SELECT netID FROM " + Constants.DATABASENAME + ".`course_user` WHERE `number`='"
-                        + course.getNumber() + "' AND `term`='" + course.getTerm() + "' AND `year`='" + course.getYear() + "'";
-                Statement smt3 = conn.createStatement();
-                ResultSet rs3 = smt3.executeQuery(query3);
-                while (rs3.next()) {
-                    course.setInstructor(rs3.getString("netID"));
-                    course.setInstructor_name(nameMap.getOrDefault(course.getInstructor(), ""));
-                }
+                course.setInstructor(rs.getString("netID"));
+                course.setInstructor_name(rs.getString("firstName") + " " + rs.getString("lastName"));
                 if (user.getType() == User.UserType.STUDENT)
                     course.setStatus(getUserStatus(conn, user.getNetID(), course.getNumber(), course.getTerm(), course.getYear()));
 

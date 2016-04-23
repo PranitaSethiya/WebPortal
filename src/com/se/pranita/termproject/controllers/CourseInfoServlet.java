@@ -35,47 +35,47 @@ public class CourseInfoServlet extends HttpServlet {
         try {
             ArrayList<Course> courses = new ArrayList<>();
             Connection conn = ConnectionHandler.getConnection();
-            String query2 = "SELECT * FROM " + Constants.DATABASENAME + ".`course_user` WHERE `netID`='" + user.getNetID() + "'";
-            Statement smt2 = conn.createStatement();
-            ResultSet rs2 = smt2.executeQuery(query2);
-            while (rs2.next()) {
-                String query = "SELECT * FROM " + Constants.DATABASENAME + ".`courses` WHERE `number`='"
-                        + rs2.getString("number") + "' AND `term`='" + rs2.getString("term")
-                        + "' AND `year`='" + rs2.getString("year") + "'";
-                Statement smt = conn.createStatement();
-                ResultSet rs = smt.executeQuery(query);
+            String query = "SELECT * FROM " + Constants.DATABASENAME + ".`courses` JOIN " + Constants.DATABASENAME + ".`course_user` ON " +
+                    Constants.DATABASENAME + ".`courses`.`number` = " +
+                    Constants.DATABASENAME + ".`course_user`.`number` AND " +
+                    Constants.DATABASENAME + ".`courses`.`term` = " +
+                    Constants.DATABASENAME + ".`course_user`.`term` AND " +
+                    Constants.DATABASENAME + ".`courses`.`year` = " +
+                    Constants.DATABASENAME + ".`course_user`.`year` WHERE " +
+                    Constants.DATABASENAME + ".`course_user`.`netID`='" + user.getNetID() + "'";
 
-                while (rs.next()) {
-                    Course course = new Course();
-                    course.setName(rs.getString("name"));
-                    course.setNumber(rs.getString("number"));
-                    course.setDepartment(rs.getString("department"));
-                    course.setCourse_syllabus(rs.getString("course_syllabus"));
-                    course.setIns_office(rs.getString("ins_office_hour"));
-                    course.setIns_office(rs.getString("ins_office_hour"));
-                    course.setIns_office_hour(rs.getString("ins_office"));
-                    course.setTa_name(rs.getString("ta_name"));
-                    course.setTa_office(rs.getString("ta_office_hour"));
-                    course.setTa_office_hour(rs.getString("ta_office"));
-                    course.setTa_email(rs.getString("ta_email"));
-                    course.setTerm(rs.getString("term"));
-                    course.setYear(rs.getInt("year"));
-                    course.setInstructor(user.getNetID());
-                    course.setInstructor_name(user.getFirstName() + " " + user.getLastName());
+            Statement smt = conn.createStatement();
+            ResultSet rs = smt.executeQuery(query);
 
-                    courses.add(course);
+            while (rs.next()) {
+                Course course = new Course();
+                course.setName(rs.getString("name"));
+                course.setNumber(rs.getString("number"));
+                course.setDepartment(rs.getString("department"));
+                course.setCourse_syllabus(rs.getString("course_syllabus"));
+                course.setIns_office(rs.getString("ins_office_hour"));
+                course.setIns_office(rs.getString("ins_office_hour"));
+                course.setIns_office_hour(rs.getString("ins_office"));
+                course.setTa_name(rs.getString("ta_name"));
+                course.setTa_office(rs.getString("ta_office_hour"));
+                course.setTa_office_hour(rs.getString("ta_office"));
+                course.setTa_email(rs.getString("ta_email"));
+                course.setTerm(rs.getString("term"));
+                course.setYear(rs.getInt("year"));
+                course.setInstructor(user.getNetID());
+                course.setInstructor_name(user.getFirstName() + " " + user.getLastName());
 
-                    System.out.println("JSON: "+ course.toJSON());
-                }
+                courses.add(course);
 
+                System.out.println("JSON: " + course.toJSON());
             }
+
 
             System.out.println(courses);
             req.setAttribute("courses", courses);
             RequestDispatcher rd = getServletContext()
                     .getRequestDispatcher("/course_info.jsp");
             rd.forward(req, resp);
-//            resp.sendRedirect("/view_courses");
         } catch (SQLException e) {
             e.printStackTrace();
             session.setAttribute("error", e.getMessage());
