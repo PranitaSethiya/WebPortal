@@ -1,6 +1,8 @@
-package com.se.pranita.termproject.controllers;
+package com.se.pranita.termproject.controllers.posts;
 
 import com.se.pranita.termproject.model.*;
+import com.se.pranita.termproject.model.common.ConnectionHandler;
+import com.se.pranita.termproject.model.user.User;
 import com.se.pranita.termproject.utils.Constants;
 
 import javax.servlet.RequestDispatcher;
@@ -13,9 +15,6 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.*;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 /**

@@ -1,6 +1,8 @@
-package com.se.pranita.termproject.controllers;
+package com.se.pranita.termproject.controllers.resources;
 
 import com.se.pranita.termproject.model.*;
+import com.se.pranita.termproject.model.common.ConnectionHandler;
+import com.se.pranita.termproject.model.user.User;
 import com.se.pranita.termproject.utils.Constants;
 
 import javax.servlet.RequestDispatcher;

@@ -1,8 +1,8 @@
-package com.se.pranita.termproject.controllers;
+package com.se.pranita.termproject.controllers.resources;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import com.se.pranita.termproject.model.ConnectionHandler;
+import com.se.pranita.termproject.model.common.ConnectionHandler;
 import com.se.pranita.termproject.utils.Constants;
 
 import javax.servlet.ServletException;
@@ -10,12 +10,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.*;
-import java.util.Calendar;
-import java.util.Enumeration;
 
 /**
  * Created by Pranita on 20/4/16.

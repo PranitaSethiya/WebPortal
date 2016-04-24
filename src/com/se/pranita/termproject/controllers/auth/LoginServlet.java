@@ -1,8 +1,7 @@
-package com.se.pranita.termproject.controllers;
+package com.se.pranita.termproject.controllers.auth;
 
-import com.se.pranita.termproject.model.Authenticator;
-import com.se.pranita.termproject.model.ConnectionHandler;
-import com.se.pranita.termproject.model.User;
+import com.se.pranita.termproject.model.user.Authenticator;
+import com.se.pranita.termproject.model.user.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,15 +10,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.Statement;
 
 /**
  * Created by Pranita on 14/4/16.
  */
-@WebServlet(name = "com.se.pranita.termproject.controllers.LoginServlet")
+@WebServlet(name = "com.se.pranita.termproject.controllers.auth.LoginServlet")
 public class LoginServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

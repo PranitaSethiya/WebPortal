@@ -1,8 +1,8 @@
 package com.se.pranita.termproject.controllers;
 
-import com.se.pranita.termproject.model.Student;
-import com.se.pranita.termproject.model.User;
-import com.se.pranita.termproject.model.UserFactory;
+import com.se.pranita.termproject.model.user.Student;
+import com.se.pranita.termproject.model.user.User;
+import com.se.pranita.termproject.model.user.UserFactory;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

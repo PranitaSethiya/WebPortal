@@ -1,4 +1,4 @@
-package com.se.pranita.termproject.model;
+package com.se.pranita.termproject.model.announcement;
 
 /**
  * Created by Pranita on 23/4/16.

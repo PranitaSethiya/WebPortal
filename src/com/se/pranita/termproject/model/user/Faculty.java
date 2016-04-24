@@ -1,4 +1,4 @@
-package com.se.pranita.termproject.model;
+package com.se.pranita.termproject.model.user;
 
 /**
  * Created by Pranita on 14/4/16.

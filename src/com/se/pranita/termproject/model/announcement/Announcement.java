@@ -1,4 +1,4 @@
-package com.se.pranita.termproject.model;
+package com.se.pranita.termproject.model.announcement;
 
 import com.google.gson.GsonBuilder;
 

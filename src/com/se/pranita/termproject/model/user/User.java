@@ -1,14 +1,14 @@
-package com.se.pranita.termproject.model;
+package com.se.pranita.termproject.model.user;
 
 import com.google.gson.GsonBuilder;
+import com.se.pranita.termproject.model.common.ConnectionHandler;
+import com.se.pranita.termproject.model.Course;
 import com.se.pranita.termproject.utils.Constants;
 
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Calendar;
 
 /**
  * Created by Pranita on 14/4/16.

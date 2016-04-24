@@ -1,5 +1,6 @@
 package com.se.pranita.termproject.model;
 
+import com.se.pranita.termproject.model.common.ConnectionHandler;
 import com.se.pranita.termproject.utils.Constants;
 
 import java.sql.Connection;

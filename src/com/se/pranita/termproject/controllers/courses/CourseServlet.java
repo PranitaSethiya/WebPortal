@@ -1,12 +1,9 @@
-package com.se.pranita.termproject.controllers;
+package com.se.pranita.termproject.controllers.courses;
 
 
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import com.se.pranita.termproject.model.ConnectionHandler;
+import com.se.pranita.termproject.model.common.ConnectionHandler;
 import com.se.pranita.termproject.model.Course;
-import com.se.pranita.termproject.model.User;
+import com.se.pranita.termproject.model.user.User;
 import com.se.pranita.termproject.utils.Constants;
 import com.se.pranita.termproject.utils.TermUtil;
 
@@ -21,9 +18,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by Pranita on 21/4/16.

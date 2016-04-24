@@ -1,4 +1,4 @@
-<%@ page import="com.se.pranita.termproject.model.User" %><%--
+<%@ page import="com.se.pranita.termproject.model.user.User" %><%--
   Created by IntelliJ IDEA.
   User: pranita
   Date: 15/4/16

@@ -1,7 +1,7 @@
 package com.se.pranita.termproject.controllers;
 
 import com.se.pranita.termproject.model.Alumni;
-import com.se.pranita.termproject.model.ConnectionHandler;
+import com.se.pranita.termproject.model.common.ConnectionHandler;
 import com.se.pranita.termproject.utils.Constants;
 
 import javax.servlet.RequestDispatcher;
@@ -15,7 +15,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Enumeration;
 
 /**
  * Created by Pranita on 22/4/16.

@@ -1,6 +1,6 @@
-package com.se.pranita.termproject.controllers;
+package com.se.pranita.termproject.controllers.resources;
 
-import com.se.pranita.termproject.model.ConnectionHandler;
+import com.se.pranita.termproject.model.common.ConnectionHandler;
 import com.se.pranita.termproject.model.Resource;
 import com.se.pranita.termproject.utils.Constants;
 

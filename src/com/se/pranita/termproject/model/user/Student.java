@@ -1,4 +1,4 @@
-package com.se.pranita.termproject.model;
+package com.se.pranita.termproject.model.user;
 
 import com.google.gson.GsonBuilder;
 import com.se.pranita.termproject.utils.TermUtil;

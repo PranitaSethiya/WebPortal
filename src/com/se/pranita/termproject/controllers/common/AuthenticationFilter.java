@@ -1,6 +1,4 @@
-package com.se.pranita.termproject.controllers;
-
-import com.se.pranita.termproject.model.User;
+package com.se.pranita.termproject.controllers.common;
 
 import java.io.IOException;
 

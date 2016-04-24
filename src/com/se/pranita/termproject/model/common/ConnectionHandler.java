@@ -1,13 +1,10 @@
-package com.se.pranita.termproject.model;
+package com.se.pranita.termproject.model.common;
 
 import com.se.pranita.termproject.utils.Constants;
 
-import java.io.IOException;
 import java.sql.Connection;
-import java.io.FileInputStream;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.Properties;
 
 /**
  * Created by Pranita on 16/4/16.

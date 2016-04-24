@@ -1,6 +1,9 @@
 package com.se.pranita.termproject.controllers;
 
 import com.se.pranita.termproject.model.*;
+import com.se.pranita.termproject.model.common.ConnectionHandler;
+import com.se.pranita.termproject.model.user.Student;
+import com.se.pranita.termproject.model.user.User;
 import com.se.pranita.termproject.utils.Constants;
 import com.se.pranita.termproject.utils.TermUtil;
 
@@ -16,7 +19,6 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Enumeration;
 
 /**
  * Created by Pranita on 22/4/16.

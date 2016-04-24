@@ -98,3 +98,12 @@ CREATE TABLE `exam_user` (
   FOREIGN KEY (`netID`) REFERENCES `users`(`netID`),
   FOREIGN KEY (`examID`) REFERENCES `exams`(`examID`)
 );
+
+CREATE TABLE `results` (
+  `resultID` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `netID` VARCHAR(10) NOT NULL,
+  `exam_name` VARCHAR(100) NOT NULL,
+  `result_details` TEXT NOT NULL,
+  `create_time` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (`netID`) REFERENCES `users`(`netID`)
+);

@@ -1,4 +1,4 @@
-package com.se.pranita.termproject.controllers;
+package com.se.pranita.termproject.controllers.auth;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

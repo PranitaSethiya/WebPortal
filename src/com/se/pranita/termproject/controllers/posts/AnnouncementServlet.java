@@ -1,6 +1,10 @@
-package com.se.pranita.termproject.controllers;
+package com.se.pranita.termproject.controllers.posts;
 
-import com.se.pranita.termproject.model.*;
+import com.se.pranita.termproject.model.announcement.Announcement;
+import com.se.pranita.termproject.model.announcement.AnnouncementFactory;
+import com.se.pranita.termproject.model.announcement.Event;
+import com.se.pranita.termproject.model.common.ConnectionHandler;
+import com.se.pranita.termproject.model.user.User;
 import com.se.pranita.termproject.utils.Constants;
 
 import javax.servlet.RequestDispatcher;
@@ -17,7 +21,6 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Enumeration;
 
 /**
  * Created by Pranita on 23/4/16.

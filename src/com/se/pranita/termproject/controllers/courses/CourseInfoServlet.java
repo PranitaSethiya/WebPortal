@@ -1,8 +1,8 @@
-package com.se.pranita.termproject.controllers;
+package com.se.pranita.termproject.controllers.courses;
 
-import com.se.pranita.termproject.model.ConnectionHandler;
+import com.se.pranita.termproject.model.common.ConnectionHandler;
 import com.se.pranita.termproject.model.Course;
-import com.se.pranita.termproject.model.User;
+import com.se.pranita.termproject.model.user.User;
 import com.se.pranita.termproject.utils.Constants;
 
 import javax.servlet.RequestDispatcher;
@@ -18,8 +18,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by Pranita on 22/4/16.

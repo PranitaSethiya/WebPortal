@@ -25,6 +25,25 @@
                     <h2>About WebPortal</h2>
                     <%--<h1>Welcome to the WebPortal homepage.</h1>--%>
                     <p>WebPortal is a SE Project for Spring 2016 Term developed by Pranita Setiya.</p>
+                    <p>WebPortal is a Student Management System.</p>
+                    <p>Technologies Used:
+                    <ul>
+                        <li>JSP and Servlets</li>
+                        <li>MySQL</li>
+                        <li>Apache Tomcat Server</li>
+                    </ul>
+                    </p>
+                    <p>
+                        Libraries Used:
+                        <ul>
+                        <li><a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a></li>
+                        <li><a href="https://jquery.com/" target="_blank">jQuery</a></li>
+                        <li><a href="https://eonasdan.github.io/bootstrap-datetimepicker/" target="_blank">Bootstrap Datetimepicker</a></li>
+                        <li><a href="https://plugins.jquery.com/toaster/" target="_blank">jQuery Toaster</a></li>
+                        <li><a href="http://momentjs.com/" target="_blank">Moment</a></li>
+                        <li><a href="https://github.com/google/gson" target="_blank">Gson</a></li>
+                        </ul>
+                    </p>
                 </div>
             </div>
         </div>
