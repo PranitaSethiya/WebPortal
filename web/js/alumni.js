@@ -62,7 +62,7 @@ function editAlumni(alumni) {
         '</p>' +
         '</div>' +
         '<div class="modal-footer">' +
-        '<button type="button" class="btn btn-success" onclick="editSaveAlumni();">Update</button>' +
+        '<button type="button" class="btn btn-success" id="editSaveAlumniButton">Update</button>' +
         '<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>' +
         '</div>' +
         '</div>' +
@@ -71,11 +71,10 @@ function editAlumni(alumni) {
 
     $('#editModalHere').html(html);
     $('#editModal').modal();
-}
-
-function editSaveAlumni() {
-    sendPost("update", $('#edit_modal_name').val(), $('#edit_modal_homepage').val(),
-        $('#edit_modal_description').val(), $('#edit_modal_image').val());
+    $('#editSaveAlumniButton').click(function () {
+        sendPost("update", $('#edit_modal_name').val(), $('#edit_modal_homepage').val(),
+            $('#edit_modal_description').val(), $('#edit_modal_image').val(), alumni['name']);
+    });
 }
 
 function saveAlumni() {
@@ -83,14 +82,15 @@ function saveAlumni() {
         $('#add_modal_description').val(), $('#add_modal_image').val());
 }
 
-function sendPost(action_r, name_r, homepage_r, description_r, image_r) {
+function sendPost(action_r, name_r, homepage_r, description_r, image_r, old_name_r) {
     $.post("/alumni",
         {
             action: action_r,
             name: name_r,
             homepage: homepage_r,
             description: description_r,
-            image: image_r
+            image: image_r,
+            old_name: old_name_r
 
         }, function (data, status) {
             if (data == "success") {

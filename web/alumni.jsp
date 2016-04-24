@@ -36,10 +36,10 @@
                     <li class="list-group-item">
                         <div class="row" id="name">
 
-                            <% if (alumni.getImage() == null) {%>
-                            <div class="col-lg-6">
-                                <i class="img-circle glyphicon glyphicon-tower icon-large icon-white"
-                                   style="font-size: 50px; padding: 20px;"></i>
+                            <% if (alumni.getImage().length() == 0) {%>
+                            <div class="col-lg-2">
+                                <center><i class="img-circle glyphicon glyphicon-tower icon-large icon-white"
+                                   style="font-size: 50px; padding: 20px;"></i></center>
                             </div>
                             <%} else {%>
                             <div class="col-lg-2">

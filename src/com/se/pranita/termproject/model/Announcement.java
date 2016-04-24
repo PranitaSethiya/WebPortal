@@ -8,6 +8,7 @@ import java.sql.Timestamp;
  * Created by Pranita on 23/4/16.
  */
 public abstract class Announcement {
+    private Integer id;
     private String netID;
     private String link;
     private String title;
@@ -16,7 +17,8 @@ public abstract class Announcement {
     private Timestamp createTime;
     private String ownerName;
 
-    public Announcement(String netID, String link, String title, String details, AnnouncementType type, Timestamp createTime) {
+    public Announcement(Integer id, String netID, String link, String title, String details, AnnouncementType type, Timestamp createTime) {
+        this.id = id;
         this.netID = netID;
         this.link = link;
         this.title = title;
@@ -25,8 +27,8 @@ public abstract class Announcement {
         this.createTime = createTime;
     }
 
-    public Announcement() {
-
+    public Announcement(AnnouncementType type) {
+        this.type = type;
     }
 
 
@@ -96,6 +98,14 @@ public abstract class Announcement {
         this.ownerName = ownerName;
     }
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     public enum AnnouncementType {
         JOB(0), EVENT(1), NEWS(2);
 
@@ -106,7 +116,7 @@ public abstract class Announcement {
         }
 
         public static AnnouncementType getAnnouncementType(String type) {
-            if (type.equalsIgnoreCase("job"))
+            if (type.equalsIgnoreCase("job") || type.equalsIgnoreCase("job posting"))
                 return JOB;
             else if (type.equalsIgnoreCase("event"))
                 return EVENT;
@@ -114,6 +124,20 @@ public abstract class Announcement {
                 return NEWS;
             else
                 return null;
+        }
+
+        @Override
+        public String toString() {
+            switch (value) {
+                case 0:
+                    return "Job";
+                case 1:
+                    return "Event";
+                case 2:
+                    return "News";
+                default:
+                    return "Announcement";
+            }
         }
 
         public int getValue() {

@@ -8,13 +8,13 @@ $(function () {
     });
 });
 
-function updateEventView() {
-    if($('#add_modal_type').val() == "Event") {
-        $('#add_datetimepicker_event_parent').show();
-        $('#add_modal_venue_parent').show();
+function updateEventView(val) {
+    if ($('#' + val + '_modal_type').val() == "Event") {
+        $('#' + val + '_datetimepicker_event_parent').show();
+        $('#' + val + '_modal_venue_parent').show();
     } else {
-        $('#add_datetimepicker_event_parent').hide();
-        $('#add_modal_venue_parent').hide();
+        $('#' + val + '_datetimepicker_event_parent').hide();
+        $('#' + val + '_modal_venue_parent').hide();
     }
 }
 
@@ -29,7 +29,7 @@ function deleteAnnouncement(announcement) {
         '<h4 class="modal-title">Delete Announcement</h4>' +
         '</div>' +
         '<div class="modal-body">' +
-        '<p>Are you sure you want to delete Announcement <b>' + announcement['name'] + '</b>?' +
+        '<p>Are you sure you want to delete Announcement titled <b>' + announcement['title'] + '</b>?' +
         '</p>' +
         '</div>' +
         '<div class="modal-footer">' +
@@ -42,43 +42,78 @@ function deleteAnnouncement(announcement) {
 
     $('#deleteModalHere').html(html);
     $('#deleteAnnouncementButton').click(function () {
-        deleteActionAnnouncement(announcement['name']);
+        deleteActionAnnouncement(announcement['id']);
     });
     $('#deleteModal').modal();
 }
 
-function deleteActionAnnouncement(announcement_name) {
-    sendPost("delete", announcement_name);
+function deleteActionAnnouncement(id) {
+    sendPost("delete", id);
 }
 
 function editAnnouncement(announcement) {
     var html =
         '<div id="editModal" class="modal fade" role="dialog">' +
         '<div class="modal-dialog">' +
-        '<!-- Modal content-->' +
         '<div class="modal-content">' +
         '<div class="modal-header">' +
         '<button type="button" class="close" data-dismiss="modal">&times;</button>' +
-        '<h4 class="modal-title">Announcement</h4>' +
+        '<h3 class="modal-title">Edit Announcement</h3>' +
         '</div>' +
         '<div class="modal-body">' +
-        '<p>' +
-        '<label for="edit_modal_name">Name</label>' +
-        '<input id="edit_modal_name" name="name" type="text" class="form-control" placeholder=""' +
-        'autofocus value="' + announcement['name'] + '">' +
-        '<label for="edit_modal_homepage">Homepage</label>' +
-        '<input id="edit_modal_homepage" name="homepage" type="text" class="form-control"' +
-        'placeholder="http://announcement.xyz" value=' + announcement['homepage'] + '>' +
-        '<label for="edit_modal_description">Description</label>' +
-        '<textarea id="edit_modal_description" name="description" type="text"' +
-        'class="form-control">' + announcement['description'] + '</textarea>' +
-        '<label for="edit_modal_image">Image</label>' +
-        '<input id="edit_modal_image" name="image" type="text" class="form-control"' +
-        'placeholder="http://announcement.xyz/logo.png" value=' + announcement['image'] + '>' +
-        '</p>' +
+        '<div class="pad">' +
+        '<label for="edit_modal_title">Title</label>' +
+        '<input id="edit_modal_title" name="title" type="text" class="form-control" placeholder=""' +
+        'autofocus required value="'+ announcement['title'] + '">' +
+        '</div>' +
+        '<div class="pad">' +
+        '<label for="edit_modal_details">Details</label>' +
+        '<textarea id="edit_modal_details" name="details" type="text"' +
+        'class="form-control">' + announcement['details'] + '</textarea>' +
+        '</div>' +
+        '<div class="pad">' +
+        '<label for="edit_modal_link">Link or Contact Info</label>' +
+        '<input id="edit_modal_link" name="link" type="text" class="form-control"' +
+        'placeholder="http://link.xyz" value="'+ announcement['link'] + '">' +
+        '</div>' +
+        '<div class="pad">' +
+        '<label for="edit_modal_type">Announcement Type</label>' +
+        '<select name="type" class="form-control" id="edit_modal_type" onchange="updateEventView(' + "'edit'" + ');"' +
+        'required > <option ';
+    
+    if(announcement['type'] == "JOB")
+    html += 'selected';
+    
+    html +=    '>Job Posting</option>' +
+        '<option ';
+
+    if(announcement['type'] == "EVENT")
+        html+='selected';
+    
+    html +=   '>Event</option>' +
+        '<option ';
+    
+    if(announcement['type'] == "NEWS")
+        html+='selected';
+    
+    html += '>News</option>' +
+        '</select>' +
+        '</div>' +
+        '<div class="pad" id="edit_datetimepicker_event_parent" hidden>' +
+        '<label for="edit_datetimepicker_event">Event Date and Time</label>' +
+        '<div class="input-group date" id="edit_datetimepicker_event">' +
+        '<input type="text" class="form-control"/> <span class="input-group-addon"><span' +
+        'class="glyphicon-calendar glyphicon"></span></span>' +
+        '</div>' +
+        '</div>' +
+        '<div class="pad" id="edit_modal_venue_parent" hidden>' +
+        '<label for="edit_modal_venue">Event Venue</label>' +
+        '<input id="edit_modal_venue" name="venue" type="text" class="form-control"' +
+        'placeholder="" value="'+ announcement['eventVenue'] + '">' +
+        '</div>' +
         '</div>' +
         '<div class="modal-footer">' +
-        '<button type="button" class="btn btn-success" onclick="editSaveAnnouncement();">Update</button>' +
+        '<button type="button" class="btn btn-success" id="editSaveAnnouncementButton">Update</button>' +
         '<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>' +
         '</div>' +
         '</div>' +
@@ -86,28 +121,35 @@ function editAnnouncement(announcement) {
         '</div>';
 
     $('#editModalHere').html(html);
-    $('#editModal').modal();
-}
+    $('#editSaveAnnouncementButton').click(function () {
+        sendPost("update", announcement['id'], $('#edit_modal_title').val(), $('#edit_modal_details').val(),
+            $('#edit_modal_link').val(), $('#edit_modal_type').val(), $('#edit_datetimepicker_event').data().date, $('#edit_modal_venue').val());
+    });
 
-function editSaveAnnouncement() {
-    sendPost("update", $('#edit_modal_name').val(), $('#edit_modal_homepage').val(),
-        $('#edit_modal_description').val(), $('#edit_modal_image').val());
+    $('#edit_datetimepicker_event').datetimepicker({
+        defaultDate: announcement['eventDatetime']
+    });
+
+    $('#editModal').modal();
+    updateEventView("edit");
 }
 
 function saveAnnouncement() {
-    sendPost("save", $('#add_modal_title').val(), $('#add_modal_details').val(),
-        $('#add_modal_link').val(), $('#add_modal_type').val(), $('#add_datetimepicker_event').val(), $('#add_modal_venue').val());
+    sendPost("save", null, $('#add_modal_title').val(), $('#add_modal_details').val(),
+        $('#add_modal_link').val(), $('#add_modal_type').val(), $('#add_datetimepicker_event').data().date, $('#add_modal_venue').val());
 }
 
-function sendPost(action_r, title_r, details_r, link_r, type_r, event_date_r, event_venue_r) {
+function sendPost(action_r, id_r, title_r, details_r, link_r, type_r, event_date_r, event_venue_r) {
     console.log(action_r, title_r, details_r, link_r, type_r, event_date_r, event_venue_r);
-    $.post("/announcement",
+    $.post("/announcements",
         {
+            id: id_r,
+            action: action_r,
             title: title_r,
             details: details_r,
             link: link_r,
             announcement_type: type_r,
-            event_datetime:  event_date_r, 
+            event_datetime: event_date_r,
             event_venue: event_venue_r
 
         }, function (data, status) {

@@ -1,5 +1,7 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="com.se.pranita.termproject.model.Announcement" %>
+<%@ page import="com.se.pranita.termproject.model.Event" %>
+<%@ page import="java.text.SimpleDateFormat" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -9,6 +11,7 @@
     <link rel="stylesheet" type="text/css" href="css/vendor/bootstrap-datetimepicker.css">
     <link href="css/custom.css" rel="stylesheet">
     <link href="css/sidebar.css" rel="stylesheet">
+    <link href="css/forum.css" rel="stylesheet">
 </head>
 <body>
 <%@ include file="header.jsp" %>
@@ -35,33 +38,51 @@
                         Announcement announcement = announcements.get(i);
                     %>
                     <li class="list-group-item">
-                        <div class="row" id="name">
 
-                            <%--<% if (announcement.getImage() == null) {%>--%>
-                            <%--<div class="col-lg-6">--%>
-                            <%--<i class="img-circle glyphicon glyphicon-tower icon-large icon-white"--%>
-                            <%--style="font-size: 50px; padding: 20px;"></i>--%>
-                            <%--</div>--%>
-                            <%--<%} else {%>--%>
-                            <%--<div class="col-lg-2">--%>
-                            <%--<center><img src="<%= announcement.getImage() %>" width="100" height="100"></center>--%>
-                            <%--</div>--%>
-                            <%--<% } %>--%>
-                            <%--<div class="col-lg-10">--%>
-                            <%--<% if (currentUser.getType().getValue() != 0) {%>--%>
-                            <%--<button type="button" class="btn btn-danger pull-right" onclick='deleteAlumni(<%= announcement %>);'><i class="glyphicon-trash glyphicon"></i></button>--%>
-                            <%--<button type="button" class="btn btn-warning pull-right" onclick='editAlumni(<%= announcement %>);'><i class="glyphicon-edit glyphicon"></i></button>--%>
-                            <%--<% } %>--%>
-                            <%--<b style="font-size: 20"><%= announcement.getName() %>--%>
-                            <%--</b><br/>--%>
-                            <%--<a href="<%= announcement.getHomepage() %>"><%= announcement.getHomepage() %>--%>
-                            <%--</a><br/>--%>
-                            <%--<p><%= announcement.getDescription() %>--%>
-                            <%--</p>--%>
+                        <div>
+                            <div class="post-head-container">
+                                <div class="post-head post-head-left">
+                                    <div>
 
+                                        <i class="glyphicon glyphicon-user"></i>
 
-                            <%--</div>--%>
+                                        <a class="bigfusername"><%= announcement.getOwnerName() %>
+                                        </a>
 
+                                    </div>
+                                </div>
+
+                                <div class="post-head post-head-right">
+                                    <span class="time"><%= new SimpleDateFormat("EEE, dd MMM yyyy hh:mm a").format(announcement.getCreateTime()) %></span>
+                                    | <b class="head"><%= announcement.getType().toString() %>
+                                </b>
+                                <% if(announcement.getNetID().equalsIgnoreCase(currentUser.getNetID())) { %>
+                                    <div class="postbit-social">
+                                        <a href='javascript:deleteAnnouncement(<%= announcement %>);' title="Delete Post"><i
+                                                class="g-delete glyphicon glyphicon-trash"></i></a>
+                                        <a href='javascript:editAnnouncement(<%= announcement %>);' title="Edit Post"><i class="g-edit glyphicon glyphicon-edit"></i></a>
+                                    </div>
+                                <% } %>
+                                </div>
+                            </div>
+                            <div class="post-content-container">
+                                <div>
+                                    <b class="panel-title"><%= announcement.getTitle() %>
+                                    </b><br/><br/>
+                                    <%= announcement.getDetails() %>
+                                    <br>
+                                    <% if (announcement.getLink() != null) {%>
+                                    <% if (announcement.getLink().length() > 0) {%>
+                                    <b>Info: </b><%= announcement.getLink() %><br/>
+                                    <% } %>
+                                    <% } %>
+                                    <% if (announcement.getType().getValue() == 1) {%>
+                                    <b>Date: </b><%= new SimpleDateFormat("EEE, dd MMM yyyy hh:mm a").format(((Event) announcement).getEventDatetime()) %>
+                                    <br/>
+                                    <b>Venue: </b><%= ((Event) announcement).getEventVenue() %><br/>
+                                    <% } %>
+                                </div>
+                            </div>
                         </div>
                     </li>
                     <% } %>
@@ -105,7 +126,8 @@
                         </div>
                         <div class="pad">
                             <label for="add_modal_type">Announcement Type</label>
-                            <select name="type" class="form-control" id="add_modal_type" onchange="updateEventView();" required>
+                            <select name="type" class="form-control" id="add_modal_type" onchange="updateEventView('add');"
+                                    required>
                                 <option>Job Posting</option>
                                 <option>Event</option>
                                 <option>News</option>
@@ -115,14 +137,15 @@
                         <div class="pad" id="add_datetimepicker_event_parent" hidden>
                             <label for="add_datetimepicker_event">Event Date and Time</label>
                             <div class="input-group date" id="add_datetimepicker_event">
-                                <input type="text" class="form-control" />	<span class="input-group-addon"><span class="glyphicon-calendar glyphicon"></span></span>
+                                <input type="text" class="form-control"/> <span class="input-group-addon"><span
+                                    class="glyphicon-calendar glyphicon"></span></span>
                             </div>
                         </div>
                         <div class="pad" id="add_modal_venue_parent" hidden>
-                        <label for="add_modal_venue">Event Venue</label>
-                        <input id="add_modal_venue" name="venue" type="text" class="form-control"
-                               placeholder="">
-                            </div>
+                            <label for="add_modal_venue">Event Venue</label>
+                            <input id="add_modal_venue" name="venue" type="text" class="form-control"
+                                   placeholder="">
+                        </div>
 
                     </div>
                     <div class="modal-footer">
