@@ -8,6 +8,16 @@ import java.sql.Timestamp;
  * Created by Pranita on 23/4/16.
  */
 public class Discussion {
+    private int id;
+    private int discussion_id;
+    private String netID;
+    private String title;
+    private DiscussionType type;
+    private String details;
+    private Timestamp create_time;
+    private Timestamp updated_time;
+    private String ownerName;
+
     public Discussion() {
     }
 
@@ -84,14 +94,13 @@ public class Discussion {
         this.updated_time = updated_time;
     }
 
-    private int id;
-    private int discussion_id;
-    private String netID;
-    private String title;
-    private DiscussionType type;
-    private String details;
-    private Timestamp create_time;
-    private Timestamp updated_time;
+    public String getOwnerName() {
+        return ownerName;
+    }
+
+    public void setOwnerName(String ownerName) {
+        this.ownerName = ownerName;
+    }
 
     public enum DiscussionType {
         TOPIC(0), REPLY(1);
@@ -122,9 +131,20 @@ public class Discussion {
             }
         }
 
+        public static DiscussionType getDiscussionType(int type) {
+            switch (type) {
+                case 0:
+                    return TOPIC;
+                case 1:
+                    return REPLY;
+                default:
+                    return DiscussionType.TOPIC;
+            }
+        }
+
         public int getValue() {
             return this.value;
         }
     }
-    
+
 }

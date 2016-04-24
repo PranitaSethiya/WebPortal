@@ -82,3 +82,19 @@ CREATE TABLE `discussion_post` (
   `updated_time` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   FOREIGN KEY (`netID`) REFERENCES `users`(`netID`)
 );
+
+CREATE TABLE `exam` (
+  `examID` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `netID` VARCHAR(10) NOT NULL,
+  `name` VARCHAR(100) NOT NULL,
+  `date_of_exam` DATE NOT NULL,
+  `additional_details` TEXT DEFAULT NULL,
+  FOREIGN KEY (`netID`) REFERENCES `users`(`netID`)
+);
+
+CREATE TABLE `exam_user` (
+  `examID` INT NOT NULL,
+  `netID` VARCHAR(10) NOT NULL,
+  FOREIGN KEY (`netID`) REFERENCES `users`(`netID`),
+  FOREIGN KEY (`examID`) REFERENCES `exam`(`examID`)
+);

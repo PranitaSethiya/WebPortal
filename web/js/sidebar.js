@@ -32,7 +32,7 @@ $("#nav-crs-btn").click(function (e) {
 });
 $("#nav-post-btn").click(function (e) {
     var post = ['Announcements', 'Discussion board', 'Exam offering', 'Results'];
-    var links = ['announcements', 'discussion_board', 'exams', 'results'];
+    var links = ['announcements', 'discussions', 'exams', 'results'];
     makeList(e, "Posts", post, links);
 });
 // $("#nav-student-btn").click(function (e) {

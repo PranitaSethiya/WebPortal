@@ -13,6 +13,7 @@
     width: 100%;
     border-top: 1px solid #d8d8d8;
     border-bottom: 1px solid #d8d8d8;
+    border-left: 1px solid #d8d8d8;
     -moz-box-shadow: -1px 3px 3px rgba(0, 0, 0, 0.03);
     -webkit-box-shadow: -1px 3px 3px rgba(0, 0, 0, 0.03);
     -o-box-shadow: -1px 3px 3px rgba(0, 0, 0, 0.03);
@@ -26,11 +27,22 @@
     border-right: 1px solid #d8d8d8;
     border-left: 1px solid #d8d8d8
 }
+.post-head-left-thread {
+    width: 50px;
+    float: left;
+    border-right: 1px solid #d8d8d8;
+    border-left: 1px solid #d8d8d8
+}
 
 .post-head-right {
     border-right: 1px solid #d8d8d8;
     font-size: 14px;
     margin-left: 195px
+}
+.post-head-right-thread {
+    border-right: 1px solid #d8d8d8;
+    font-size: 14px;
+    margin-left: 80px
 }
 
 
@@ -59,11 +71,15 @@
     clear: left
 }
 
-.postbit-social {
+.postbit-buttons {
     float: right
 }
 
-.postbit-social A {
+.postbit-social-left {
+    float: left;
+}
+
+.postbit-buttons A {
     color: #a9a9a9;
     line-height: 46px;
     height: 46px;
@@ -76,7 +92,29 @@
     float: right
 }
 
-.postbit-social I {
+.postbit-buttons I {
+    line-height: 46px;
+    width: 100%;
+    text-align: center
+}
+.postbit-social-left A {
+    color: #a9a9a9;
+    line-height: 46px;
+    height: 46px;
+    text-align: center;
+    width: 50px;
+    margin: 0;
+    border-right: 1px solid #d8d8d8;
+    font-size: 22px;
+    display: inline-block;
+    float: left;
+}
+
+.g-list-alt {
+    color: #5e5e5e;
+}
+
+.postbit-social-left I {
     line-height: 46px;
     width: 100%;
     text-align: center

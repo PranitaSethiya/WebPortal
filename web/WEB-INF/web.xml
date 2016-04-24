@@ -118,45 +118,16 @@
         <url-pattern>/ViewResources</url-pattern>
     </servlet-mapping>
 
-    <!--<servlet>-->
-        <!--<servlet-name>PhdStudents</servlet-name>-->
-        <!--<jsp-file>/phd_students.jsp</jsp-file>-->
-    <!--</servlet>-->
+    <servlet>
+        <servlet-name>about</servlet-name>
+        <jsp-file>/about.jsp</jsp-file>
+    </servlet>
 
-    <!--<servlet-mapping>-->
-        <!--<servlet-name>PhdStudents</servlet-name>-->
-        <!--<url-pattern>/phd_students</url-pattern>-->
-    <!--</servlet-mapping>-->
+    <servlet-mapping>
+        <servlet-name>about</servlet-name>
+        <url-pattern>/about</url-pattern>
+    </servlet-mapping>
 
-    <!--<servlet>-->
-        <!--<servlet-name>Alumni</servlet-name>-->
-        <!--<jsp-file>/alumni.jsp</jsp-file>-->
-    <!--</servlet>-->
-
-    <!--<servlet-mapping>-->
-        <!--<servlet-name>Alumni</servlet-name>-->
-        <!--<url-pattern>/alumni</url-pattern>-->
-    <!--</servlet-mapping>-->
-
-    <!--<servlet>-->
-        <!--<servlet-name>ViewStudent</servlet-name>-->
-        <!--<jsp-file>/view_student.jsp</jsp-file>-->
-    <!--</servlet>-->
-
-    <!--<servlet-mapping>-->
-        <!--<servlet-name>ViewStudent</servlet-name>-->
-        <!--<url-pattern>/view_student</url-pattern>-->
-    <!--</servlet-mapping>-->
-
-    <!--<servlet>-->
-        <!--<servlet-name>EditStudent</servlet-name>-->
-        <!--<jsp-file>/edit_student.jsp</jsp-file>-->
-    <!--</servlet>-->
-
-    <!--<servlet-mapping>-->
-        <!--<servlet-name>EditStudent</servlet-name>-->
-        <!--<url-pattern>/edit_student</url-pattern>-->
-    <!--</servlet-mapping>-->
 
 
 </web-app>

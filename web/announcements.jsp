@@ -57,7 +57,7 @@
                                     | <b class="head"><%= announcement.getType().toString() %>
                                 </b>
                                 <% if(announcement.getNetID().equalsIgnoreCase(currentUser.getNetID())) { %>
-                                    <div class="postbit-social">
+                                    <div class="postbit-buttons">
                                         <a href='javascript:deleteAnnouncement(<%= announcement %>);' title="Delete Post"><i
                                                 class="g-delete glyphicon glyphicon-trash"></i></a>
                                         <a href='javascript:editAnnouncement(<%= announcement %>);' title="Edit Post"><i class="g-edit glyphicon glyphicon-edit"></i></a>
