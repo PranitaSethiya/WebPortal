@@ -41,10 +41,10 @@
                                 <div class="post-head post-head-left-thread">
                                     <div class="postbit-social-left">
                                         <% if (discussion.getType().getValue() == 0) { %>
-                                        <a href='javascript:e.preventDefault();'><i
+                                        <a><i
                                                 class="g-list-alt glyphicon glyphicon-list-alt"></i></a>
                                         <% } else { %>
-                                        <a href='javascript:e.preventDefault();'><i
+                                        <a><i
                                                 class="g-list-alt glyphicon glyphicon-share-alt"></i></a>
                                         <% } %>
                                     </div>

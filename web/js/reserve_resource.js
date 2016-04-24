@@ -1,5 +1,5 @@
 /**
- * Created by sachin on 17/4/16.
+ * Created by pranita on 17/4/16.
  */
 function getTimeSlots(name, index) {
     var vals = {

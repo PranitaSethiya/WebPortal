@@ -83,7 +83,7 @@ CREATE TABLE `discussion_post` (
   FOREIGN KEY (`netID`) REFERENCES `users`(`netID`)
 );
 
-CREATE TABLE `exam` (
+CREATE TABLE `exams` (
   `examID` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `netID` VARCHAR(10) NOT NULL,
   `name` VARCHAR(100) NOT NULL,
@@ -96,5 +96,5 @@ CREATE TABLE `exam_user` (
   `examID` INT NOT NULL,
   `netID` VARCHAR(10) NOT NULL,
   FOREIGN KEY (`netID`) REFERENCES `users`(`netID`),
-  FOREIGN KEY (`examID`) REFERENCES `exam`(`examID`)
+  FOREIGN KEY (`examID`) REFERENCES `exams`(`examID`)
 );

@@ -1,5 +1,5 @@
 /**
- * Created by sachin on 23/4/16.
+ * Created by pranita on 23/4/16.
  */
 
 $(function () {

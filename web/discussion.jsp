@@ -43,7 +43,7 @@
                                 <div class="post-head post-head-left-thread">
                                     <div class="postbit-social-left">
 
-                                            <a href='javascript:e.preventDefault();'><i
+                                            <a><i
                                                     class="g-list-alt glyphicon glyphicon-list-alt"></i></a>
 
                                     </div>
