@@ -61,7 +61,7 @@
                                     <td class="lalign"><%= course.getNumber() %></td>
                                     <td><%= course.getName() %></td>
                                     <td><%= course.getTerm() + " " + course.getYear() %></td>
-                                    <td><%= course.getStatus() %></td>
+                                    <td><%= course.getStatus().toString() %></td>
                                 </tr>
                                 <% } %>
                                 </tbody>

@@ -252,6 +252,19 @@ public class Course {
                 return null;
         }
 
+        public String toString() {
+            switch (this.value) {
+                case 0:
+                    return "Enrolled";
+                case 1:
+                    return "Unenrolled";
+                case 2:
+                    return "Completed";
+                default:
+                    return "Gone";
+            }
+        }
+
         public int getValue() {
             return this.value;
         }
