@@ -2,10 +2,8 @@ package com.se.pranita.termproject.model.dao;
 
 import com.se.pranita.termproject.model.Result;
 import com.se.pranita.termproject.model.common.ConnectionHandler;
-import com.se.pranita.termproject.model.user.User;
 import com.se.pranita.termproject.utils.Constants;
 
-import javax.servlet.http.HttpSession;
 import java.sql.*;
 import java.util.ArrayList;
 

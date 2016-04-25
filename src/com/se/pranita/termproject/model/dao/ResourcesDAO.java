@@ -46,4 +46,18 @@ public class ResourcesDAO {
         conn.close();
     }
 
+    public void delete(String resource_name, String resource_type, String resource_additional) throws SQLException {
+        Connection conn = ConnectionHandler.getConnection();
+        String query = "DELETE FROM " + Constants.DATABASENAME + ".`resources` WHERE `name` = ?, `type`= ? , `info` = ?";
+        PreparedStatement ps = conn.prepareStatement(query);
+        ps.setString(1, resource_name);
+        ps.setString(2, resource_type);
+        ps.setString(3, resource_additional);
+
+        ps.executeUpdate();
+        conn.commit();
+        ps.close();
+        conn.close();
+    }
+
 }

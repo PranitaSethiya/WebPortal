@@ -51,8 +51,6 @@ public class CoursesDAO {
             course.setInstructor(netID);
 
             courses.add(course);
-
-            System.out.println("JSON: " + course.toJSON());
         }
 
         return courses;
@@ -86,12 +84,11 @@ public class CoursesDAO {
             course.setNumber(rs.getString("number"));
             course.setDepartment(rs.getString("department"));
             course.setCourse_syllabus(rs.getString("course_syllabus"));
-            course.setIns_office(rs.getString("ins_office_hour"));
-            course.setIns_office(rs.getString("ins_office_hour"));
-            course.setIns_office_hour(rs.getString("ins_office"));
+            course.setIns_office(rs.getString("ins_office"));
+            course.setIns_office_hour(rs.getString("ins_office_hour"));
             course.setTa_name(rs.getString("ta_name"));
-            course.setTa_office(rs.getString("ta_office_hour"));
-            course.setTa_office_hour(rs.getString("ta_office"));
+            course.setTa_office(rs.getString("ta_office"));
+            course.setTa_office_hour(rs.getString("ta_office_hour"));
             course.setTa_email(rs.getString("ta_email"));
             course.setTerm(rs.getString("term"));
             course.setYear(rs.getInt("year"));
@@ -190,6 +187,38 @@ public class CoursesDAO {
         ps.executeUpdate();
         conn.commit();
         ps.close();
+        conn.close();
+
+    }
+
+    public void delete(String number, String term, int year) throws IOException, SQLException {
+
+        Connection conn = ConnectionHandler.getConnection();
+
+        String query2 = "DELETE FROM " + Constants.DATABASENAME +
+                ".`course_user` " +
+                "WHERE `number`=?";
+        PreparedStatement ps2 = conn.prepareStatement(query2);
+        ps2.setString(1, number);
+
+        ps2.executeUpdate();
+
+        String query = "DELETE FROM " + Constants.DATABASENAME +
+                ".`courses` " +
+                "WHERE `number`=? AND `term`=? AND `year`=?";
+        PreparedStatement ps = conn.prepareStatement(query);
+
+        ps.setString(1, number);
+        ps.setString(2, term);
+        ps.setInt(3, year);
+
+        ps.executeUpdate();
+
+        conn.commit();
+
+        ps2.close();
+        ps.close();
+
         conn.close();
 
     }

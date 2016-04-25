@@ -20,7 +20,7 @@ public class ExamDAO {
     public ExamDAO() {
     }
 
-    public ArrayList<Exam> get(User user) throws SQLException {
+    public ArrayList<Exam> get(String netID) throws SQLException {
         ArrayList<Exam> exams = new ArrayList<>();
         Connection conn = ConnectionHandler.getConnection();
         String query = "SELECT e.`examID`, e.`netID`, `name`, `date_of_exam`, `additional_details`, b.`netID` AS studentID, u.`firstName`, u.`lastName` FROM " +
@@ -38,11 +38,11 @@ public class ExamDAO {
             int examID = rs.getInt("examID");
 
             if (!added.keySet().contains(examID)) {
-                exams.add(getExam(examID, rs, user));
+                exams.add(getExam(examID, rs, netID));
                 added.put(examID, exams.size() - 1);
-            } else if (user.getNetID().equalsIgnoreCase(rs.getString("studentID"))) {
+            } else if (netID.equalsIgnoreCase(rs.getString("studentID"))) {
                 exams.remove((int) added.get(examID));
-                exams.add(getExam(examID, rs, user));
+                exams.add(getExam(examID, rs, netID));
                 added.put(examID, exams.size() - 1);
             }
         }
@@ -50,7 +50,7 @@ public class ExamDAO {
         return exams;
     }
 
-    private Exam getExam(int examID, ResultSet rs, User user) throws SQLException {
+    private Exam getExam(int examID, ResultSet rs, String netID) throws SQLException {
         Exam exam = new Exam();
         exam.setExamID(examID);
         exam.setNetID(rs.getString("netID"));
@@ -58,7 +58,7 @@ public class ExamDAO {
         exam.setDateOfExam(rs.getDate("date_of_exam").toString());
         exam.setAdditionalDetails(rs.getString("additional_details"));
         exam.setOwnerName(rs.getString("firstName") + " " + rs.getString("lastName"));
-        exam.setEnrolled(user.getNetID().equalsIgnoreCase(rs.getString("studentID")));
+        exam.setEnrolled(netID.equalsIgnoreCase(rs.getString("studentID")));
 
         exam.setExpired(Date.valueOf(exam.getDateOfExam()).compareTo(Date.valueOf(new SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date()))) < 0);
         return exam;
@@ -76,6 +76,26 @@ public class ExamDAO {
         ps.setString(2, name);
         ps.setDate(3, dateOfExam);
         ps.setString(4, additionalDetails);
+
+        ps.executeUpdate();
+        conn.commit();
+        ps.close();
+        conn.close();
+    }
+
+    public void save(int examID, String netID, String name, Date dateOfExam, String additionalDetails) throws SQLException {
+
+        String query = "INSERT INTO " + Constants.DATABASENAME +
+                ".`exams` (`examID`, `netID`, `name`, `date_of_exam`, `additional_details`) " +
+                "VALUES(?, ?, ?, ?, ?)";
+        Connection conn = ConnectionHandler.getConnection();
+        PreparedStatement ps = conn.prepareStatement(query);
+
+        ps.setInt(1, examID);
+        ps.setString(2, netID);
+        ps.setString(3, name);
+        ps.setDate(4, dateOfExam);
+        ps.setString(5, additionalDetails);
 
         ps.executeUpdate();
         conn.commit();

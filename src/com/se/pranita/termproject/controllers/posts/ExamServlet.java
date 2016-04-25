@@ -29,7 +29,7 @@ public class ExamServlet extends HttpServlet {
         System.out.println(user);
 
         try {
-            ArrayList<Exam> exams = new ExamDAO().get(user);
+            ArrayList<Exam> exams = new ExamDAO().get(user.getNetID());
 
             req.setAttribute("exams", exams);
             RequestDispatcher rd = getServletContext()

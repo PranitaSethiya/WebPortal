@@ -51,7 +51,7 @@ public class UserDAO {
                 Constants.DATABASENAME + ".`course_user`.`term` AND " +
                 Constants.DATABASENAME + ".`courses`.`year` = " +
                 Constants.DATABASENAME + ".`course_user`.`year` " +
-                " JOIN " + Constants.DATABASENAME + ".`users` ON " +
+                "RIGHT JOIN " + Constants.DATABASENAME + ".`users` ON " +
                 Constants.DATABASENAME + ".`users`.`netID` = " +
                 Constants.DATABASENAME + ".`course_user`.`netID`" +
                 " WHERE " +
@@ -73,27 +73,29 @@ public class UserDAO {
 
             ArrayList<Course> courses = new ArrayList<>();
 
-            Course course_1 = new Course();
-            course_1.setNumber(rs.getString("number"));
-            course_1.setTerm(rs.getString("term"));
-            course_1.setYear(rs.getInt("year"));
-            course_1.setName(rs.getString("name"));
+            if(rs.getString("number") != null) {
+                Course course_1 = new Course();
+                course_1.setNumber(rs.getString("number"));
+                course_1.setTerm(rs.getString("term"));
+                course_1.setYear(rs.getInt("year"));
+                course_1.setName(rs.getString("name"));
 
-            course_1.setStatus(TermUtil.compareCurrentTerm(TermUtil.Term.getTerm(course_1.getTerm()),
-                    course_1.getYear()) <= 0 ? Course.CourseStatus.ENROLLED : Course.CourseStatus.COMPLETED);
-            courses.add(course_1);
+                course_1.setStatus(TermUtil.compareCurrentTerm(TermUtil.Term.getTerm(course_1.getTerm()),
+                        course_1.getYear()) <= 0 ? Course.CourseStatus.ENROLLED : Course.CourseStatus.COMPLETED);
+                courses.add(course_1);
 
-            while (rs.next()) {
-                Course course = new Course();
-                course.setNumber(rs.getString("number"));
-                course.setTerm(rs.getString("term"));
-                course.setYear(rs.getInt("year"));
-                course.setName(rs.getString("name"));
+                while (rs.next()) {
+                    Course course = new Course();
+                    course.setNumber(rs.getString("number"));
+                    course.setTerm(rs.getString("term"));
+                    course.setYear(rs.getInt("year"));
+                    course.setName(rs.getString("name"));
 
-                course.setStatus(TermUtil.compareCurrentTerm(TermUtil.Term.getTerm(course.getTerm()),
-                        course.getYear()) <= 0 ? Course.CourseStatus.ENROLLED : Course.CourseStatus.COMPLETED);
-                courses.add(course);
+                    course.setStatus(TermUtil.compareCurrentTerm(TermUtil.Term.getTerm(course.getTerm()),
+                            course.getYear()) <= 0 ? Course.CourseStatus.ENROLLED : Course.CourseStatus.COMPLETED);
+                    courses.add(course);
 
+                }
             }
 
             user.setCourses(courses);
@@ -125,6 +127,19 @@ public class UserDAO {
             ps.setString(8, null);
             ps.setString(9, null);
         }
+
+        ps.executeUpdate();
+        conn.commit();
+        ps.close();
+        conn.close();
+    }
+
+    public void delete(String netID) throws SQLException {
+        Connection conn = ConnectionHandler.getConnection();
+        String query = "DELETE FROM " + Constants.DATABASENAME + ".`users` WHERE `netID`=?";
+        PreparedStatement ps = conn.prepareStatement(query);
+
+        ps.setString(1, netID);
 
         ps.executeUpdate();
         conn.commit();
