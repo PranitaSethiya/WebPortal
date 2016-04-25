@@ -12,8 +12,8 @@ import java.sql.Statement;
  */
 public class Authenticator {
 
-    static Connection con = null;
-    static ResultSet rs = null;
+    private static Connection con = null;
+    private static ResultSet rs = null;
 
     public static User login(String netId, String password) {
 

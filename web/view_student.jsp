@@ -21,18 +21,10 @@
         <div id="wrap">
             <div id="main" class="container">
                 <div class="jumbotron">
-                    <%--<div class="row">--%>
-                        <%--<div class="col-lg-2">--%>
-                            <%--<i class="img-circle glyphicon glyphicon-user icon-large icon-white "--%>
-                               <%--style="font-size: 100px; padding: 20px;"></i>--%>
-                        <%--</div>--%>
-                        <%--<div class="col-lg-10">--%>
                             <h1><%=student.getFirstName() + " " + student.getLastName()%>
                             </h1>
                         <h4><%= student.getNetID() %>@webportal.edu<br/></h4>
                         <hr>
-                        <%--</div>--%>
-                    <%--</div>--%>
                     <p>
                     <div class="row">
                         <div class="col-lg-4">
@@ -68,19 +60,7 @@
                             </table>
                         </div>
                     </div>
-                    <%--<div class="row">--%>
-                        <%--<div class="col-lg-6">--%>
-
-                        <%--</div>--%>
-                        <%--<div class="col-lg-6">--%>
-
-                        <%--</div>--%>
-                    <%--</div>--%>
-
-
                     </p>
-
-
                 </div>
             </div>
         </div>
@@ -97,7 +77,6 @@
         $('#keywords').tablesorter();
     });
 </script>
-<%--<script src="js/view_student.js"></script>--%>
 </body>
 
 </html>
