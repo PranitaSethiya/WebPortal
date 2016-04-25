@@ -19,7 +19,7 @@
         <h1 class="heading text-center">Create your WebPortal Account</h1>
         <p class="heading-desc text-center">Already have an account? Log in <a href="/">Here</a>. </p>
         <form name="loginForm" class="form-signin" action="SignUpServlet" onchange="updateDisplay();"
-              onsubmit="validateForm();">
+              onsubmit="validateForm();" method="post">
             <div class="pad" id="netid_parent">
                 <label for="netid">Net ID</label>
                 <input id="netid" name="netID" type="text" class="form-control" placeholder="" autofocus>

@@ -1,9 +1,7 @@
 package com.se.pranita.termproject.controllers;
 
-import com.se.pranita.termproject.model.common.ConnectionHandler;
-import com.se.pranita.termproject.model.user.Student;
+import com.se.pranita.termproject.model.dao.UserDAO;
 import com.se.pranita.termproject.model.user.User;
-import com.se.pranita.termproject.utils.Constants;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,10 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 
 /**
@@ -26,40 +21,17 @@ import java.util.ArrayList;
 public class UserDetailServlet extends HttpServlet{
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession session = req.getSession(false);
-//        User user = (User) session.getAttribute("currentSessionUser");
-//        System.out.println(user);
 
         try {
-            Connection conn = ConnectionHandler.getConnection();
-            String query = "SELECT * FROM " + Constants.DATABASENAME + ".`users` WHERE `program`='Ph.D'";
+            ArrayList<User> users = new UserDAO().getByProgram("Ph.D");
 
-            Statement smt = conn.createStatement();
-            ResultSet rs = smt.executeQuery(query);
-
-            ArrayList<User> users = new ArrayList<>();
-            while (rs.next()) {
-                User user = new Student();
-                user.setNetID(rs.getString("netID"));
-                user.setFirstName(rs.getString("firstName"));
-                user.setLastName(rs.getString("lastName"));
-                user.setType(User.UserType.STUDENT);
-
-                ((Student) user).setStartTerm(rs.getString("startTerm"));
-                ((Student) user).setStartYear(rs.getInt("startYear"));
-                ((Student) user).setProgram(rs.getString("program"));
-                ((Student) user).setDepartment(rs.getString("department"));
-                System.out.println(user.toJSON());
-                users.add(user);
-            }
-
-            System.out.println(users);
             req.setAttribute("users", users);
             RequestDispatcher rd = getServletContext()
                     .getRequestDispatcher("/phd_students.jsp");
             rd.forward(req, resp);
         } catch (SQLException e) {
             e.printStackTrace();
+            HttpSession session = req.getSession(false);
             session.setAttribute("error", e.getMessage());
             resp.sendRedirect("/error");
 

@@ -3,6 +3,7 @@ package com.se.pranita.termproject.controllers.resources;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.se.pranita.termproject.model.common.ConnectionHandler;
+import com.se.pranita.termproject.model.dao.ReservationDAO;
 import com.se.pranita.termproject.utils.Constants;
 
 import javax.servlet.ServletException;
@@ -24,20 +25,9 @@ public class TimeSlotServlet extends HttpServlet {
 
         PrintWriter out = response.getWriter();
         try {
-            Connection conn = ConnectionHandler.getConnection();
 
-            String query = "INSERT INTO " + Constants.DATABASENAME + ".`reservations` VALUES (?, ?, ?, ?)";
-            PreparedStatement ps = conn.prepareStatement(query);
-
-            ps.setString(1, request.getParameter("name"));
-            ps.setString(2, request.getParameter("netID"));
-            ps.setDate(3, java.sql.Date.valueOf(request.getParameter("slot_date")));
-            ps.setString(4, request.getParameter("slot_time"));
-
-            ps.executeUpdate();
-            conn.commit();
-            ps.close();
-            conn.close();
+            new ReservationDAO().save(request.getParameter("name"), request.getParameter("netID"),
+                    java.sql.Date.valueOf(request.getParameter("slot_date")), request.getParameter("slot_time"));
 
             out.print("success");
         }catch (SQLException ex){

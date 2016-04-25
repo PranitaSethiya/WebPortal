@@ -56,19 +56,4 @@ public class Resource {
         this.info = info;
     }
 
-    public boolean save() throws SQLException {
-        int status;
-        Connection conn = ConnectionHandler.getConnection();
-        String query = "INSERT INTO " + Constants.DATABASENAME + ".`resources` VALUES (?, ?, ?)";
-        PreparedStatement ps = conn.prepareStatement(query);
-        ps.setString(1, this.getName());
-        ps.setString(2, this.getType());
-        ps.setString(3, this.getInfo());
-
-        status = ps.executeUpdate();
-        conn.commit();
-        ps.close();
-        conn.close();
-        return status > 0;
-    }
 }

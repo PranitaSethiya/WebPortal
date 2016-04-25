@@ -67,7 +67,7 @@
                                 <% } %></td>
                             <td>
                                 <button type="button" class="btn"
-                                        onclick="showModal('Instructor info for <%=course.getNumber()%>', '<b>Name: </b><%= course.getInstructor_name() %><br/><b>Email: </b><%= course.getInstructor() %>@webportal.edu<br/><b>Office: </b><%= course.getIns_office() %><br/><b>Office hours: </b><%= course.getIns_office_hour() %>', 'Close');">
+                                        onclick="showModal('Instructor info for <%=course.getNumber()%>', '<b>Name: </b><%= currentUser.getFirstName() + " " + currentUser.getLastName() %><br/><b>Email: </b><%= course.getInstructor() %>@webportal.edu<br/><b>Office: </b><%= course.getIns_office() %><br/><b>Office hours: </b><%= course.getIns_office_hour() %>', 'Close');">
                                     Click
                                     to show
                                 </button>

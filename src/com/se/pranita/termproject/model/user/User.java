@@ -34,38 +34,6 @@ public abstract class User {
         this.lastName = lastName;
     }
 
-    public boolean save() throws SQLException {
-        int status;
-        Connection conn = ConnectionHandler.getConnection();
-        String query = "INSERT INTO " + Constants.DATABASENAME + ".`users` VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        PreparedStatement ps = conn.prepareStatement(query);
-
-        ps.setString(1, this.netID);
-        ps.setString(2, this.password);
-        ps.setString(3, this.firstName);
-        ps.setString(4, this.lastName);
-        ps.setInt(5, this.type.getValue());
-        if(type == UserType.STUDENT) {
-            ps.setString(6, ((Student) this).getStartTerm());
-            ps.setInt(7, ((Student) this).getStartYear());
-            ps.setString(8, ((Student) this).getProgram());
-            ps.setString(9, ((Student) this).getDepartment());
-        } else {
-            ps.setString(6, null);
-            ps.setInt(7, -1);
-            ps.setString(8, null);
-            ps.setString(9, null);
-        }
-
-        status = ps.executeUpdate();
-        conn.commit();
-        ps.close();
-        conn.close();
-
-
-        return status > 0;
-    }
-
     public UserType getType() {
         return type;
     }

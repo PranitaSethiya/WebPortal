@@ -17,7 +17,8 @@ import java.util.Map;
  */
 public class ExamDAO {
 
-    public ExamDAO() {}
+    public ExamDAO() {
+    }
 
     public ArrayList<Exam> get(User user) throws SQLException {
         ArrayList<Exam> exams = new ArrayList<>();
@@ -36,11 +37,11 @@ public class ExamDAO {
 
             int examID = rs.getInt("examID");
 
-            if(!added.keySet().contains(examID)) {
+            if (!added.keySet().contains(examID)) {
                 exams.add(getExam(examID, rs, user));
                 added.put(examID, exams.size() - 1);
-            } else if(user.getNetID().equalsIgnoreCase(rs.getString("studentID"))) {
-                exams.remove((int)added.get(examID));
+            } else if (user.getNetID().equalsIgnoreCase(rs.getString("studentID"))) {
+                exams.remove((int) added.get(examID));
                 exams.add(getExam(examID, rs, user));
                 added.put(examID, exams.size() - 1);
             }
@@ -122,8 +123,8 @@ public class ExamDAO {
     public void enroll(int examID, String netID, boolean enroll) throws SQLException {
 
         String query;
-        if(enroll)
-        query = "INSERT INTO " + Constants.DATABASENAME + ".`exam_user` " + "VALUES(?, ?)";
+        if (enroll)
+            query = "INSERT INTO " + Constants.DATABASENAME + ".`exam_user` " + "VALUES(?, ?)";
         else
             query = "DELETE FROM " + Constants.DATABASENAME + ".`exam_user` WHERE examID=? AND netID=?";
         Connection conn = ConnectionHandler.getConnection();

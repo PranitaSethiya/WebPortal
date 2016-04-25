@@ -1,10 +1,8 @@
 package com.se.pranita.termproject.controllers.posts;
 
-import com.se.pranita.termproject.model.common.ConnectionHandler;
 import com.se.pranita.termproject.model.Exam;
 import com.se.pranita.termproject.model.dao.ExamDAO;
 import com.se.pranita.termproject.model.user.User;
-import com.se.pranita.termproject.utils.Constants;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,10 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.*;
-import java.sql.Date;
-import java.text.SimpleDateFormat;
-import java.util.*;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  * Created by Pranita on 23/4/16.

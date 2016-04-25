@@ -1,8 +1,7 @@
 package com.se.pranita.termproject.controllers;
 
 import com.se.pranita.termproject.model.Alumni;
-import com.se.pranita.termproject.model.common.ConnectionHandler;
-import com.se.pranita.termproject.utils.Constants;
+import com.se.pranita.termproject.model.dao.AlumniDAO;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.*;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -24,28 +23,10 @@ public class AlumniServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession(false);
-//        User user = (User) session.getAttribute("currentSessionUser");
-//        System.out.println(user);
 
         try {
-            Connection conn = ConnectionHandler.getConnection();
-            String query = "SELECT * FROM " + Constants.DATABASENAME + ".`alumni`";
+            ArrayList<Alumni> alumnis = new AlumniDAO().get();
 
-            Statement smt = conn.createStatement();
-            ResultSet rs = smt.executeQuery(query);
-
-
-            ArrayList<Alumni> alumnis = new ArrayList<>();
-            while (rs.next()) {
-                Alumni alumni = new Alumni();
-                alumni.setName(rs.getString("name"));
-                alumni.setDescription(rs.getString("description"));
-                alumni.setHomepage(rs.getString("homepage"));
-                alumni.setImage(rs.getString("image"));
-                alumnis.add(alumni);
-            }
-
-            System.out.println(alumnis);
             req.setAttribute("alumnis", alumnis);
             RequestDispatcher rd = getServletContext()
                     .getRequestDispatcher("/alumni.jsp");
@@ -63,47 +44,20 @@ public class AlumniServlet extends HttpServlet {
 
         PrintWriter out = response.getWriter();
         try {
-            Connection conn = ConnectionHandler.getConnection();
-            PreparedStatement ps;
 
-            String query;
             if(request.getParameter("action").equalsIgnoreCase("save")) {
-                query = "INSERT INTO " + Constants.DATABASENAME + ".`alumni` VALUES(?, ?, ?, ?)";
-                ps = conn.prepareStatement(query);
 
-                ps.setString(1, request.getParameter("name"));
-                ps.setString(2, request.getParameter("homepage"));
-                ps.setString(3, request.getParameter("description"));
-                ps.setString(4, request.getParameter("image"));
+                new AlumniDAO().save(request.getParameter("name"), request.getParameter("homepage"),
+                        request.getParameter("description"), request.getParameter("image"));
 
-                ps.executeUpdate();
-                conn.commit();
-                ps.close();
-                conn.close();
             }else if(request.getParameter("action").equalsIgnoreCase("update")) {
-                query = "UPDATE " + Constants.DATABASENAME + ".`alumni` SET name=?, homepage=?, description=?, image=? WHERE name=?";
-                ps = conn.prepareStatement(query);
 
-                ps.setString(1, request.getParameter("name"));
-                ps.setString(2, request.getParameter("homepage"));
-                ps.setString(3, request.getParameter("description"));
-                ps.setString(4, request.getParameter("image"));
-                ps.setString(5, request.getParameter("old_name"));
+                new AlumniDAO().put(request.getParameter("name"), request.getParameter("homepage"),
+                        request.getParameter("description"), request.getParameter("image"),
+                        request.getParameter("old_name"));
 
-                ps.executeUpdate();
-                conn.commit();
-                ps.close();
-                conn.close();
             } else if(request.getParameter("action").equalsIgnoreCase("delete")) {
-                query = "DELETE FROM " + Constants.DATABASENAME + ".`alumni` WHERE name=?";
-                ps = conn.prepareStatement(query);
-
-                ps.setString(1, request.getParameter("name"));
-
-                ps.executeUpdate();
-                conn.commit();
-                ps.close();
-                conn.close();
+                new AlumniDAO().delete(request.getParameter("name"));
             }
 
 
