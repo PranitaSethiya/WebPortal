@@ -80,8 +80,6 @@ public class CoursesDAOTest {
         savedCourse = null;
         list = courseDAO.get(User.UserType.FACULTY, null);
 
-        System.out.println(list);
-
         for(int i = 0 ; i < list.size() ; i++)
             if(list.get(i).getNumber().equalsIgnoreCase(testCourse.getNumber())){
                 savedCourse = list.get(i);
