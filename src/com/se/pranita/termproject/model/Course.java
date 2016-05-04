@@ -50,22 +50,7 @@ public class Course {
 
     @Override
     public String toString() {
-        return "Course{" +
-                "number='" + number + '\'' +
-                ", name='" + name + '\'' +
-                ", department='" + department + '\'' +
-                ", course_syllabus='" + course_syllabus + '\'' +
-                ", instructor='" + instructor + '\'' +
-                ", instructor_name='" + instructor_name + '\'' +
-                ", ins_office_hour='" + ins_office_hour + '\'' +
-                ", ins_office='" + ins_office + '\'' +
-                ", ta_name='" + ta_name + '\'' +
-                ", ta_office_hour='" + ta_office_hour + '\'' +
-                ", ta_office='" + ta_office + '\'' +
-                ", ta_email='" + ta_email + '\'' +
-                ", term='" + term + '\'' +
-                ", year=" + year +
-                '}';
+        return toJSON();
     }
 
     public String getNumber() {

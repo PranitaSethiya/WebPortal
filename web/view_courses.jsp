@@ -9,23 +9,35 @@
     <link href="css/custom.css" rel="stylesheet">
     <link href="css/sidebar.css" rel="stylesheet">
 </head>
-<body>
-<%@ include file="header.jsp" %>
 <% ArrayList<Course> courses = (ArrayList) request.getAttribute("courses");
     User user = ((User) session.getAttribute("currentSessionUser"));
     boolean isStudent = user.getType().getValue() == 0;
 %>
+<body onload='setCourses(<%= courses %>);'>
+<%@ include file="header.jsp" %>
 <div id="wrapper" class="toggled">
     <%@ include file="sidebar.jsp" %>
     <div id="page-content-wrapper">
         <div id="wrap">
             <div id="main" class="container">
                 <% if(courses.size() > 0) {%>
+                <div class="pad" id="department">
+                    <label for="dept">Filter by Department</label>
+                    <select name="department" class="form-control" id="dept" onchange="updateEntries()">
+                        <option selected>All departments</option>
+                        <option>Chemical Engineering</option>
+                        <option>Computer Science</option>
+                        <option>Computer Engineering</option>
+                        <option>Electrical Engineering</option>
+                        <option>Environmental Sciences</option>
+                        <option>Mechanical Engineering</option>
+                    </select>
+                </div>
                 <div class="panel-group" id="accordion">
                     <% for (int i = 0; i < courses.size(); i++) {
                         Course course = (Course) courses.get(i);
                     %>
-                    <div class="panel panel-default">
+                    <div class="panel panel-default" id="course-<%= i %>">
                         <div class="panel-heading">
                             <% if( isStudent ) { %>
                                 <% if(course.getStatus().getValue() == 0) { %>

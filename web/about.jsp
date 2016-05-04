@@ -31,6 +31,7 @@
                         <li>JSP and Servlets</li>
                         <li>MySQL</li>
                         <li>Apache Tomcat Server</li>
+                        <li>JUnit 4</li>
                     </ul>
                     </p>
                     <p>

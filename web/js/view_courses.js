@@ -37,3 +37,19 @@ function makeEnrolled(index){
     if($('#enroll' + index).text().toString().trim() == "Drop")
     $('#enroll' + index).text('Enrolled').removeClass('btn-danger').addClass('btn-success');
 }
+
+var allCourses;
+function setCourses(courses) {
+    allCourses = courses;
+}
+function updateEntries() {
+    var count = 0;
+    for(var i = 0 ; i < allCourses.length ; i++) {
+        if(allCourses[i]['department'] == $("#dept").val() || ($("#dept").val() == 'All departments')) {
+            $( "#course-" + i ).show();
+            count += 1;
+        } else {
+            $( "#course-" + i ).hide();
+        }
+    }
+}
