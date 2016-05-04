@@ -1,5 +1,7 @@
 package com.se.pranita.termproject.controllers.common;
 
+import com.se.pranita.termproject.model.user.User;
+
 import java.io.IOException;
 
 import javax.servlet.Filter;
@@ -33,7 +35,7 @@ public class AuthenticationFilter implements Filter {
         System.out.println("Requested Resource::" + uri);
 
         HttpSession session = req.getSession(false);
-
+        //check if page doesn't require authentication
         if (uri.equalsIgnoreCase("/") || uri.endsWith("/error")
                 || uri.endsWith("/LoginServlet") || uri.endsWith("/SignUpServlet") || uri.endsWith("/SignUp")
                 || uri.endsWith("css") || uri.endsWith("js")
@@ -51,7 +53,13 @@ public class AuthenticationFilter implements Filter {
                     res.sendRedirect("/");
                 } else {
                     System.out.println("has user attribute");
-                    chain.doFilter(request, response);
+
+                    //check if User.UserType has permission for page
+                    User user = (User) session.getAttribute("currentSessionUser");
+                    if(hasPermission(user.getType(), uri))
+                        chain.doFilter(request, response);
+                    else
+                        res.sendRedirect("/home");
                 }
             } else {
                 System.out.println("session is null");
@@ -59,8 +67,19 @@ public class AuthenticationFilter implements Filter {
             }
 
         }
+    }
 
-
+    private boolean hasPermission(User.UserType type, String uri) {
+        if(uri.endsWith("/create_course")) {
+            return !(type == User.UserType.STUDENT || type == User.UserType.STAFF);
+        } else if(uri.endsWith("/course_info")) {
+            return !(type == User.UserType.STUDENT || type == User.UserType.STAFF);
+        } else if(uri.endsWith("/phd_students")) {
+            return !(type == User.UserType.STUDENT || type == User.UserType.STAFF);
+        } else if(uri.endsWith("/add_resource")) {
+            return type == User.UserType.STAFF;
+        }
+        return true;
     }
 
 
