@@ -14,7 +14,7 @@ import java.io.IOException;
 /**
  * Created by Pranita on 14/4/16.
  */
-@WebServlet(name = "com.se.pranita.termproject.controllers.auth.LoginServlet")
+@WebServlet(name = "com.se.pranita.termproject.controllers.auth.LoginServlet", urlPatterns = {"/LoginServlet"})
 public class LoginServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

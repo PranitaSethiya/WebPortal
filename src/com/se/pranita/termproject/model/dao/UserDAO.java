@@ -44,7 +44,18 @@ public class UserDAO {
 
     public User getStudentById(String netID) throws SQLException {
 
-        String query = "SELECT * FROM " + Constants.DATABASENAME + ".`courses` JOIN " + Constants.DATABASENAME + ".`course_user` ON " +
+        String query = "SELECT " +
+                Constants.DATABASENAME + ".`users`.`firstName`, " +
+                Constants.DATABASENAME + ".`users`.`lastName`, " +
+                Constants.DATABASENAME + ".`users`.`department`, " +
+                Constants.DATABASENAME + ".`users`.`startYear`, " +
+                Constants.DATABASENAME + ".`users`.`startTerm`, " +
+                Constants.DATABASENAME + ".`users`.`program`, " +
+                Constants.DATABASENAME + ".`courses`.`number`, " +
+                Constants.DATABASENAME + ".`courses`.`term`, " +
+                Constants.DATABASENAME + ".`courses`.`year`, " +
+                Constants.DATABASENAME + ".`courses`.`name`" +
+                " FROM " + Constants.DATABASENAME + ".`courses` JOIN " + Constants.DATABASENAME + ".`course_user` ON " +
                 Constants.DATABASENAME + ".`courses`.`number` = " +
                 Constants.DATABASENAME + ".`course_user`.`number` AND " +
                 Constants.DATABASENAME + ".`courses`.`term` = " +

@@ -31,7 +31,7 @@ CREATE TABLE `courses` (
   `number` VARCHAR(10) NOT NULL,
   `name` VARCHAR(100) NOT NULL,
   `department` VARCHAR(100) NOT NULL,
-  `course_syllabus` TEXT NOT NULL DEFAULT '',
+  `course_syllabus` TEXT NOT NULL,
   `ins_office_hour` VARCHAR(100) DEFAULT NULL,
   `ins_office` VARCHAR(100) DEFAULT NULL,
   `ta_name` VARCHAR(100) DEFAULT NULL,

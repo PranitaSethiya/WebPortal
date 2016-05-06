@@ -27,6 +27,7 @@ public class ViewStudentServlet extends HttpServlet {
             if (user == null) {
                 throw new SQLException("Error retrieving data.");
             }
+            System.out.println(user);
             req.setAttribute("user", user);
 
             RequestDispatcher rd = getServletContext()
