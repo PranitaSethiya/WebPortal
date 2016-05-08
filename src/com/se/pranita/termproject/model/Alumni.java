@@ -40,7 +40,10 @@ public class Alumni {
     }
 
     public void setImage(String image) {
-        this.image = image;
+        if(image != null)
+            this.image = image;
+        else
+            this.image = "";
     }
 
     public Alumni() {

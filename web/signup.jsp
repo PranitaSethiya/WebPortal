@@ -78,7 +78,6 @@
                 <select name="program" class="form-control" id="prgm">
                     <option></option>
                     <option>BS</option>
-                    <option>BA</option>
                     <option>MS</option>
                     <option>Ph.D</option>
                 </select>

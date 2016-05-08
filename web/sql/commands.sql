@@ -15,7 +15,7 @@ CREATE TABLE `users` (
 CREATE TABLE `resources` (
   `name` VARCHAR(100) NOT NULL,
   `type` VARCHAR(50) NOT NULL,
-  `info` VARCHAR(500) NOT NULL DEFAULT '',
+  `info` TEXT NOT NULL,
   PRIMARY KEY (`name`)
 );
 CREATE TABLE `reservations` (
