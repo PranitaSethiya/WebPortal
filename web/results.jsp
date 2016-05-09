@@ -23,7 +23,7 @@
                 <h1>Results</h1>
                 <% if (currentUser.getType().getValue() == 1) {%>
                 <div>
-                    <button type="button" class="btn btn-primary pull-right" onclick="addResult('Create');">New Exam
+                    <button type="button" class="btn btn-primary pull-right" onclick="addResult('Create');">New Result
                     </button>
                     <br/></div>
                 <br/>
