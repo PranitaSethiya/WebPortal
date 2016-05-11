@@ -4,6 +4,7 @@ package com.se.pranita.termproject.controllers.courses;
 import com.se.pranita.termproject.model.Course;
 import com.se.pranita.termproject.model.dao.CoursesDAO;
 import com.se.pranita.termproject.model.user.User;
+import com.se.pranita.termproject.model.user.UserUtil;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -26,7 +27,7 @@ public class CourseServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession(false);
-        User user = (User) session.getAttribute("currentSessionUser");
+        User user = UserUtil.getCurrentUser(req);
         System.out.println(user);
 
         try {
@@ -56,7 +57,7 @@ public class CourseServlet extends HttpServlet {
                     new CoursesDAO().save(req.getParameter("course_num"), req.getParameter("course_name"),
                             req.getParameter("department"), req.getParameter("sem"), Integer.parseInt(req.getParameter("year")),
                             req.getParameter("course_syllabus"), req.getParameter("ins_office"),
-                            ((User) session.getAttribute("currentSessionUser")).getNetID(), req.getParameter("ins_office_hour"),
+                            UserUtil.getCurrentUser(req).getNetID(), req.getParameter("ins_office_hour"),
                             req.getParameter("ta_name"), req.getParameter("ta_email"), req.getParameter("ta_office"),
                             req.getParameter("ta_office_hour"));
 

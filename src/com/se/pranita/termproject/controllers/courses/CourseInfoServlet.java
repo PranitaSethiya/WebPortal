@@ -2,6 +2,7 @@ package com.se.pranita.termproject.controllers.courses;
 
 import com.se.pranita.termproject.model.dao.CoursesDAO;
 import com.se.pranita.termproject.model.user.User;
+import com.se.pranita.termproject.model.user.UserUtil;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -21,7 +22,7 @@ public class CourseInfoServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession(false);
-        User user = (User) session.getAttribute("currentSessionUser");
+        User user = UserUtil.getCurrentUser(req);
 
         try {
             req.setAttribute("courses", new CoursesDAO().getById(user.getNetID()));

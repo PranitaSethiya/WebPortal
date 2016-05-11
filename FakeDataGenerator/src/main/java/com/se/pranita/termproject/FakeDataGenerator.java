@@ -46,7 +46,7 @@ public class FakeDataGenerator {
 
     public static void sleep() {
         try {
-            Thread.sleep(100);
+            Thread.sleep(1);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -73,12 +73,12 @@ public class FakeDataGenerator {
                 result.setNetID(faculty.get(rand.nextInt(faculty.size())).getNetID());
                 result.setExamName(courses_names[rand.nextInt(courses_names.length)]);
                 result.setResultDetails(fairy.textProducer().loremIpsum());
-                try {
-                    if (saveToDB)
-                        new ResultDAO().save(result.getNetID(), result.getExamName(), result.getResultDetails());
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
+//                try {
+//                    if (saveToDB)
+//                        new ResultDAO().save(result.getNetID(), result.getResultDetails(), result.getExamName());
+//                } catch (SQLException e) {
+//                    e.printStackTrace();
+//                }
                 System.out.println(result);
             }catch (Exception ignored){}
         }

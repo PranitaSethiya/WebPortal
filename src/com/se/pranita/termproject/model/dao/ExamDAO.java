@@ -21,12 +21,21 @@ public class ExamDAO {
     }
 
     public ArrayList<Exam> get(String netID) throws SQLException {
+        return get(netID, false);
+    }
+
+    public ArrayList<Exam> get(String netID, boolean specific) throws SQLException {
         ArrayList<Exam> exams = new ArrayList<>();
         Connection conn = ConnectionHandler.getConnection();
         String query = "SELECT e.`examID`, e.`netID`, `name`, `date_of_exam`, `additional_details`, b.`netID` AS studentID, u.`firstName`, u.`lastName` FROM " +
                 Constants.DATABASENAME + ".`exams` e left join " +
                 Constants.DATABASENAME + ".`exam_user` b on e.`examID`=b.`examID` left join " +
-                Constants.DATABASENAME + ".`users` u on e.`netID`=u.`netID` ORDER BY e.`date_of_exam` DESC";
+                Constants.DATABASENAME + ".`users` u on e.`netID`=u.`netID` ";
+
+        if(specific)
+            query += "WHERE e.`netID`='" + netID + "' ";
+
+        query += "ORDER BY e.`date_of_exam` DESC";
 
         Statement smt = conn.createStatement();
         ResultSet rs = smt.executeQuery(query);
@@ -60,7 +69,7 @@ public class ExamDAO {
         exam.setOwnerName(rs.getString("firstName") + " " + rs.getString("lastName"));
         exam.setEnrolled(netID.equalsIgnoreCase(rs.getString("studentID")));
 
-        exam.setExpired(Date.valueOf(exam.getDateOfExam()).compareTo(Date.valueOf(new SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date()))) < 0);
+        exam.setExpired(Date.valueOf(exam.getDateOfExam()).compareTo(Date.valueOf(new SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date()))) <= 0);
         return exam;
     }
 

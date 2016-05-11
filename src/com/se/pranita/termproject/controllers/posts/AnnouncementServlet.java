@@ -3,6 +3,7 @@ package com.se.pranita.termproject.controllers.posts;
 import com.se.pranita.termproject.model.announcement.Announcement;
 import com.se.pranita.termproject.model.dao.AnnouncementDAO;
 import com.se.pranita.termproject.model.user.User;
+import com.se.pranita.termproject.model.user.UserUtil;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -43,8 +44,8 @@ public class AnnouncementServlet extends HttpServlet {
         try {
 
             if (request.getParameter("action").equalsIgnoreCase("save")) {
-                HttpSession session = request.getSession(false);
-                User user = (User) session.getAttribute("currentSessionUser");
+
+                User user = UserUtil.getCurrentUser(request);
 
                 new AnnouncementDAO().save(user.getNetID(), request.getParameter("title"),
                         request.getParameter("details"), request.getParameter("link"),

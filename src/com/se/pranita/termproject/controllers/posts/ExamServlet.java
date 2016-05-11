@@ -3,6 +3,7 @@ package com.se.pranita.termproject.controllers.posts;
 import com.se.pranita.termproject.model.Exam;
 import com.se.pranita.termproject.model.dao.ExamDAO;
 import com.se.pranita.termproject.model.user.User;
+import com.se.pranita.termproject.model.user.UserUtil;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -25,7 +26,7 @@ public class ExamServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         HttpSession session = req.getSession(false);
-        User user = (User) session.getAttribute("currentSessionUser");
+        User user = UserUtil.getCurrentUser(req);
         System.out.println(user);
 
         try {
@@ -50,8 +51,8 @@ public class ExamServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         try {
             if (request.getParameter("action").equalsIgnoreCase("create")) {
-                HttpSession session = request.getSession(false);
-                User user = (User) session.getAttribute("currentSessionUser");
+//                HttpSession session = request.getSession(false);
+                User user = UserUtil.getCurrentUser(request);
 
                 new ExamDAO().save(user.getNetID(), request.getParameter("name"),
                         java.sql.Date.valueOf(request.getParameter("date_of_exam")),
@@ -69,14 +70,14 @@ public class ExamServlet extends HttpServlet {
 
             } else if(request.getParameter("action").equalsIgnoreCase("enroll")) {
 
-                HttpSession session = request.getSession(false);
-                User user = (User) session.getAttribute("currentSessionUser");
+//                HttpSession session = request.getSession(false);
+                User user = UserUtil.getCurrentUser(request);
 
                 new ExamDAO().enroll(Integer.parseInt(request.getParameter("examID")), user.getNetID(), true);
 
             } else if(request.getParameter("action").equalsIgnoreCase("drop")) {
-                HttpSession session = request.getSession(false);
-                User user = (User) session.getAttribute("currentSessionUser");
+//                HttpSession session = request.getSession(false);
+                User user = UserUtil.getCurrentUser(request);
 
                 new ExamDAO().enroll(Integer.parseInt(request.getParameter("examID")), user.getNetID(), false);
 
@@ -84,7 +85,7 @@ public class ExamServlet extends HttpServlet {
 
 
             out.print("success");
-        } catch (SQLException ex) {
+        } catch (Exception ex) {
             ex.printStackTrace();
             out.print("error");
         }

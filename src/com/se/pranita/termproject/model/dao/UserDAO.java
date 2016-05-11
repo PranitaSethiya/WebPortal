@@ -51,6 +51,8 @@ public class UserDAO {
                 Constants.DATABASENAME + ".`users`.`startYear`, " +
                 Constants.DATABASENAME + ".`users`.`startTerm`, " +
                 Constants.DATABASENAME + ".`users`.`program`, " +
+                Constants.DATABASENAME + ".`users`.`phoneNumber`, " +
+                Constants.DATABASENAME + ".`users`.`advisor`, " +
                 Constants.DATABASENAME + ".`courses`.`number`, " +
                 Constants.DATABASENAME + ".`courses`.`term`, " +
                 Constants.DATABASENAME + ".`courses`.`year`, " +
@@ -81,6 +83,8 @@ public class UserDAO {
             ((Student) user).setStartYear(rs.getInt("startYear"));
             ((Student) user).setStartTerm(rs.getString("startTerm"));
             ((Student) user).setProgram(rs.getString("program"));
+            ((Student) user).setPhoneNumber(rs.getString("phoneNumber"));
+            ((Student) user).setAdvisorName(rs.getString("advisor"));
 
             ArrayList<Course> courses = new ArrayList<>();
 
@@ -119,7 +123,7 @@ public class UserDAO {
                      String department, String program, String sem, String year) throws SQLException {
 
         Connection conn = ConnectionHandler.getConnection();
-        String query = "INSERT INTO " + Constants.DATABASENAME + ".`users` VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO " + Constants.DATABASENAME + ".`users` VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         PreparedStatement ps = conn.prepareStatement(query);
 
         ps.setString(1, netID);
@@ -132,11 +136,15 @@ public class UserDAO {
             ps.setInt(7, Integer.parseInt(year));
             ps.setString(8, program);
             ps.setString(9, department);
+            ps.setString(10, null);
+            ps.setString(11, null);
         } else {
             ps.setString(6, null);
             ps.setInt(7, -1);
             ps.setString(8, null);
             ps.setString(9, null);
+            ps.setString(10, null);
+            ps.setString(11, null);
         }
 
         ps.executeUpdate();
@@ -151,6 +159,28 @@ public class UserDAO {
         PreparedStatement ps = conn.prepareStatement(query);
 
         ps.setString(1, netID);
+
+        ps.executeUpdate();
+        conn.commit();
+        ps.close();
+        conn.close();
+    }
+
+    public void put(String netID, String firstName, String lastName, String newPass,
+                    String phoneNumber, String advisor) throws SQLException {
+        Connection conn = ConnectionHandler.getConnection();
+
+        String query = "UPDATE " + Constants.DATABASENAME + ".`users`" +
+                "SET `firstName`=?, `lastName`=?, `password`=?, `phoneNumber`=?, `advisor`=?" +
+                "WHERE netID=?";
+        PreparedStatement ps = conn.prepareStatement(query);
+
+        ps.setString(1, firstName);
+        ps.setString(2, lastName);
+        ps.setString(3, newPass);
+        ps.setString(4, phoneNumber);
+        ps.setString(5, advisor);
+        ps.setString(6, netID);
 
         ps.executeUpdate();
         conn.commit();

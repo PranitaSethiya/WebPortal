@@ -5,6 +5,7 @@ import com.se.pranita.termproject.model.common.ConnectionHandler;
 import com.se.pranita.termproject.model.dao.ReservationDAO;
 import com.se.pranita.termproject.model.dao.ResourcesDAO;
 import com.se.pranita.termproject.model.user.User;
+import com.se.pranita.termproject.model.user.UserUtil;
 import com.se.pranita.termproject.utils.Constants;
 
 import javax.servlet.RequestDispatcher;
@@ -28,7 +29,7 @@ public class ResourcesServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession(false);
-        User user = (User) session.getAttribute("currentSessionUser");
+        User user = UserUtil.getCurrentUser(req);
 
         try {
             ArrayList<Reservation> reservations = new ReservationDAO().getById(user.getNetID());
@@ -52,6 +53,8 @@ public class ResourcesServlet extends HttpServlet {
 
             new ResourcesDAO().save(req.getParameter("resource_name"), req.getParameter("resource_type"),
                     req.getParameter("resource_additional"));
+
+            response.sendRedirect("/reserve_resource");
 
         } catch(Exception ex) {
             System.out.println(ex.getMessage());

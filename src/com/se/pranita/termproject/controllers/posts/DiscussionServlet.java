@@ -3,6 +3,7 @@ package com.se.pranita.termproject.controllers.posts;
 import com.se.pranita.termproject.model.Discussion;
 import com.se.pranita.termproject.model.dao.DiscussionDAO;
 import com.se.pranita.termproject.model.user.User;
+import com.se.pranita.termproject.model.user.UserUtil;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -57,8 +58,8 @@ public class DiscussionServlet extends HttpServlet {
 
 
             if (request.getParameter("action").equalsIgnoreCase("save")) {
-                HttpSession session = request.getSession(false);
-                User user = (User) session.getAttribute("currentSessionUser");
+//                HttpSession session = request.getSession(false);
+                User user = UserUtil.getCurrentUser(request);
 
                 new DiscussionDAO().save(user.getNetID(), request.getParameter("title"),
                         request.getParameter("details"), Integer.parseInt(request.getParameter("type")),

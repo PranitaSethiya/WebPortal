@@ -12,6 +12,8 @@ public class Student extends User {
     private int startYear;
     private String program;
     private String department;
+    private String phoneNumber;
+    private String advisorName;
 
     public Student() {
         super(UserType.STUDENT);
@@ -26,12 +28,14 @@ public class Student extends User {
         return toJSON();
     }
 
-    public Student(String netID, String password, String firstName, String lastName, String startTerm, int startYear, String program, String department) {
+    public Student(String netID, String password, String firstName, String lastName, String startTerm, int startYear, String program, String department, String phoneNumber, String advisorName) {
         super(UserType.STUDENT, netID, password, firstName, lastName);
         this.startTerm = startTerm;
         this.startYear = startYear;
         this.program = program;
         this.department = department;
+        this.phoneNumber = phoneNumber;
+        this.advisorName = advisorName;
     }
 
     public String getStartTerm() {
@@ -40,6 +44,7 @@ public class Student extends User {
 
     public void setStartTerm(String startTerm) {
         this.startTerm = startTerm;
+        notifyAllObservers();
     }
 
     public String getProgram() {
@@ -48,6 +53,7 @@ public class Student extends User {
 
     public void setProgram(String program) {
         this.program = program;
+        notifyAllObservers();
     }
 
     public String getDepartment() {
@@ -56,6 +62,7 @@ public class Student extends User {
 
     public void setDepartment(String department) {
         this.department = department;
+        notifyAllObservers();
     }
 
 
@@ -65,6 +72,7 @@ public class Student extends User {
 
     public void setStartYear(int startYear) {
         this.startYear = startYear;
+        notifyAllObservers();
     }
 
     @Override
@@ -87,4 +95,29 @@ public class Student extends User {
         return String.format(message, year_diff);
 
     }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        if(phoneNumber != null)
+            this.phoneNumber = phoneNumber;
+        else
+            this.phoneNumber = "";
+        notifyAllObservers();
+    }
+
+    public String getAdvisorName() {
+        return advisorName;
+    }
+
+    public void setAdvisorName(String advisorName) {
+        if(advisorName != null)
+            this.advisorName = advisorName;
+        else
+            this.advisorName = "";
+        notifyAllObservers();
+    }
+
 }

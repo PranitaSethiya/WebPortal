@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Pranita on 14/4/16.
@@ -21,6 +22,7 @@ public abstract class User {
     private String lastName;
     private UserType type;
     private ArrayList<Course> courses;
+    private transient List<Observer> observers = new ArrayList<Observer>();
 
     public User(UserType type) {
         this.type = type;
@@ -40,6 +42,7 @@ public abstract class User {
 
     public void setType(UserType type) {
         this.type = type;
+        notifyAllObservers();
     }
 
     public String getNetID() {
@@ -56,6 +59,7 @@ public abstract class User {
 
     public void setPassword(String password) {
         this.password = password;
+        notifyAllObservers();
     }
 
     public String getFirstName() {
@@ -64,6 +68,7 @@ public abstract class User {
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
+        notifyAllObservers();
     }
 
     public String getLastName() {
@@ -72,6 +77,7 @@ public abstract class User {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+        notifyAllObservers();
     }
 
     public String toJSON() {
@@ -80,6 +86,7 @@ public abstract class User {
 
     public void setCourses(ArrayList<Course> courses) {
         this.courses = courses;
+        notifyAllObservers();
     }
 
     public ArrayList<Course> getCourses() {
@@ -114,5 +121,13 @@ public abstract class User {
     @Override
     public String toString() {
         return toJSON();
+    }
+
+    public void attach(Observer observer){
+        observers.add(observer);
+    }
+
+    public void notifyAllObservers(){
+        observers.forEach(Observer::update);
     }
 }

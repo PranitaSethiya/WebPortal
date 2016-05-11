@@ -20,7 +20,9 @@ public class ReservationDAOTest {
         String className = ReservationDAOTest.class.getSimpleName();
 
         Reservation testReservation = new Reservation();
-        testReservation.setNetID("SS123456");;
+        //this user should exist
+        testReservation.setNetID("SS123456");
+        //this resource should exist
         testReservation.setResourceName("Fax 1000");
         testReservation.setSlot_time_range("0-0");
         testReservation.setSlot_date(java.sql.Date.valueOf("2025-12-12"));

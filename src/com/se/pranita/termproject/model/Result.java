@@ -15,6 +15,7 @@ public class Result {
     private String netID;
     private String ownerName;
     private boolean owner;
+    private int examID;
 
     public Result() {
     }
@@ -78,5 +79,13 @@ public class Result {
 
     public boolean isOwner() {
         return owner;
+    }
+
+    public int getExamID() {
+        return examID;
+    }
+
+    public void setExamID(int examID) {
+        this.examID = examID;
     }
 }

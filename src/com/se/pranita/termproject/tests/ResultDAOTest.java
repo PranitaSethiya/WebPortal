@@ -21,9 +21,10 @@ public class ResultDAOTest {
         Result testResult = new Result();
         testResult.setNetID("SS123456");
         testResult.setExamName(className + "examName");
+        //exam with id 1 should be present
         testResult.setResultDetails(className + "ResultDetails");
 
-        resultDAO.save(testResult.getNetID(), testResult.getExamName(), testResult.getResultDetails());
+        resultDAO.save(testResult.getNetID(), testResult.getResultDetails(), 1);
 
         Result savedResult = null;
         ArrayList<Result> list = resultDAO.get(testResult.getNetID());
@@ -41,7 +42,7 @@ public class ResultDAOTest {
         testResult.setExamName(className + "examNameMod");
         testResult.setResultDetails(className + "ResultDetailsMod");
 
-        resultDAO.put(testResult.getExamName(), testResult.getResultDetails(), String.valueOf(savedResult.getResultID()));
+        resultDAO.put(1, testResult.getResultDetails(), String.valueOf(savedResult.getResultID()));
 
         savedResult = null;
         list = resultDAO.get(testResult.getNetID());

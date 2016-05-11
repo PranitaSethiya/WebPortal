@@ -21,7 +21,7 @@
         <div id="wrap">
             <div id="main" class="container">
                 <% if(courses.size() > 0) {%>
-                <div class="pad" id="department">
+                <div id="department" style="padding-top: 1%; padding-bottom: 0.5%">
                     <label for="dept">Filter by Department</label>
                     <select name="department" class="form-control" id="dept" onchange="updateEntries()">
                         <option selected>All departments</option>
@@ -31,6 +31,12 @@
                         <option>Electrical Engineering</option>
                         <option>Environmental Sciences</option>
                         <option>Mechanical Engineering</option>
+                    </select>
+                </div>
+                <div style="padding-bottom: 1%" id="term_parent">
+                    <label for="term">Filter by Term</label>
+                    <select name="term" class="form-control" id="term" onchange="updateEntries()">
+                        <option selected>All Terms</option>
                     </select>
                 </div>
                 <div class="panel-group" id="accordion">

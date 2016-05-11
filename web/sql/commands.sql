@@ -10,6 +10,8 @@ CREATE TABLE `users` (
   `startYear` INT(4) DEFAULT NULL,
   `program` VARCHAR(4) DEFAULT NULL,
   `department` VARCHAR(100) DEFAULT NULL,
+  `phoneNumber` VARCHAR(13) DEFAULT NULL,
+  `advisor` TEXT DEFAULT NULL,
   PRIMARY KEY (`netID`)
 );
 CREATE TABLE `resources` (
@@ -102,8 +104,13 @@ CREATE TABLE `exam_user` (
 CREATE TABLE `results` (
   `resultID` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `netID` VARCHAR(10) NOT NULL,
-  `exam_name` VARCHAR(100) NOT NULL,
   `result_details` TEXT NOT NULL,
   `create_time` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  FOREIGN KEY (`netID`) REFERENCES `users`(`netID`)
+  `examID` INT NOT NULL,
+  FOREIGN KEY (`netID`) REFERENCES `users`(`netID`),
+  FOREIGN KEY (`examID`) REFERENCES `exams`(`examID`)
 );
+
+ALTER TABLE `users`
+  ADD COLUMN `phoneNumber` VARCHAR(13) DEFAULT NULL,
+  ADD COLUMN `advisor` TEXT DEFAULT NULL;

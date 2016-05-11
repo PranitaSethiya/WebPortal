@@ -1,6 +1,7 @@
 <%@ page import="com.se.pranita.termproject.model.Result" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="com.se.pranita.termproject.model.Exam" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -10,18 +11,19 @@
     <link href="css/custom.css" rel="stylesheet">
     <link href="css/sidebar.css" rel="stylesheet">
 </head>
-<body>
-<%@ include file="header.jsp" %>
 <%
     ArrayList<Result> results = (ArrayList) request.getAttribute("results");
+    ArrayList<Exam> exams = (ArrayList) request.getAttribute("exams");
 %>
+<body onload='setExams(<%=exams%>)'>
+<%@ include file="header.jsp" %>
 <div id="wrapper" class="toggled">
     <%@ include file="sidebar.jsp" %>
     <div id="page-content-wrapper">
         <div id="wrap">
             <div id="main" class="container">
                 <h1>Results</h1>
-                <% if (currentUser.getType().getValue() == 1) {%>
+                <% if (currentUser.getType().getValue() != 0) { %>
                 <div>
                     <button type="button" class="btn btn-primary pull-right" onclick="addResult('Create');">New Result
                     </button>
@@ -53,7 +55,7 @@
                         </div>
                         <div id="collapse<%= i %>" class="panel-collapse collapse">
                             <div class="panel-body">
-                                <%= result.getResultDetails() %>
+                                <pre><code><%= result.getResultDetails() %></code></pre>
                             </div>
                         </div>
                     </div>
