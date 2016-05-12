@@ -157,48 +157,6 @@ public class Course {
         this.year = year;
     }
 
-//    public boolean save() throws SQLException {
-//        int status;
-//        Connection conn = ConnectionHandler.getConnection();
-//        String query = "INSERT INTO " + Constants.DATABASENAME + ".`courses` VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-//        PreparedStatement ps = conn.prepareStatement(query);
-//        ps.setString(1, this.getNumber());
-//        ps.setString(2, this.getName());
-//        ps.setString(3, this.getDepartment());
-//        ps.setString(4, this.getCourse_syllabus());
-////        ps.setString(5, this.getInstructor());
-//        ps.setString(5, this.getIns_office_hour());
-//        ps.setString(6, this.getIns_office());
-//        ps.setString(7, this.getTa_name());
-//        ps.setString(8, this.getTa_office_hour());
-//        ps.setString(9, this.getTa_office());
-//        ps.setString(10, this.getTa_email());
-//        ps.setString(11, this.getTerm());
-//        ps.setInt(12, this.getYear());
-//
-//        status = ps.executeUpdate();
-//        conn.commit();
-//        ps.close();
-//        conn.close();
-//        return status > 0;
-//    }
-//
-//    public boolean saveRelation(String user_netId) throws SQLException {
-//        int status;
-//        Connection conn = ConnectionHandler.getConnection();
-//        String query = "INSERT INTO " + Constants.DATABASENAME + ".`course_user` VALUES (?, ?, ?, ?)";
-//        PreparedStatement ps = conn.prepareStatement(query);
-//        ps.setString(1, user_netId);
-//        ps.setString(2, this.getNumber());
-//        ps.setString(3, this.getTerm());
-//        ps.setInt(4, this.getYear());
-//
-//        status = ps.executeUpdate();
-//        conn.commit();
-//        ps.close();
-//        conn.close();
-//        return status > 0;
-//    }
 
     public String getInstructor_name() {
         return instructor_name;
