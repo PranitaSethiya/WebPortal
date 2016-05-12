@@ -158,3 +158,6 @@ body {
 .property-data.major-tenant td:nth-child(odd) {
     font-weight: 100
 }
+
+table.fixed { table-layout:fixed; }
+table.fixed td { overflow: hidden; }

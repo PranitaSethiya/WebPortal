@@ -247,20 +247,30 @@
                             <tr>
                                 <td><b>Core Courses: (Required: <%=ProgramRequirement.getTotalCore(student.getProgram())%>)</b></td>
                                 <td>
-                                    <% ArrayList<Course> core = ProgramRequirement.coreRequirements(student.getDepartment(), student.getCourses());
-                                        for(int i = 0 ; i < core.size() ; i++) {%>
-                                        <%if(core.get(i).getStatus().getValue() == 0) {%>
-                                            <span class="glyphicon glyphicon-record" title="Enrolled" style="color: deepskyblue;"></span> <%=core.get(i).getName()%><br/>
-                                        <%} else if(core.get(i).getStatus().getValue() == 2){%>
-                                            <span class="glyphicon glyphicon-ok" title="Completed" style="color: green;" ></span> <%=core.get(i).getName()%><br/>
-                                        <%} else {%>
-                                            <span class="glyphicon glyphicon-remove" title="Incomplete" style="color: red;"></span> <%=core.get(i).getName()%><br/>
-                                        <%}%>
-                                    <% } %>
+                                    <table class="property-data fixed">
+                                        <%--<tbody>--%>
+                                        <col width="5px" />
+                                        <col width="30px" />
+                                        <% ArrayList<Course> core = ProgramRequirement.coreRequirements(student.getDepartment(), student.getCourses());
+                                            for(int i = 0 ; i < core.size() ; i++) {%>
+                                        <tr>
+                                            <%if(core.get(i).getStatus().getValue() == 0) {%>
+                                            <td style="text-align: center; margin: 0;"><span class="glyphicon glyphicon-record" title="Enrolled" style="color: deepskyblue;"></span></td><td style="text-align: left"><%=core.get(i).getName()%></td>
+                                            <%} else if(core.get(i).getStatus().getValue() == 2){%>
+                                            <td style="text-align: center; margin: 0;"><span class="glyphicon glyphicon-ok" title="Completed" style="color: green;" ></span></td><td style="text-align: left"><%=core.get(i).getName()%></td>
+                                            <%} else {%>
+                                            <td style="text-align: center; margin: 0;"><span class="glyphicon glyphicon-remove" title="Incomplete" style="color: red;"></span></td><td style="text-align: left"><%=core.get(i).getName()%></td>
+                                            <%}%>
+                                        </tr>
+                                        <% } %>
+                                        <%--</tbody>--%>
+                                    </table>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
+
+
                     </p>
                 </div>
                 <div class="modal-footer">
