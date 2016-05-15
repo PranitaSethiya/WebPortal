@@ -17,4 +17,4 @@ Libraries Used:
 3. [Bootstrap Datetimepicker](https://eonasdan.github.io/bootstrap-datetimepicker/)<br/>
 4. [jQuery Toaster](https://plugins.jquery.com/toaster/)<br/>
 5. [Moment](http://momentjs.com/)<br/>
-6. [Gson](https://github.com/google/gson" target="_blank)<br/>
+6. [Gson](https://github.com/google/gson)<br/>
