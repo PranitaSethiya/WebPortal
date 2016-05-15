@@ -1,6 +1,7 @@
 <%@ page import="com.se.pranita.termproject.model.Exam" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="java.sql.Date" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -72,7 +73,7 @@
                                     </button>
                                     <% } %>
                                     <% } else {%>
-                                    <% if (!exam.isExpired()) { %>
+                                    <% if (!exam.isExpired() || Date.valueOf(exam.getDateOfExam()).compareTo(Date.valueOf(new SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date()))) == 0) { %>
                                     <button id="enroll<%= i %>" class="btn btn-success pull-right" style="margin: 6px;" onmouseover="makeDrop('<%= i %>')" onmouseleave="makeEnrolled('<%= i %>');"
                                             onclick='enroll("<%= i %>", <%= exam %>);'>Enroll
                                     </button>

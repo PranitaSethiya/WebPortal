@@ -12,7 +12,7 @@ import static org.junit.Assert.*;
  * Created by Pranita on 25/4/16.
  */
 public class ResultDAOTest {
-    @Test
+//    @Test
     public void testResultDAO() throws Exception {
         ResultDAO resultDAO = new ResultDAO();
 
